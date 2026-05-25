@@ -1,0 +1,62 @@
+@startuml 06_c4_l3_analysis_tuning
+!include style_c4_readable.puml
+
+title Анализ признаков и настройка моделей — C4 L3
+
+rectangle "Входные данные\nтаблицы признаков,\nэмбеддинги,\nвеса моделей,\nметрики" as input <<input>>
+
+rectangle "Оркестратор анализа\nanalysis/feature_importance/run_all.py,\nrun_all_experiments.sh" as orchestrator <<pipeline>>
+
+package "Анализ признаков" {
+
+  rectangle "Корреляции\nSpearman, Pearson,\nmutual information" as corr <<component>>
+
+  rectangle "CatBoost importance\nвстроенная важность,\nTreeSHAP" as cb <<component>>
+
+  rectangle "Permutation\nтабличные модели,\nпоследовательные модели" as perm <<component>>
+
+  rectangle "SHAP\nвклад признаков,\nзависимости,\nгруппы" as shap <<component>>
+
+  rectangle "Кластеризация\nKMeans, GMM,\nDBSCAN, DTW,\nэмбеддинги" as cluster <<component>>
+}
+
+rectangle "Подбор гиперпараметров\ntune_hp/*\nOptuna, trials,\nлучшие параметры" as tuning <<pipeline>>
+
+rectangle "Сводная сборка\nmaster ranking,\nsummary report,\nтаблица кластеров,\nbest params" as merge <<pipeline>>
+
+rectangle "Результат\nрейтинги признаков,\nкластеры, графики,\nнастройки моделей" as output <<output>>
+
+' ── компоненты анализа в ряд ──────────────────────────────────
+corr -[hidden]right-> cb
+cb -[hidden]right-> perm
+perm -[hidden]right-> shap
+shap -[hidden]right-> cluster
+
+' ── основной поток ────────────────────────────────────────────
+input -down-> orchestrator : передаёт\nданные и модели
+
+orchestrator -down-> corr : анализ
+orchestrator -down-> cb : анализ
+orchestrator -down-> perm : анализ
+orchestrator -down-> shap : анализ
+orchestrator -down-> cluster : анализ
+orchestrator -down-> tuning : подбор\nпараметров
+
+corr -down-> merge : оценки
+cb -down-> merge : оценки
+perm -down-> merge : оценки
+shap -down-> merge : оценки
+cluster -down-> merge : группы\nвидео
+tuning -down-> merge : лучшие\nпараметры
+
+merge -down-> output : запись\nрезультатов
+
+legend bottom left
+  |= Цвет |= Тип блока |
+  | <back:#F1F8E9><color:#2E7D32>████</color></back> | входные данные |
+  | <back:#FFF8F8><color:#C62828>████</color></back> | оркестрация и сборка |
+  | <back:#F7FBFF><color:#1565C0>████</color></back> | компонент анализа |
+  | <back:#F5F5F5><color:#6D6D6D>████</color></back> | результат |
+end legend
+
+@enduml

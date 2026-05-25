@@ -1,0 +1,118 @@
+@startuml 00_c4_l1_project_overview
+hide stereotype
+left to right direction
+scale max 4200 width
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 24
+skinparam linetype polyline
+skinparam nodesep 55
+skinparam ranksep 70
+skinparam ArrowFontSize 18
+skinparam titleFontSize 28
+skinparam ArrowColor #333333
+skinparam stereotypeFontSize 0
+skinparam stereotypeFontColor transparent
+skinparam defaultTextAlignment center
+
+skinparam rectangle {
+  RoundCorner 8
+  FontColor #222222
+}
+
+skinparam package {
+  BackgroundColor #FAFCFF
+  BorderColor #1565C0
+  BorderThickness 2
+  FontColor #0D47A1
+  FontStyle bold
+  FontSize 24
+}
+
+skinparam rectangle<<input>> {
+  BorderColor #2E7D32
+  BorderThickness 3
+  BackgroundColor #F1F8E9
+}
+
+skinparam rectangle<<pipeline>> {
+  BorderColor #C62828
+  BorderThickness 3
+  BackgroundColor #FFF8F8
+}
+
+skinparam rectangle<<component>> {
+  BorderColor #1565C0
+  BorderThickness 2
+  BackgroundColor #F7FBFF
+}
+
+skinparam rectangle<<output>> {
+  BorderColor #6D6D6D
+  BorderThickness 2
+  BackgroundColor #F5F5F5
+}
+
+title seenx-ml — C4 L1
+
+rectangle "Исходные данные\nвидео, аудио,\nretention, метаданные" as prepared <<input>>
+
+package "seenx-ml — прогнозирование кривой удержания" {
+
+  rectangle "CLI-запуск пайплайна\nпоследовательно вызывает этапы\nи проверяет статус выполнения" as orchestrator <<pipeline>>
+
+  rectangle "Сбор данных\nкомментарии,\nтаймкоды,\nметаданные" as ingest <<pipeline>>
+
+  rectangle "Извлечение\nмультимодальных признаков\nvisual, audio, text,\ncomments, embeddings" as features <<component>>
+
+  rectangle "Формирование датасета\nпосекундная таблица,\nнормализация,\ntrain/val/LOO" as dataset <<pipeline>>
+
+  rectangle "Подбор параметров\nOptuna,\nлучшие конфигурации" as tuning <<pipeline>>
+
+  rectangle "Обучение моделей\nCatBoost, LSTM,\nTransformer,\nVideoMAE, DeBERTa" as training <<component>>
+
+  rectangle "Оценка и анализ\nрезультатов\nметрики, error analysis,\nfeature importance" as analysis <<component>>
+
+  rectangle "Финальные артефакты\nпрогнозы,\nграфики,\nотчёты" as artifacts <<output>>
+}
+
+rectangle "Пользователь\nполучает результаты\nанализа" as user_result <<input>>
+
+rectangle "YouTube\nкомментарии,\nреакции аудитории" as youtube <<input>>
+
+' ── раскладка как в исходной L1 ───────────────────────────────
+prepared -[hidden]right-> orchestrator
+orchestrator -[hidden]right-> ingest
+ingest -[hidden]right-> features
+features -[hidden]right-> dataset
+dataset -[hidden]right-> tuning
+tuning -[hidden]right-> training
+training -[hidden]right-> analysis
+analysis -[hidden]right-> artifacts
+artifacts -[hidden]right-> user_result
+orchestrator -[hidden]up-> ingest
+youtube -[hidden]up-> ingest
+
+' ── основной поток ────────────────────────────────────────────
+prepared --> orchestrator : пути к данным\nи параметры
+orchestrator --> ingest : запускает\nсбор
+ingest --> features : комментарии\nи метаданные
+features --> dataset : признаки\nпо секундам
+dataset --> tuning : train / val
+tuning --> training : лучшие\nпараметры
+training --> analysis : модели\nи прогнозы
+analysis --> artifacts : сохраняет\nрезультаты
+artifacts --> user_result : прогнозы,\nграфики,\nотчёты
+
+youtube --> ingest : комментарии
+
+legend bottom left
+  |= Цвет |= Тип блока |
+  | <back:#F1F8E9><color:#2E7D32>████</color></back> | актор или внешний источник |
+  | <back:#FFF8F8><color:#C62828>████</color></back> | оркестрация и сборка |
+  | <back:#F7FBFF><color:#1565C0>████</color></back> | компонент обработки |
+  | <back:#F5F5F5><color:#6D6D6D>████</color></back> | артефакт или результат |
+end legend
+
+@enduml

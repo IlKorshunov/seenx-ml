@@ -1,0 +1,36 @@
+@startuml 02_c4_l2_comment_collection
+!include style_c4_readable.puml
+
+title Сбор комментариев YouTube — C4 L2
+
+rectangle "Исследователь" as user <<input>>
+
+rectangle "YouTube Data API\nканал, плейлисты,\nметаданные, комментарии" as youtube <<input>>
+
+package "get_data — сбор комментариев" {
+
+  rectangle "CLI\ncomments.py" as cli <<pipeline>>
+
+  rectangle "Экспорт\nтокен, плейлисты,\nкомментарии и ответы,\nтаймкоды, метаданные видео" as export <<component>>
+
+  rectangle "Сборка JSON\nобъединение метаданных\nи комментариев по видео" as merge <<pipeline>>
+
+  rectangle "Хранилище\nJSON-файлы\nс комментариями\nи метаданными" as store <<output>>
+}
+
+' ── основной поток ────────────────────────────────────────────
+user -down-> cli : запускает\nэкспорт
+cli -down-> export : запросы\nк API
+youtube -down-> export : отдаёт\nданные
+export -down-> merge : сырые данные\nпо видео
+merge -down-> store : запись\nJSON
+
+legend bottom left
+  |= Цвет |= Тип блока |
+  | <back:#F1F8E9><color:#2E7D32>████</color></back> | входные данные |
+  | <back:#FFF8F8><color:#C62828>████</color></back> | оркестрация и сборка |
+  | <back:#F7FBFF><color:#1565C0>████</color></back> | компонент сбора |
+  | <back:#F5F5F5><color:#6D6D6D>████</color></back> | результат |
+end legend
+
+@enduml

@@ -1,0 +1,63 @@
+\babel@toc {russian}{}\relax 
+\contentsline {chapter}{ВВЕДЕНИЕ}{3}{}%
+\contentsline {chapter}{\numberline {1}Аналитический обзор}{7}{}%
+\contentsline {section}{\numberline {1.1}Прогнозирование числа просмотров}{7}{}%
+\contentsline {section}{\numberline {1.2}Прогнозирование вовлечённости аудитории}{7}{}%
+\contentsline {section}{\numberline {1.3}Обоснование выбора платформы YouTube}{8}{}%
+\contentsline {section}{\numberline {1.4}Обоснование выбора технологий}{9}{}%
+\contentsline {section}{Выводы по главе\nobreakspace 1}{10}{}%
+\contentsline {chapter}{\numberline {2}Проектирование системы}{13}{}%
+\contentsline {section}{\numberline {2.1}Основные этапы работы}{13}{}%
+\contentsline {section}{\numberline {2.2}Сбор комментариев}{14}{}%
+\contentsline {subsection}{\numberline {2.2.1}Семантический анализ комментариев}{15}{}%
+\contentsline {section}{\numberline {2.3}Извлечение признаков}{16}{}%
+\contentsline {subsection}{\numberline {2.3.1}Пространство признаков}{17}{}%
+\contentsline {subsection}{\numberline {2.3.2}Извлечение границ заставок.}{19}{}%
+\contentsline {subsection}{\numberline {2.3.3}Векторный анализ модальных составляющих}{21}{}%
+\contentsline {subsection}{\numberline {2.3.4}Признаки громкости и динамики звукового сигнала.}{23}{}%
+\contentsline {subsection}{\numberline {2.3.5}Визуальная составляющая кадра}{24}{}%
+\contentsline {subsection}{\numberline {2.3.6}Признаки рекламных интеграций}{26}{}%
+\contentsline {subsection}{\numberline {2.3.7}Признаки движения в кадре.}{27}{}%
+\contentsline {subsection}{\numberline {2.3.8}Скорость речи и плотность слов}{29}{}%
+\contentsline {subsection}{\numberline {2.3.9}Обращения к зрителю}{30}{}%
+\contentsline {subsection}{\numberline {2.3.10}Определение вступления и заключения видеоролика}{30}{}%
+\contentsline {section}{\numberline {2.4}Baseline-кривая удержания и параметрическая аппроксимация retention-кривых}{32}{}%
+\contentsline {subsection}{\numberline {2.4.1}Нормализация признаков.}{32}{}%
+\contentsline {subsection}{\numberline {2.4.2}Baseline-кривая удержания}{34}{}%
+\contentsline {subsection}{\numberline {2.4.3}Параметрическая аппроксимация retention-кривых}{34}{}%
+\contentsline {section}{\numberline {2.5}Архитектуры предсказания удержания зрителей}{34}{}%
+\contentsline {subsection}{\numberline {2.5.1}Transformer}{34}{}%
+\contentsline {subsection}{\numberline {2.5.2}LSTM}{36}{}%
+\contentsline {subsection}{\numberline {2.5.3}VIDEOMAE}{37}{}%
+\contentsline {subsection}{\numberline {2.5.4}Архитектуры на основе языковой модели DeBERTa}{38}{}%
+\contentsline {subsection}{\numberline {2.5.5}Ансамбль llm}{39}{}%
+\contentsline {section}{\numberline {2.6}Анализ признаков и настройка моделей}{39}{}%
+\contentsline {subsection}{\numberline {2.6.1}Оценивание важности признаков}{39}{}%
+\contentsline {subsubsection}{\numberline {2.6.1.1}Корреляционный анализ}{40}{}%
+\contentsline {subsubsection}{\numberline {2.6.1.2}Значимость по градиентному бустингу}{41}{}%
+\contentsline {subsubsection}{\numberline {2.6.1.3}Перестановочная значимость для табличных моделей}{42}{}%
+\contentsline {subsubsection}{\numberline {2.6.1.4}Анализ через значения Шепли}{43}{}%
+\contentsline {subsubsection}{\numberline {2.6.1.5}Перестановочная значимость для последовательных нейросетевых моделей}{43}{}%
+\contentsline {subsubsection}{\numberline {2.6.1.6}Сводный рейтинг}{44}{}%
+\contentsline {subsection}{\numberline {2.6.2}Кластеризация видео}{44}{}%
+\contentsline {subsection}{\numberline {2.6.3}Подбор гиперпараметров.}{47}{}%
+\contentsline {section}{Выводы по главе\nobreakspace 2}{48}{}%
+\contentsline {chapter}{\numberline {3}Реализация и экспериментальная оценка моделей}{51}{}%
+\contentsline {section}{\numberline {3.1}Результаты валидаций.}{51}{}%
+\contentsline {subsection}{\numberline {3.1.1}Тренировочный оркестратор.}{53}{}%
+\contentsline {subsection}{\numberline {3.1.2}Агрегатор признаков.}{54}{}%
+\contentsline {subsection}{\numberline {3.1.3}Фронтенд-интерфейс сервиса}{56}{}%
+\contentsline {subsection}{\numberline {3.1.4}Ключевые файлы и директории.}{57}{}%
+\contentsline {section}{Выводы по главе\nobreakspace 3}{58}{}%
+\contentsline {chapter}{ЗАКЛЮЧЕНИЕ}{60}{}%
+\contentsline {chapter}{Библиографический список}{63}{}%
+\ttl@change@i {\@ne }{chapter}{\appendixPrefix }{}{\contentslabel [\@appendixname ~\thecontentslabel .]{\the \appendixPrefix }}{\hspace *{-\the \appendixPrefix }}{\titlerule *[0.5pc]{.}\contentspage }\relax 
+\ttl@change@v {chapter}{}{}{}\relax 
+\contentsline {chapter}{Приложение А}{67}{}%
+\contentsline {chapter}{Приложение Б}{69}{}%
+\contentsline {chapter}{Приложение В}{70}{}%
+\contentsline {chapter}{Приложение Г}{72}{}%
+\contentsline {chapter}{Приложение Д}{73}{}%
+\contentsline {chapter}{Приложение Е}{77}{}%
+\contentsline {chapter}{Приложение Ж}{81}{}%
+\contentsfinish 

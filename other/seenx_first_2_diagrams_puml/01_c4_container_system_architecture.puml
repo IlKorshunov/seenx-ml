@@ -1,0 +1,39 @@
+@startuml 01_c4_container_system_architecture
+!include style_c4_readable.puml
+
+title Основные этапы работы системы — C4 L2
+
+rectangle "Исследователь\nзапускает пайплайн,\nанализирует результаты" as user <<input>>
+
+rectangle "Исходные данные\nвидео, аудио,\nretention.csv,\nкомментарии" as raw <<input>>
+
+rectangle "Сбор данных\nget_data/comments.py,\nother/download_data.py,\nretention_analysis.py" as ingest <<pipeline>>
+
+rectangle "Извлечение признаков\nsrc/aggregator.py,\nsrc/extractors/*" as features <<component>>
+
+rectangle "Подготовка датасета\nнормализация,\nфильтрация,\nокна train/val" as dataset <<pipeline>>
+
+rectangle "Обучение моделей\nCatBoost, LSTM,\nTransformer, VideoMAE,\nDeBERTa" as train <<component>>
+
+rectangle "Анализ и настройка\nfeature importance,\nкластеризация,\nOptuna" as analysis <<component>>
+
+rectangle "Артефакты\nмодели, метрики,\nграфики, отчёты" as artifacts <<output>>
+
+' ── основной поток ────────────────────────────────────────────
+user -down-> raw : задаёт\nисходные данные
+raw -down-> ingest : передаёт\nфайлы и метаданные
+ingest -down-> features : данные\nпо видео
+features -down-> dataset : посекундная\nтаблица признаков
+dataset -down-> train : обучающие\nвыборки
+train -down-> analysis : модели\nи предсказания
+analysis -down-> artifacts : сохраняет\nрезультаты
+
+legend bottom left
+  |= Цвет |= Тип блока |
+  | <back:#F1F8E9><color:#2E7D32>████</color></back> | входные данные |
+  | <back:#FFF8F8><color:#C62828>████</color></back> | оркестрация и сборка |
+  | <back:#F7FBFF><color:#1565C0>████</color></back> | компонент обработки |
+  | <back:#F5F5F5><color:#6D6D6D>████</color></back> | результат |
+end legend
+
+@enduml

@@ -1,0 +1,58 @@
+@startuml 05_c4_l3_prediction_architectures
+!include style_c4_readable.puml
+
+title Архитектуры предсказания удержания — C4 L3
+
+rectangle "Входные данные\nпосекундные признаки,\nэмбеддинги,\nretention-кривые" as input <<input>>
+
+rectangle "Подготовка выборок\nнормализация,\nскользящие окна,\ntrain/val/LOO" as dataset <<pipeline>>
+
+package "Модели прогнозирования" {
+
+  rectangle "CatBoost\nтабличные признаки,\nбыстрый baseline\nи основная модель" as catboost <<component>>
+
+  rectangle "LSTM\nпоследовательная\nмодель удержания" as lstm <<component>>
+
+  rectangle "Transformer\nвременное внимание,\nмультимодальные входы" as transformer <<component>>
+
+  rectangle "VideoMAE-вариант\nадаптированная\nвизуальная ветвь" as videomae <<component>>
+
+  rectangle "DeBERTa-вариант\nтекстовая ветвь\nпо транскрипту" as deberta <<component>>
+}
+
+rectangle "Ансамбль\nсмешивание предсказаний,\nметамодель,\nсравнение конфигураций" as ensemble <<pipeline>>
+
+rectangle "Результат\nвеса моделей,\nпредсказанные кривые,\nметрики валидации" as output <<output>>
+
+' ── модели в ряд ──────────────────────────────────────────────
+catboost -[hidden]right-> lstm
+lstm -[hidden]right-> transformer
+transformer -[hidden]right-> videomae
+videomae -[hidden]right-> deberta
+
+' ── основной поток ────────────────────────────────────────────
+input -down-> dataset : признаки\nи цели
+
+dataset -down-> catboost : таблицы
+dataset -down-> lstm : окна\nвременного ряда
+dataset -down-> transformer : окна\nи эмбеддинги
+dataset -down-> videomae : video\nэмбеддинги
+dataset -down-> deberta : текстовые\nэмбеддинги
+
+catboost -down-> ensemble : прогноз
+lstm -down-> ensemble : прогноз
+transformer -down-> ensemble : прогноз
+videomae -down-> ensemble : прогноз
+deberta -down-> ensemble : прогноз
+
+ensemble -down-> output : сохраняет\nартефакты
+
+legend bottom left
+  |= Цвет |= Тип блока |
+  | <back:#F1F8E9><color:#2E7D32>████</color></back> | входные данные |
+  | <back:#FFF8F8><color:#C62828>████</color></back> | оркестрация и сборка |
+  | <back:#F7FBFF><color:#1565C0>████</color></back> | модель |
+  | <back:#F5F5F5><color:#6D6D6D>████</color></back> | результат |
+end legend
+
+@enduml

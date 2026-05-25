@@ -1,0 +1,61 @@
+' Shared readable style for diploma C4-like diagrams.
+' Categories:
+' input     — external actor/source/input data
+' pipeline  — orchestration, assembly, transformation
+' component — processing/analysis/model component
+' output    — output artifact/storage/result
+
+hide stereotype
+top to bottom direction
+scale max 4200 width
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 24
+skinparam linetype polyline
+skinparam nodesep 65
+skinparam ranksep 80
+skinparam ArrowFontSize 18
+skinparam titleFontSize 30
+skinparam ArrowColor #333333
+skinparam stereotypeFontSize 0
+skinparam stereotypeFontColor transparent
+skinparam defaultTextAlignment center
+
+skinparam rectangle {
+  RoundCorner 8
+  FontColor #222222
+}
+
+skinparam package {
+  BackgroundColor #FAFCFF
+  BorderColor #1565C0
+  BorderThickness 2
+  FontColor #0D47A1
+  FontStyle bold
+  FontSize 24
+}
+
+skinparam rectangle<<input>> {
+  BorderColor #2E7D32
+  BorderThickness 3
+  BackgroundColor #F1F8E9
+}
+
+skinparam rectangle<<pipeline>> {
+  BorderColor #C62828
+  BorderThickness 3
+  BackgroundColor #FFF8F8
+}
+
+skinparam rectangle<<component>> {
+  BorderColor #1565C0
+  BorderThickness 2
+  BackgroundColor #F7FBFF
+}
+
+skinparam rectangle<<output>> {
+  BorderColor #6D6D6D
+  BorderThickness 2
+  BackgroundColor #F5F5F5
+}
