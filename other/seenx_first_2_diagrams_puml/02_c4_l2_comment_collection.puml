@@ -1,36 +1,43 @@
 @startuml 02_c4_l2_comment_collection
 !include style_c4_readable.puml
 
-title Сбор комментариев YouTube — C4 L2
+top to bottom direction
+scale max 1800 height
 
-rectangle "Исследователь" as user <<input>>
+skinparam defaultFontSize 30
+skinparam ArrowFontSize 22
 
-rectangle "YouTube Data API\nканал, плейлисты,\nметаданные, комментарии" as youtube <<input>>
+rectangle "<b>Исследователь</b>\nзапускает экспорт,\nпередаёт параметры,\nконтролирует результат" as user <<input>>
 
-package "get_data — сбор комментариев" {
+rectangle "<b>CLI</b>\nпринимает параметры,\nзапускает экспорт,\nпроверяет выполнение" as cli <<pipeline>>
 
-  rectangle "CLI\ncomments.py" as cli <<pipeline>>
+rectangle "<b>YouTube Data API</b>\nканал, плейлисты,\nметаданные,\nкомментарии" as youtube <<input>>
 
-  rectangle "Экспорт\nтокен, плейлисты,\nкомментарии и ответы,\nтаймкоды, метаданные видео" as export <<component>>
+rectangle "<b>Экспорт</b>\nкомментарии и ответы,\nтаймкоды,\nметаданные видео" as export <<component>>
 
-  rectangle "Сборка JSON\nобъединение метаданных\nи комментариев по видео" as merge <<pipeline>>
+rectangle "<b>Сборка JSON</b>\nобъединяет метаданные,\nкомментарии,\nданные по видео" as merge <<pipeline>>
 
-  rectangle "Хранилище\nJSON-файлы\nс комментариями\nи метаданными" as store <<output>>
-}
+rectangle "<b>Хранилище</b>\nJSON-файлы\nс комментариями\nи метаданными" as store <<output>>
 
-' ── основной поток ────────────────────────────────────────────
-user -down-> cli : запускает\nэкспорт
-cli -down-> export : запросы\nк API
-youtube -down-> export : отдаёт\nданные
-export -down-> merge : сырые данные\nпо видео
-merge -down-> store : запись\nJSON
+' ── компактный вертикальный порядок ──────────────────────────
+user    -[hidden]down-> cli
+cli     -[hidden]down-> youtube
+youtube -[hidden]down-> export
+export  -[hidden]down-> merge
+merge   -[hidden]down-> store
+
+user    -down-> cli     : запускает\nэкспорт
+cli     -down-> youtube : параметры\nзапроса
+youtube -down-> export  : данные\nYouTube
+export  -down-> merge   : данные\nпо видео
+merge   -down-> store   : запись\nJSON
 
 legend bottom left
   |= Цвет |= Тип блока |
-  | <back:#F1F8E9><color:#2E7D32>████</color></back> | входные данные |
-  | <back:#FFF8F8><color:#C62828>████</color></back> | оркестрация и сборка |
-  | <back:#F7FBFF><color:#1565C0>████</color></back> | компонент сбора |
-  | <back:#F5F5F5><color:#6D6D6D>████</color></back> | результат |
-end legend
+  | <back:#B9F6CA>     </back> | внешние данные / акторы |
+  | <back:#FFCDD2>     </back> | оркестрация и сборка |
+  | <back:#BBDEFB>     </back> | компонент сбора |
+  | <back:#D6D6D6>     </back> | результат |
+endlegend
 
 @enduml

@@ -1,39 +1,62 @@
 @startuml 01_c4_container_system_architecture
 !include style_c4_readable.puml
 
-title Основные этапы работы системы — C4 L2
+top to bottom direction
+scale max 2200 width
 
-rectangle "Исследователь\nзапускает пайплайн,\nанализирует результаты" as user <<input>>
+skinparam defaultFontSize 36
+skinparam ArrowFontSize 24
+skinparam nodesep 80
+skinparam ranksep 95
+skinparam package {
+  FontSize 30
+}
 
-rectangle "Исходные данные\nвидео, аудио,\nretention.csv,\nкомментарии" as raw <<input>>
+' ── вход и выход пайплайна ───────────────────────────────────
+rectangle "<b>Вход пайплайна</b>\nпараметры запуска,\nмедиафайлы,\nretention,\nметаданные" as input <<input>>
 
-rectangle "Сбор данных\nget_data/comments.py,\nother/download_data.py,\nretention_analysis.py" as ingest <<pipeline>>
+' ── укрупнённые контейнеры системы ───────────────────────────
+package "seenx-ml" {
 
-rectangle "Извлечение признаков\nsrc/aggregator.py,\nsrc/extractors/*" as features <<component>>
+  rectangle "<b>CLI-запуск</b>\nкоординация этапов,\nпараметры запуска,\nконтроль статуса" as cli <<pipeline>>
 
-rectangle "Подготовка датасета\nнормализация,\nфильтрация,\nокна train/val" as dataset <<pipeline>>
+  rectangle "<b>Сбор данных</b>\nзагрузка материалов,\nметаданных,\nкомментариев" as ingest <<pipeline>>
 
-rectangle "Обучение моделей\nCatBoost, LSTM,\nTransformer, VideoMAE,\nDeBERTa" as train <<component>>
+  rectangle "<b>Подготовка признаков</b>\nизвлечение,\nагрегация,\nнормализация,\nформирование датасета" as features <<component>>
 
-rectangle "Анализ и настройка\nfeature importance,\nкластеризация,\nOptuna" as analysis <<component>>
+  rectangle "<b>Кластеризация и настройка</b>\nгруппы видео,\nпоиск параметров,\nподготовка конфигураций" as tuning <<component>>
 
-rectangle "Артефакты\nмодели, метрики,\nграфики, отчёты" as artifacts <<output>>
+  rectangle "<b>Моделирование</b>\nобучение LSTM,\nTransformer,\nVideoMAE-варианта" as modeling <<component>>
 
-' ── основной поток ────────────────────────────────────────────
-user -down-> raw : задаёт\nисходные данные
-raw -down-> ingest : передаёт\nфайлы и метаданные
-ingest -down-> features : данные\nпо видео
-features -down-> dataset : посекундная\nтаблица признаков
-dataset -down-> train : обучающие\nвыборки
-train -down-> analysis : модели\nи предсказания
-analysis -down-> artifacts : сохраняет\nрезультаты
+  rectangle "<b>Анализ результатов</b>\nметрики,\nважность признаков,\nсводные отчёты" as analysis <<component>>
+}
+
+rectangle "<b>Артефакты</b>\nмодели, метрики,\nграфики, отчёты" as artifacts <<output>>
+
+' ── вертикальный поток без пересечений ───────────────────────
+input    -[hidden]down-> cli
+cli      -[hidden]down-> ingest
+ingest   -[hidden]down-> features
+features -[hidden]down-> tuning
+tuning   -[hidden]down-> modeling
+modeling -[hidden]down-> analysis
+analysis -[hidden]down-> artifacts
+
+' ── основной поток ───────────────────────────────────────────
+input    -down-> cli        : входные\nданные
+cli      -down-> ingest     : запускает\nсбор
+ingest   -down-> features   : данные\nпо видео
+features -down-> tuning : таблица признаков\nи эмбеддинги
+tuning   -down-> modeling : группы видео\nи параметры
+modeling -down-> analysis   : модели\nи предсказания
+analysis -down-> artifacts  : сохраняет\nрезультаты
 
 legend bottom left
   |= Цвет |= Тип блока |
-  | <back:#F1F8E9><color:#2E7D32>████</color></back> | входные данные |
-  | <back:#FFF8F8><color:#C62828>████</color></back> | оркестрация и сборка |
-  | <back:#F7FBFF><color:#1565C0>████</color></back> | компонент обработки |
-  | <back:#F5F5F5><color:#6D6D6D>████</color></back> | результат |
-end legend
+  | <back:#B9F6CA>     </back> | пользователи / источник данных |
+  | <back:#FFCDD2>     </back> | оркестрация и сборка |
+  | <back:#BBDEFB>     </back> | компонент обработки |
+  | <back:#D6D6D6>     </back> | результат |
+endlegend
 
 @enduml

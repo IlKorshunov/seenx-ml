@@ -1,62 +1,51 @@
 @startuml 06_c4_l3_analysis_tuning
 !include style_c4_readable.puml
 
-title Анализ признаков и настройка моделей — C4 L3
+top to bottom direction
+scale max 1800 height
 
-rectangle "Входные данные\nтаблицы признаков,\nэмбеддинги,\nвеса моделей,\nметрики" as input <<input>>
+skinparam defaultFontSize 30
+skinparam ArrowFontSize 22
 
-rectangle "Оркестратор анализа\nanalysis/feature_importance/run_all.py,\nrun_all_experiments.sh" as orchestrator <<pipeline>>
+rectangle "<b>Входные данные</b>\nтаблицы признаков,\nэмбеддинги,\nвеса моделей,\nметрики" as input <<input>>
 
-package "Анализ признаков" {
+rectangle "<b>Оркестратор анализа</b>\nзапуск методов,\nконтроль расчётов,\nсборка отчёта" as orchestrator <<pipeline>>
 
-  rectangle "Корреляции\nSpearman, Pearson,\nmutual information" as corr <<component>>
+package "Методы анализа признаков" {
 
-  rectangle "CatBoost importance\nвстроенная важность,\nTreeSHAP" as cb <<component>>
+  rectangle "<b>Статистические оценки</b>\nSpearman, Pearson,\nmutual information" as stat <<component>>
 
-  rectangle "Permutation\nтабличные модели,\nпоследовательные модели" as perm <<component>>
-
-  rectangle "SHAP\nвклад признаков,\nзависимости,\nгруппы" as shap <<component>>
-
-  rectangle "Кластеризация\nKMeans, GMM,\nDBSCAN, DTW,\nэмбеддинги" as cluster <<component>>
+  rectangle "<b>Модельные оценки</b>\nCatBoost importance,\nPermutation,\nSHAP" as model <<component>>
 }
 
-rectangle "Подбор гиперпараметров\ntune_hp/*\nOptuna, trials,\nлучшие параметры" as tuning <<pipeline>>
+rectangle "<b>Сводная сборка</b>\nmaster ranking,\nsummary report,\nсогласование оценок" as merge <<pipeline>>
 
-rectangle "Сводная сборка\nmaster ranking,\nsummary report,\nтаблица кластеров,\nbest params" as merge <<pipeline>>
+rectangle "<b>Результат</b>\nрейтинги признаков,\nграфики важности,\nсводные отчёты" as output <<output>>
 
-rectangle "Результат\nрейтинги признаков,\nкластеры, графики,\nнастройки моделей" as output <<output>>
-
-' ── компоненты анализа в ряд ──────────────────────────────────
-corr -[hidden]right-> cb
-cb -[hidden]right-> perm
-perm -[hidden]right-> shap
-shap -[hidden]right-> cluster
+' ── компактная раскладка ─────────────────────────────────────
+input -[hidden]down-> orchestrator
+stat -[hidden]right-> model
+orchestrator -[hidden]down-> model
+model -[hidden]down-> merge
+merge -[hidden]down-> output
 
 ' ── основной поток ────────────────────────────────────────────
 input -down-> orchestrator : передаёт\nданные и модели
 
-orchestrator -down-> corr : анализ
-orchestrator -down-> cb : анализ
-orchestrator -down-> perm : анализ
-orchestrator -down-> shap : анализ
-orchestrator -down-> cluster : анализ
-orchestrator -down-> tuning : подбор\nпараметров
+orchestrator -down-> stat : анализ
+orchestrator -down-> model : анализ
 
-corr -down-> merge : оценки
-cb -down-> merge : оценки
-perm -down-> merge : оценки
-shap -down-> merge : оценки
-cluster -down-> merge : группы\nвидео
-tuning -down-> merge : лучшие\nпараметры
+stat -down-> merge : оценки
+model -down-> merge : оценки
 
 merge -down-> output : запись\nрезультатов
 
 legend bottom left
   |= Цвет |= Тип блока |
-  | <back:#F1F8E9><color:#2E7D32>████</color></back> | входные данные |
-  | <back:#FFF8F8><color:#C62828>████</color></back> | оркестрация и сборка |
-  | <back:#F7FBFF><color:#1565C0>████</color></back> | компонент анализа |
-  | <back:#F5F5F5><color:#6D6D6D>████</color></back> | результат |
-end legend
+  | <back:#B9F6CA>     </back> | входные данные |
+  | <back:#FFCDD2>     </back> | оркестрация и сборка |
+  | <back:#BBDEFB>     </back> | компонент анализа |
+  | <back:#D6D6D6>     </back> | результат |
+endlegend
 
 @enduml

@@ -1,0 +1,4 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is 'diploma_from_word.blg'
+[29] biber-darwin:342> INFO - === Mon May 25, 2026, 22:43:02
+[36] Biber.pm:421> INFO - Reading 'diploma_from_word.bcf'

@@ -1,13 +1,9 @@
 @startuml 03_c4_l3_feature_aggregation
 !include style_c4_readable.puml
 
-title Извлечение и агрегация признаков — C4 L3
-
 rectangle "Входные данные\nvideo.mp4, audio,\nretention.csv,\ncomments.json, config" as input <<input>>
 
-rectangle "Оркестратор\nsrc/aggregator.py\nпроверяет готовые колонки,\nпродолжает после остановки,\nсохраняет прогресс" as agg <<pipeline>>
-
-rectangle "Ось времени\nанализирует retention,\nсоздаёт таблицу\n1 строка = 1 секунда" as grid <<pipeline>>
+rectangle "Оркестратор\nпроверяет готовые колонки,\nпродолжает после остановки,\nсохраняет прогресс" as agg <<pipeline>>
 
 package "Извлечение по модальностям" {
 
@@ -20,13 +16,11 @@ package "Извлечение по модальностям" {
   rectangle "Comments\nплотность,\nтон, отметки\nвремени" as comments <<component>>
 
   rectangle "Multimodal\nобщий вектор\nвидео, аудио,\nтекст" as mm <<component>>
-
-  rectangle "Clustering\nтип контента,\ncluster_id,\nгруппы видео" as clustering <<component>>
 }
 
 rectangle "Сборка таблицы\nприводит признаки к секундам,\nдобавляет новые колонки,\nсохраняет прогресс" as merge <<pipeline>>
 
-rectangle "Постобработка\nэмоции, производные,\nintro cap, всплески,\nудаление лишних колонок" as post <<pipeline>>
+rectangle "Постобработка\nэмоции, производные,\nудаление лишних колонок" as post <<pipeline>>
 
 rectangle "Результат\nпосекундный CSV\nretention + признаки" as output <<output>>
 
@@ -35,37 +29,31 @@ visual -[hidden]right-> audio
 audio -[hidden]right-> text
 text -[hidden]right-> comments
 comments -[hidden]right-> mm
-mm -[hidden]right-> clustering
 
 ' ── основной поток ────────────────────────────────────────────
 input -down-> agg : передаёт\nисходные файлы
-agg -down-> grid : готовит\nось времени
 
 agg -down-> visual : visual
 agg -down-> audio : audio
 agg -down-> text : text
 agg -down-> comments : comments
 agg -down-> mm : multimodal
-agg -down-> clustering : clustering
-
-grid .down.> merge : каркас\nсекунды + retention
 
 visual -down-> merge : visual\nколонки
 audio -down-> merge : audio\nколонки
 text -down-> merge : text\nколонки
 comments -down-> merge : comments\nколонки
 mm -down-> merge : multimodal\nколонки
-clustering -down-> merge : cluster\nколонки
 
 merge -down-> post : собранная\nтаблица
 post -down-> output : финальный\nCSV
 
 legend bottom left
   |= Цвет |= Тип блока |
-  | <back:#F1F8E9><color:#2E7D32>████</color></back> | входные данные |
-  | <back:#FFF8F8><color:#C62828>████</color></back> | оркестрация и сборка |
-  | <back:#F7FBFF><color:#1565C0>████</color></back> | feature extractor |
-  | <back:#F5F5F5><color:#6D6D6D>████</color></back> | результат |
-end legend
+  | <back:#B9F6CA>     </back> | входные данные |
+  | <back:#FFCDD2>     </back> | оркестрация и сборка |
+  | <back:#BBDEFB>     </back> | feature extractor |
+  | <back:#D6D6D6>     </back> | результат |
+endlegend
 
 @enduml

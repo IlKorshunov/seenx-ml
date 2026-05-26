@@ -10,13 +10,13 @@
 \contentsline {section}{\numberline {2.1}Основные этапы работы}{13}{}%
 \contentsline {section}{\numberline {2.2}Сбор комментариев}{14}{}%
 \contentsline {subsection}{\numberline {2.2.1}Семантический анализ комментариев}{15}{}%
-\contentsline {section}{\numberline {2.3}Извлечение признаков}{16}{}%
+\contentsline {section}{\numberline {2.3}Извлечение признаков}{15}{}%
 \contentsline {subsection}{\numberline {2.3.1}Пространство признаков}{17}{}%
 \contentsline {subsection}{\numberline {2.3.2}Извлечение границ заставок.}{19}{}%
 \contentsline {subsection}{\numberline {2.3.3}Векторный анализ модальных составляющих}{21}{}%
 \contentsline {subsection}{\numberline {2.3.4}Признаки громкости и динамики звукового сигнала.}{23}{}%
 \contentsline {subsection}{\numberline {2.3.5}Визуальная составляющая кадра}{24}{}%
-\contentsline {subsection}{\numberline {2.3.6}Признаки рекламных интеграций}{26}{}%
+\contentsline {subsection}{\numberline {2.3.6}Признаки рекламных интеграций}{25}{}%
 \contentsline {subsection}{\numberline {2.3.7}Признаки движения в кадре.}{27}{}%
 \contentsline {subsection}{\numberline {2.3.8}Скорость речи и плотность слов}{29}{}%
 \contentsline {subsection}{\numberline {2.3.9}Обращения к зрителю}{30}{}%
@@ -43,21 +43,22 @@
 \contentsline {subsection}{\numberline {2.6.3}Подбор гиперпараметров.}{47}{}%
 \contentsline {section}{Выводы по главе\nobreakspace 2}{48}{}%
 \contentsline {chapter}{\numberline {3}Реализация и экспериментальная оценка моделей}{51}{}%
-\contentsline {section}{\numberline {3.1}Результаты валидаций.}{51}{}%
-\contentsline {subsection}{\numberline {3.1.1}Тренировочный оркестратор.}{53}{}%
-\contentsline {subsection}{\numberline {3.1.2}Агрегатор признаков.}{54}{}%
-\contentsline {subsection}{\numberline {3.1.3}Фронтенд-интерфейс сервиса}{56}{}%
-\contentsline {subsection}{\numberline {3.1.4}Ключевые файлы и директории.}{57}{}%
-\contentsline {section}{Выводы по главе\nobreakspace 3}{58}{}%
-\contentsline {chapter}{ЗАКЛЮЧЕНИЕ}{60}{}%
-\contentsline {chapter}{Библиографический список}{63}{}%
+\contentsline {section}{\numberline {3.1}Тренировочный оркестратор}{53}{}%
+\contentsline {section}{\numberline {3.2}Агрегатор признаков}{54}{}%
+\contentsline {section}{\numberline {3.3}Фронтенд-интерфейс сервиса}{56}{}%
+\contentsline {section}{\numberline {3.4}Ключевые файлы и директории}{57}{}%
+\contentsline {section}{\numberline {3.5}Тестирование продукта}{58}{}%
+\contentsline {section}{Выводы по главе\nobreakspace 3}{59}{}%
+\contentsline {chapter}{ЗАКЛЮЧЕНИЕ}{61}{}%
+\contentsline {chapter}{Библиографический список}{64}{}%
 \ttl@change@i {\@ne }{chapter}{\appendixPrefix }{}{\contentslabel [\@appendixname ~\thecontentslabel .]{\the \appendixPrefix }}{\hspace *{-\the \appendixPrefix }}{\titlerule *[0.5pc]{.}\contentspage }\relax 
 \ttl@change@v {chapter}{}{}{}\relax 
-\contentsline {chapter}{Приложение А}{67}{}%
-\contentsline {chapter}{Приложение Б}{69}{}%
-\contentsline {chapter}{Приложение В}{70}{}%
-\contentsline {chapter}{Приложение Г}{72}{}%
-\contentsline {chapter}{Приложение Д}{73}{}%
-\contentsline {chapter}{Приложение Е}{77}{}%
-\contentsline {chapter}{Приложение Ж}{81}{}%
+\contentsline {chapter}{Приложение А}{68}{}%
+\contentsline {chapter}{Приложение Б}{70}{}%
+\contentsline {chapter}{Приложение В}{71}{}%
+\contentsline {chapter}{Приложение Г}{73}{}%
+\contentsline {chapter}{Приложение Д}{74}{}%
+\contentsline {chapter}{Приложение Е}{78}{}%
+\contentsline {chapter}{Приложение Ж}{82}{}%
+\contentsline {chapter}{Приложение З}{88}{}%
 \contentsfinish 
