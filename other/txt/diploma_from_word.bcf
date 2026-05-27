@@ -172,7 +172,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>sortingtemplatename</bcf:key>
-      <bcf:value>nyt</bcf:value>
+      <bcf:value>none</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>sortsets</bcf:key>
@@ -3547,48 +3547,12 @@
   <bcf:section number="0">
   </bcf:section>
   <!-- SORTING TEMPLATES -->
-  <bcf:sortingtemplate name="nyt">
+  <bcf:sortingtemplate name="none">
     <bcf:sort order="1">
-      <bcf:sortitem order="1">presort</bcf:sortitem>
+      <bcf:sortitem order="1">citeorder</bcf:sortitem>
     </bcf:sort>
-    <bcf:sort order="2" final="1">
-      <bcf:sortitem order="1">sortkey</bcf:sortitem>
-    </bcf:sort>
-    <bcf:sort order="3">
-      <bcf:sortitem order="1">heading</bcf:sortitem>
-      <bcf:sortitem order="2">sortname</bcf:sortitem>
-      <bcf:sortitem order="3">author</bcf:sortitem>
-      <bcf:sortitem order="4">editor</bcf:sortitem>
-      <bcf:sortitem order="5">translator</bcf:sortitem>
-      <bcf:sortitem order="6">sorttitle</bcf:sortitem>
-      <bcf:sortitem order="7">maintitle</bcf:sortitem>
-      <bcf:sortitem order="8">title</bcf:sortitem>
-    </bcf:sort>
-    <bcf:sort order="4">
-      <bcf:sortitem order="1">sortyear</bcf:sortitem>
-      <bcf:sortitem order="2">year</bcf:sortitem>
-    </bcf:sort>
-    <bcf:sort order="5">
-      <bcf:sortitem order="1">sorttitle</bcf:sortitem>
-      <bcf:sortitem order="2">maintitle</bcf:sortitem>
-      <bcf:sortitem order="3">title</bcf:sortitem>
-    </bcf:sort>
-    <bcf:sort order="6">
-      <bcf:sortitem order="1">sortvolume</bcf:sortitem>
-      <bcf:sortitem order="2" pad_side="left" pad_width="4" pad_char="0">internalsortvolume</bcf:sortitem>
-      <bcf:sortitem literal="1" order="3">0000</bcf:sortitem>
-    </bcf:sort>
-    <bcf:sort order="7">
-      <bcf:sortitem order="1" pad_side="left" pad_width="4" pad_char="0">internalsortbook</bcf:sortitem>
-      <bcf:sortitem literal="1" order="2">0000</bcf:sortitem>
-    </bcf:sort>
-    <bcf:sort order="8">
-      <bcf:sortitem order="1" pad_side="left" pad_width="4" pad_char="0">internalsortpart</bcf:sortitem>
-      <bcf:sortitem literal="1" order="2">0000</bcf:sortitem>
-    </bcf:sort>
-    <bcf:sort order="9">
-      <bcf:sortitem order="1" pad_side="left" pad_width="4" pad_char="0">internalsortissue</bcf:sortitem>
-      <bcf:sortitem literal="1" order="2">0000</bcf:sortitem>
+    <bcf:sort order="2">
+      <bcf:sortitem order="1">intciteorder</bcf:sortitem>
     </bcf:sort>
   </bcf:sortingtemplate>
   <!-- DATALISTS -->

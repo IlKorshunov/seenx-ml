@@ -324,8 +324,6 @@ INPUT ./diploma_from_word_media/Transformer.pdf
 INPUT ./diploma_from_word_media/Transformer.pdf
 INPUT ./diploma_from_word_media/LSTM.pdf
 INPUT ./diploma_from_word_media/LSTM.pdf
-INPUT ./diploma_from_word_media/02_uml_activity_training_pipeline.png
-INPUT ./diploma_from_word_media/02_uml_activity_training_pipeline.png
 INPUT ./diploma_from_word_media/image1.jpg
 INPUT ./diploma_from_word_media/image1.jpg
 INPUT ./diploma_from_word_media/image2.png

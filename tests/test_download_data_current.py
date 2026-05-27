@@ -1,9 +1,9 @@
- import os
+import os
 import sys
 import types
 from collections import OrderedDict
 
-import pytest
+import pytest  # type: ignore[reportMissingImports]
 
 from tests.helpers import load_module
 

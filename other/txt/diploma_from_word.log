@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.20)  26 MAY 2026 20:13
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.20)  27 MAY 2026 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1042,22 +1042,22 @@ Package babel Info: 'russian' activates 'russian' shorthands.
 )
 \openout1 = `diploma_from_word.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
 
 Package fontspec Info: 
 (fontspec)             Adjusting the maths setup (use [no-math] to avoid
@@ -1065,66 +1065,66 @@ Package fontspec Info:
 
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 32.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 32.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 32.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 32.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 32.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 32.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 32.
-LaTeX Font Info:    Redeclaring math accent \check on input line 32.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 32.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 32.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 32.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 32.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 32.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 34.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 34.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 34.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 34.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 34.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 34.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 34.
+LaTeX Font Info:    Redeclaring math accent \check on input line 34.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 34.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 34.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 34.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 34.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 32.
+(Font)              `operators' in the math version `normal' on input line 34.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> TU/TimesNewRoman(0)/m/n on input line 3
-2.
+4.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 32.
+(Font)              `operators' in the math version `bold' on input line 34.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/m/n on input line 
-32.
+34.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on 
-input line 32.
+input line 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/TimesNewRoman(0)/m/it on input line
- 32.
+ 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/b/n on input line 
-32.
+34.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/Arial(0)/m/n on input line 32.
+(Font)                  OT1/cmss/m/n --> TU/Arial(0)/m/n on input line 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/CourierNew(0)/m/n on input line 32.
+(Font)                  OT1/cmtt/m/n --> TU/CourierNew(0)/m/n on input line 34.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/b/n on 
-input line 32.
+input line 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> TU/TimesNewRoman(0)/b/it on input lin
-e 32.
+e 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/Arial(0)/b/n on input line 32.
+(Font)                  OT1/cmss/bx/n --> TU/Arial(0)/b/n on input line 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/CourierNew(0)/b/n on input line 32.
+(Font)                  OT1/cmtt/m/n --> TU/CourierNew(0)/b/n on input line 34.
 
-LaTeX Info: Redefining \th on input line 32.
+LaTeX Info: Redefining \th on input line 34.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1223,305 +1223,567 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'diploma_from_word.bbl' found.
 
 (./diploma_from_word.bbl)
-Package biblatex Info: Reference section=0 on input line 32.
-Package biblatex Info: Reference segment=0 on input line 32.
+Package biblatex Info: Reference section=0 on input line 34.
+Package biblatex Info: Reference segment=0 on input line 34.
 \c@lstlisting=\count537
 \appendixPrefix=\skip124
  (./diploma_from_word.toc
-Overfull \hbox (2.15993pt too wide) detected at line 23
+Overfull \hbox (2.15993pt too wide) detected at line 24
 \TU/TimesNewRoman(0)/m/n/14.4 2.3.10. 
  []
 
 
-Underfull \hbox (badness 2334) in paragraph at lines 24--24
- []|| []\TU/TimesNewRoman(0)/m/n/14.4 Baseline-кривая удержания и параметрическ
-ая аппроксимация 
+Overfull \hbox (1.62555pt too wide) detected at line 25
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.11. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 26
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.12. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 27
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.13. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 28
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.14. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 29
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.15. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 30
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.16. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 31
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.17. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 32
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.18. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 33
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.19. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 34
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.20. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 35
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.21. 
  []
 
 [1
 
 
-])
+]
+Overfull \hbox (2.15993pt too wide) detected at line 36
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.22. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 37
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.23. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 38
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.24. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 39
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.25. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 40
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.26. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 41
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.27. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 42
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.28. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 43
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.29. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 44
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.30. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 45
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.31. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 46
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.32. 
+ []
+
+
+Overfull \hbox (2.15993pt too wide) detected at line 47
+\TU/TimesNewRoman(0)/m/n/14.4 2.3.33. 
+ []
+
+
+Underfull \hbox (badness 2334) in paragraph at lines 48--48
+ []|| []\TU/TimesNewRoman(0)/m/n/14.4 Baseline-кривая удержания и параметрическ
+ая аппроксимация 
+ []
+
+[2])
 \tf@toc=\write5
 \openout5 = `diploma_from_word.toc'.
 
- [2]
-Underfull \hbox (badness 1132) in paragraph at lines 55--56
+ [3] [4
+
+] [5] [6]
+Underfull \hbox (badness 1132) in paragraph at lines 112--113
 []\TU/TimesNewRoman(0)/m/n/14.4 Для прогнозирования удержания аудитории недоста
 точно учитывать
  []
 
-[3
+[7
 
-] [4] [5] [6]
+] [8] [9] [10]
 Глава 1.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 115
+LaTeX Font Info:    Trying to load font information for U+msa on input line 172
 .
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 115
+LaTeX Font Info:    Trying to load font information for U+msb on input line 172
 .
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 2359) in paragraph at lines 115--116
+Underfull \hbox (badness 2359) in paragraph at lines 172--173
 []\TU/TimesNewRoman(0)/m/n/14.4 Одной из важных работ этого направления являетс
 я исследование
  []
 
-[7
+[11
 
-] [8] [9] [10] [11] [12]
+] [12] [13] [14] [15] [16]
 Глава 2.
 
-Underfull \hbox (badness 1259) in paragraph at lines 179--180
+Underfull \hbox (badness 1259) in paragraph at lines 236--237
 \TU/TimesNewRoman(0)/m/n/14.4 о видеороликах канала на основе авторизованного д
 оступа к экосистеме
  []
 
-[13
+[17
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 200--201
+Underfull \hbox (badness 10000) in paragraph at lines 257--258
 []\TU/TimesNewRoman(0)/m/n/14.4 Для каждого целевого видеоролика с помощью мето
 дов API
  []
 
 
-Underfull \hbox (badness 6188) in paragraph at lines 200--201
+Underfull \hbox (badness 6188) in paragraph at lines 257--258
 \TU/TimesNewRoman(0)/m/n/14.4 (commentThreads и comments) рекурсивно выгружаютс
 я все ветки об-
  []
 
-[14] [15] [16] [17] [18] [19] [20]
+[18] [19] [20] [21] [22] [23] [24]
 File: diploma_from_word_media/Bumper.png Graphic file (type bmp)
 <diploma_from_word_media/Bumper.png>
- [21] [22] [23]
+ [25] [26] [27]
 File: diploma_from_word_media/RMS.png Graphic file (type bmp)
 <diploma_from_word_media/RMS.png>
- [24]
-Underfull \hbox (badness 10000) in paragraph at lines 419--420
+ [28]
+Underfull \hbox (badness 10000) in paragraph at lines 476--477
 []\TU/TimesNewRoman(0)/m/n/14.4 Для учёта рекламных вставок в видеоролике был р
 еализо-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 419--420
+Underfull \hbox (badness 10000) in paragraph at lines 476--477
 \TU/TimesNewRoman(0)/m/n/14.4 ван отдельный извлекатель признаков, расположенны
 й в модуле
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 419--420
+Underfull \hbox (badness 10000) in paragraph at lines 476--477
 \TU/CourierNew(0)/m/n/14.4 seenx-ml/src/extractors/text/ad_segment_feature.py\T
 U/TimesNewRoman(0)/m/n/14.4 .
  []
 
-[25]
-Underfull \hbox (badness 10000) in paragraph at lines 427--428
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 484--485
 []\TU/TimesNewRoman(0)/m/n/14.4 На выходе формируются два признака: \TU/Courier
 New(0)/m/n/14.4 is_ad \TU/TimesNewRoman(0)/m/n/14.4 и
  []
 
 
-Underfull \hbox (badness 1708) in paragraph at lines 427--428
+Underfull \hbox (badness 1708) in paragraph at lines 484--485
 \TU/CourierNew(0)/m/n/14.4 ad_segment_length\TU/TimesNewRoman(0)/m/n/14.4 . При
 знак \TU/CourierNew(0)/m/n/14.4 is_ad \TU/TimesNewRoman(0)/m/n/14.4 равен едини
 це на тех секундах
  []
 
-[26]
+[30]
 File: diploma_from_word_media/Ad.png Graphic file (type bmp)
 <diploma_from_word_media/Ad.png>
- [27]
+ [31]
 File: diploma_from_word_media/radial_med.png Graphic file (type bmp)
 <diploma_from_word_media/radial_med.png>
 File: diploma_from_word_media/radial_ratio.png Graphic file (type bmp)
 <diploma_from_word_media/radial_ratio.png>
- [28] [29]
-Underfull \hbox (badness 1102) in paragraph at lines 513--514
+ [32] [33]
+Underfull \hbox (badness 1102) in paragraph at lines 570--571
 []\TU/TimesNewRoman(0)/m/n/14.4 Основной способ определения границ основан на я
 зыковой модели
  []
 
-[30] [31] [32] [33]
-Underfull \hbox (badness 4205) in paragraph at lines 591--592
+[34] [35]
+Underfull \hbox (badness 7944) in paragraph at lines 596--597
+[]\TU/TimesNewRoman(0)/m/n/14.4 Для оценки качества речевого сигнала использова
+лись признаки
+ []
+
+[36] [37]
+Underfull \hbox (badness 1314) in paragraph at lines 646--647
+[]\TU/TimesNewRoman(0)/m/n/14.4 где $\OML/cmm/m/it/14.4 e[]$ \TU/TimesNewRoman(
+0)/m/n/14.4 — нормированный эмбеддинг текущего фрагмента, а $[]$ —
+ []
+
+
+Underfull \hbox (badness 2529) in paragraph at lines 646--647
+\TU/TimesNewRoman(0)/m/n/14.4 — повторению уже сказанного. Дополнительно накапл
+ивалась величина
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 652--653
+[]\TU/TimesNewRoman(0)/m/n/14.4 Например, признак \TU/CourierNew(0)/m/n/14.4 co
+mment_density_30s \TU/TimesNewRoman(0)/m/n/14.4 отражает количе-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 652--653
+\TU/TimesNewRoman(0)/m/n/14.4 ство комментариев, связанных с окном вокруг текущ
+ей секунды, а
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 652--653
+\TU/CourierNew(0)/m/n/14.4 comment_question_rate_30s \TU/TimesNewRoman(0)/m/n/1
+4.4 показывает, насколько часто зрители
+ []
+
+[38] [39] [40]
+Underfull \hbox (badness 1769) in paragraph at lines 686--687
+\TU/TimesNewRoman(0)/m/n/14.4 личие коротких звуковых эффектов или акцентов, \T
+U/CourierNew(0)/m/n/14.4 spectral_flux \TU/TimesNewRoman(0)/m/n/14.4 по-
+ []
+
+
+Underfull \hbox (badness 6412) in paragraph at lines 686--687
+\TU/TimesNewRoman(0)/m/n/14.4 казывает скорость изменения спектральной структур
+ы аудиосигнала, а
+ []
+
+
+Underfull \hbox (badness 2726) in paragraph at lines 692--693
+\TU/TimesNewRoman(0)/m/n/14.4 лись признаки \TU/CourierNew(0)/m/n/14.4 speech_p
+redictability\TU/TimesNewRoman(0)/m/n/14.4 , \TU/CourierNew(0)/m/n/14.4 speech_
+lm_surprisal \TU/TimesNewRoman(0)/m/n/14.4 и
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 698--699
+[]\TU/TimesNewRoman(0)/m/n/14.4 Для учёта конкретности содержания использовалис
+ь признаки
+ []
+
+[41]
+Underfull \hbox (badness 1796) in paragraph at lines 704--705
+[]\TU/TimesNewRoman(0)/m/n/14.4 Для описания крупной структуры ролика использов
+ались признаки
+ []
+
+
+Underfull \hbox (badness 1874) in paragraph at lines 704--705
+\TU/TimesNewRoman(0)/m/n/14.4 биение видео на смысловые блоки и частоту переход
+ов между темами.
+ []
+
+
+Underfull \hbox (badness 1117) in paragraph at lines 706--707
+[]\TU/TimesNewRoman(0)/m/n/14.4 Такие признаки позволяют учитывать композицию р
+олика на более
+ []
+
+
+Underfull \hbox (badness 2556) in paragraph at lines 712--713
+[]\TU/TimesNewRoman(0)/m/n/14.4 В итоговом признаковом пространстве использовал
+ись как отдель-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 712--713
+\TU/TimesNewRoman(0)/m/n/14.4 ные вероятности эмоций, так и обобщённые признаки
+ \TU/CourierNew(0)/m/n/14.4 ekman_joy\TU/TimesNewRoman(0)/m/n/14.4 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 712--713
+\TU/CourierNew(0)/m/n/14.4 ekman_excitement\TU/TimesNewRoman(0)/m/n/14.4 , \TU/
+CourierNew(0)/m/n/14.4 ekman_sadness\TU/TimesNewRoman(0)/m/n/14.4 , \TU/Courier
+New(0)/m/n/14.4 ekman_neutral \TU/TimesNewRoman(0)/m/n/14.4 и
+ []
+
+
+Underfull \hbox (badness 7116) in paragraph at lines 712--713
+\TU/CourierNew(0)/m/n/14.4 ekman_intensity\TU/TimesNewRoman(0)/m/n/14.4 . Они п
+озволяют учитывать, меняется ли эмоцио-
+ []
+
+[42]
+Underfull \hbox (badness 10000) in paragraph at lines 722--723
+[]\TU/TimesNewRoman(0)/m/n/14.4 Для оценки насыщенности изображения использовал
+ись при-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 722--723
+\TU/TimesNewRoman(0)/m/n/14.4 знаки \TU/CourierNew(0)/m/n/14.4 visual_complexit
+y\TU/TimesNewRoman(0)/m/n/14.4 , \TU/CourierNew(0)/m/n/14.4 visual_complexity_g
+radient \TU/TimesNewRoman(0)/m/n/14.4 и
+ []
+
+
+Underfull \hbox (badness 3343) in paragraph at lines 722--723
+\TU/CourierNew(0)/m/n/14.4 visual_complexity_acceleration\TU/TimesNewRoman(0)/m
+/n/14.4 . Они описывают не только об-
+ []
+
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 746--747
+[]\TU/TimesNewRoman(0)/m/n/14.4 Для учёта музыкального сопровождения применялис
+ь признаки
+ []
+
+
+Underfull \hbox (badness 6461) in paragraph at lines 746--747
+\TU/CourierNew(0)/m/n/14.4 has_background_music\TU/TimesNewRoman(0)/m/n/14.4 , 
+\TU/CourierNew(0)/m/n/14.4 music_only \TU/TimesNewRoman(0)/m/n/14.4 и \TU/Couri
+erNew(0)/m/n/14.4 music_changed\TU/TimesNewRoman(0)/m/n/14.4 . Первый
+ []
+
+[44]
+Underfull \hbox (badness 10000) in paragraph at lines 752--753
+[]\TU/TimesNewRoman(0)/m/n/14.4 Для описания роли автора в кадре использовались
+ признаки
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 752--753
+\TU/CourierNew(0)/m/n/14.4 speaker_prob\TU/TimesNewRoman(0)/m/n/14.4 , \TU/Cour
+ierNew(0)/m/n/14.4 face_screen_ratio\TU/TimesNewRoman(0)/m/n/14.4 , \TU/Courier
+New(0)/m/n/14.4 faces_total_ratio \TU/TimesNewRoman(0)/m/n/14.4 и
+ []
+
+
+Underfull \hbox (badness 3323) in paragraph at lines 752--753
+\TU/CourierNew(0)/m/n/14.4 face_area_ratio\TU/TimesNewRoman(0)/m/n/14.4 . Они п
+оказывают, присутствует ли в кадре основ-
+ []
+
+[45] [46]
+Underfull \hbox (badness 4205) in paragraph at lines 810--811
 []\TU/TimesNewRoman(0)/m/n/14.4 Для дополнительного анализа формы удержания каж
 дая реальная
  []
 
-[34]
-Underfull \hbox (badness 1789) in paragraph at lines 605--606
+[47] [48]
+Underfull \hbox (badness 1789) in paragraph at lines 824--825
 []\TU/TimesNewRoman(0)/m/n/14.4 Выход кодировщика передаётся в голову предсказа
 ния отклонения:
  []
 
 File: diploma_from_word_media/Transformer.pdf Graphic file (type pdf)
 <use diploma_from_word_media/Transformer.pdf>
-[35] [36]
+[49]
 File: diploma_from_word_media/LSTM.pdf Graphic file (type pdf)
 <use diploma_from_word_media/LSTM.pdf>
-
-Underfull \hbox (badness 10000) in paragraph at lines 645--646
+ [50]
+Underfull \hbox (badness 10000) in paragraph at lines 864--865
 []\TU/TimesNewRoman(0)/m/n/14.4 К матрицам запросов, ключей и значений механизм
 а внимания
  []
 
-[37] [38] [39] [40] [41] [42]
-Underfull \hbox (badness 2261) in paragraph at lines 762--763
+[51] [52] [53] [54] [55] [56]
+Underfull \hbox (badness 2261) in paragraph at lines 981--982
 []\TU/TimesNewRoman(0)/m/n/14.4 Описанная в подразделе о перестановочной значим
 ости процедура
  []
 
-[43]
-Underfull \hbox (badness 1478) in paragraph at lines 775--776
+
+Underfull \hbox (badness 1478) in paragraph at lines 994--995
 []\TU/TimesNewRoman(0)/m/n/14.4 Итоговая значимость каждого признака определяла
 сь объединением
  []
 
-[44] [45] [46] [47] [48] [49] [50]
+[57] [58] [59] [60] [61] [62] [63]
 Глава 3.
-[51
+[64
 
-]
-File: diploma_from_word_media/02_uml_activity_training_pipeline.png Graphic fil
-e (type bmp)
-<diploma_from_word_media/02_uml_activity_training_pipeline.png>
- [52] [53] [54] [55]
-Underfull \hbox (badness 7981) in paragraph at lines 958--959
+] [65] [66] [67] [68]
+Underfull \hbox (badness 7981) in paragraph at lines 1173--1174
 []\TU/TimesNewRoman(0)/m/n/14.4 Для демонстрации пользовательского сценария был
 а реализована
  []
 
-[56]
-Underfull \hbox (badness 10000) in paragraph at lines 967--968
+[69]
+Underfull \hbox (badness 10000) in paragraph at lines 1182--1183
 []\TU/CourierNew(0)/m/n/14.4 seenx-ml/src/extractors\TU/TimesNewRoman(0)/m/n/14
 .4 , \TU/CourierNew(0)/m/n/14.4 seenx-ml/src/cutting_shots
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 972--973
+Underfull \hbox (badness 10000) in paragraph at lines 1187--1188
 []\TU/CourierNew(0)/m/n/14.4 seenx-ml/analysis/embedding_clustering.py\TU/Times
 NewRoman(0)/m/n/14.4 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 972--973
+Underfull \hbox (badness 10000) in paragraph at lines 1187--1188
 \TU/CourierNew(0)/m/n/14.4 seenx-ml/analysis/video_clustering.py \TU/TimesNewRo
 man(0)/m/n/14.4 — кластериза-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 974--975
+Underfull \hbox (badness 10000) in paragraph at lines 1189--1190
 []\TU/CourierNew(0)/m/n/14.4 seenx-ml/txt/diploma-/seenx-pages-demo.html\TU/Tim
 esNewRoman(0)/m/n/14.4 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 974--975
+Underfull \hbox (badness 10000) in paragraph at lines 1189--1190
 \TU/CourierNew(0)/m/n/14.4 seenx-ml/txt/diploma-/seenx-pages-demo.css \TU/Times
 NewRoman(0)/m/n/14.4 — де-
  []
 
-[57] [58]
-Underfull \hbox (badness 1205) in paragraph at lines 993--994
+[70] [71]
+Underfull \hbox (badness 1205) in paragraph at lines 1208--1209
 []\TU/TimesNewRoman(0)/m/n/14.4 Проведённые эксперименты показали, что использо
 вание мультимо-
  []
 
-[59] [60] [61
+[72] [73] [74
 
 
-] [62] [63]
-Underfull \hbox (badness 2521) in paragraph at lines 1050--1051
-[]\TU/TimesNewRoman(0)/m/n/14.4 12. Galley M., McKeown K.R., Fosler-Lussier E.,
- Jing H. Discourse
- []
-
-
-Underfull \hbox (badness 3657) in paragraph at lines 1052--1053
+] [75] [76]
+Underfull \hbox (badness 3657) in paragraph at lines 1265--1266
 []\TU/TimesNewRoman(0)/m/n/14.4 13. Gemini Team. Gemini 2.5: Pushing the Fronti
 er with Advanced
  []
 
-[64
+[77
 
-] [65]
-Underfull \hbox (badness 1292) in paragraph at lines 1102--1103
+] [78]
+Underfull \hbox (badness 1292) in paragraph at lines 1313--1314
 \TU/TimesNewRoman(0)/m/n/14.4 Finetuning and Inference // Proceedings of the 63
 rd Annual Meeting of the
  []
 
-[66]
-Underfull \hbox (badness 5231) in paragraph at lines 1108--1109
+
+Underfull \hbox (badness 5231) in paragraph at lines 1319--1320
 []\TU/TimesNewRoman(0)/m/n/14.4 41. Wu H., Xu J., Wang J., Long M. Autoformer: 
 Decomposition
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1108--1109
+Underfull \hbox (badness 10000) in paragraph at lines 1319--1320
 \TU/TimesNewRoman(0)/m/n/14.4 Transformers with Auto-Correlation for Long-Term 
 Series Forecasting //
  []
 
-
-Underfull \hbox (badness 1292) in paragraph at lines 1114--1115
+[79]
+Underfull \hbox (badness 1292) in paragraph at lines 1325--1326
 []\TU/TimesNewRoman(0)/m/n/14.4 44. Zhang H., Cisse M., Dauphin Y.N., Lopez-Paz
  D. mixup: Beyond
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1124--1125
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1336
 []\TU/TimesNewRoman(0)/m/n/14.4 49. CatBoost Documentation [Электронный ресурс]
 . – URL:
  []
 
-[67]
+[80]
 File: diploma_from_word_media/image1.jpg Graphic file (type bmp)
 <diploma_from_word_media/image1.jpg>
 File: diploma_from_word_media/image2.png Graphic file (type bmp)
 <diploma_from_word_media/image2.png>
 File: diploma_from_word_media/image3.jpg Graphic file (type bmp)
 <diploma_from_word_media/image3.jpg>
- [68
+ [81
 
-] [69]
+] [82]
 File: diploma_from_word_media/image4.png Graphic file (type bmp)
 <diploma_from_word_media/image4.png>
- [70
+ [83
 
 ]
 File: diploma_from_word_media/image5.png Graphic file (type bmp)
 <diploma_from_word_media/image5.png>
- [71
+ [84
 
 ]
 File: diploma_from_word_media/image6.png Graphic file (type bmp)
 <diploma_from_word_media/image6.png>
- [72
+ [85
 
 ]
-Underfull \hbox (badness 1810) in paragraph at lines 1210--1210
+Underfull \hbox (badness 1810) in paragraph at lines 1421--1421
 []|\TU/TimesNewRoman(0)/m/n/14.4 Transformer без мультимодальных
  []
 
-[73
+[86
 
 
-] (./appendix_d.py [74
+] (./appendix_d.py [87
 
-] [75] [76]) [77] (./appendix_e.py [78
+] [88] [89]) [90] (./appendix_e.py [91
 
-] [79] [80])
-[81] [82
+] [92] [93])
+[94] [95
 
 ]
 File: ../seenx_first_2_diagrams_puml/00_c4_l1_project_overview.png Graphic file
  (type bmp)
 <../seenx_first_2_diagrams_puml/00_c4_l1_project_overview.png>
- [83
+ [96
 
 ]
 File: ../seenx_first_2_diagrams_puml/01_c4_container_system_architecture.png Gr
@@ -1530,17 +1792,17 @@ aphic file (type bmp)
 File: ../seenx_first_2_diagrams_puml/05_c4_l3_prediction_architectures.png Grap
 hic file (type bmp)
 <../seenx_first_2_diagrams_puml/05_c4_l3_prediction_architectures.png>
- [84
+ [97
 
 ]
 File: ../seenx_first_2_diagrams_puml/08_c4_l2_model_architecture.png Graphic fi
 le (type bmp)
 <../seenx_first_2_diagrams_puml/08_c4_l2_model_architecture.png>
- [85]
+ [98]
 File: ../seenx_first_2_diagrams_puml/06_c4_l3_analysis_tuning.png Graphic file 
 (type bmp)
 <../seenx_first_2_diagrams_puml/06_c4_l3_analysis_tuning.png>
- [86] [87]
+ [99] [100]
 File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834883-y
 .jpg Graphic file (type bmp)
 <diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834883-y.jpg>
@@ -1553,7 +1815,7 @@ File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834887-y
 .jpg Graphic file (type bmp)
 <diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834887-y.jpg>
 
- [88
+ [101
 
 ]
 File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834888-y
@@ -1568,22 +1830,30 @@ File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834898-y
 .jpg Graphic file (type bmp)
 <diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834898-y.jpg>
 
- [89] [90] (./diploma_from_word.aux)
+ [102] [103] (./diploma_from_word.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
+
+LaTeX Warning: There were undefined references.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                diploma_from_word
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to 'diploma_from_word.run.xml'.
 \openout1 = `diploma_from_word.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 23707 strings out of 468168
- 484720 string characters out of 5432815
- 2198655 words of memory out of 5000000
- 52018 multiletter control sequences out of 15000+600000
+ 23697 strings out of 468168
+ 484076 string characters out of 5432815
+ 2198571 words of memory out of 5000000
+ 52009 multiletter control sequences out of 15000+600000
  630754 words of font info for 93 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  88i,12n,131p,1194b,4034s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on diploma_from_word.xdv (90 pages, 1656972 bytes).
+Output written on diploma_from_word.xdv (103 pages, 1935220 bytes).
