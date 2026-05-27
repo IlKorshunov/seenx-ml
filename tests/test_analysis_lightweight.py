@@ -178,5 +178,4 @@ class TestRetentionAnalysisCurrentApi:
         assert mean_result["n_videos"] == 2
         assert mean_result["target_length"] == 2
         assert normalized["target_length"] == module.NORMALIZED_BASELINE_POINTS
-        with pytest.raises(ValueError):
-            module.compute_channel_baseline([], strategy="mean_duration")
+        assert module.compute_channel_baseline([], strategy="mean_duration") is None

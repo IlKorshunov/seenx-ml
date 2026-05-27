@@ -1,6 +1,7 @@
 import os
 import sys
 import types
+from importlib.machinery import ModuleSpec
 from collections import OrderedDict
 
 import pytest  # type: ignore[reportMissingImports]
@@ -14,6 +15,8 @@ gdown_stub.download = lambda *a, **k: None  # type: ignore[attr-defined]
 sys.modules.setdefault("gdown", gdown_stub)
 
 tqdm_stub = types.ModuleType("tqdm")
+tqdm_stub.__path__ = []  # type: ignore[attr-defined]
+tqdm_stub.__spec__ = ModuleSpec("tqdm", loader=None, is_package=True)
 
 
 def _tqdm(iterable=None, *args, **kwargs):
@@ -23,6 +26,10 @@ def _tqdm(iterable=None, *args, **kwargs):
 _tqdm.write = lambda *a, **k: None  # type: ignore[attr-defined]
 tqdm_stub.tqdm = _tqdm  # type: ignore[attr-defined]
 sys.modules.setdefault("tqdm", tqdm_stub)
+auto_stub = types.ModuleType("tqdm.auto")
+auto_stub.__spec__ = ModuleSpec("tqdm.auto", loader=None)
+auto_stub.tqdm = _tqdm  # type: ignore[attr-defined]
+sys.modules.setdefault("tqdm.auto", auto_stub)
 download_data = load_module("download_data", "other/download_data.py")
 
 

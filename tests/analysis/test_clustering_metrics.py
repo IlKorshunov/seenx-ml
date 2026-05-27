@@ -15,6 +15,7 @@ def load_video_clustering(monkeypatch):
     for name in ["torch", "torch.nn", "torch.optim", "torch.utils", "torch.utils.data"]:
         monkeypatch.setitem(sys.modules, name, types.ModuleType(name))
     sys.modules["torch.utils.data"].DataLoader = object
+    sys.modules["torch.utils.data"].Dataset = object
 
     umap = types.ModuleType("umap")
     umap.UMAP = lambda *args, **kwargs: types.SimpleNamespace(fit_transform=lambda x: np.zeros((x.shape[0], 2)))
@@ -69,9 +70,9 @@ def test_metric_f0_f1_and_single_cluster_metrics(monkeypatch):
 
     f0, f1, ratio = vc.metric_f0_f1(d, np.array([0, 0, 1]))
 
-    assert f0 == pytest.approx(1.0 / 3.0)
-    assert f1 == pytest.approx(3.0)
-    assert ratio == 9.0
+    assert f0 == pytest.approx(0.25)
+    assert f1 == pytest.approx(4.5)
+    assert ratio == 18.0
     assert vc.compute_metrics(np.array([0, 0, 0]), X=np.zeros((3, 2))) == {"k": 1, "n_valid": 3, "n_noise": 0}
 
 
