@@ -13,7 +13,7 @@
 \contentsline {subsection}{\numberline {2.2.1}Семантический анализ комментариев}{19}{}%
 \contentsline {section}{\numberline {2.3}Извлечение признаков}{20}{}%
 \contentsline {subsection}{\numberline {2.3.1}Пространство признаков}{21}{}%
-\contentsline {subsection}{\numberline {2.3.2}Извлечение границ заставок.}{23}{}%
+\contentsline {subsection}{\numberline {2.3.2}Извлечение границ повторяющихся вставок.}{23}{}%
 \contentsline {subsection}{\numberline {2.3.3}Векторный анализ модальных составляющих}{25}{}%
 \contentsline {subsection}{\numberline {2.3.4}Признаки громкости и динамики звукового сигнала.}{27}{}%
 \contentsline {subsection}{\numberline {2.3.5}Визуальная составляющая кадра}{28}{}%
@@ -30,48 +30,45 @@
 \contentsline {subsection}{\numberline {2.3.16}Признаки комментариев аудитории}{38}{}%
 \contentsline {subsection}{\numberline {2.3.17}Соответствие заголовка содержанию}{39}{}%
 \contentsline {subsection}{\numberline {2.3.18}Цветовые характеристики кадра}{39}{}%
-\contentsline {subsection}{\numberline {2.3.19}Объектная насыщенность кадра}{40}{}%
-\contentsline {subsection}{\numberline {2.3.20}Короткие визуальные вставки}{40}{}%
-\contentsline {subsection}{\numberline {2.3.21}Синхронизация монтажа с музыкой}{40}{}%
-\contentsline {subsection}{\numberline {2.3.22}Звуковые события и смех}{41}{}%
-\contentsline {subsection}{\numberline {2.3.23}Сложность восприятия речи}{41}{}%
-\contentsline {subsection}{\numberline {2.3.24}Упоминания людей и организаций}{41}{}%
-\contentsline {subsection}{\numberline {2.3.25}Структура смысловых глав}{42}{}%
-\contentsline {subsection}{\numberline {2.3.26}Эмоциональная окраска речи и изображения}{42}{}%
-\contentsline {subsection}{\numberline {2.3.27}Разделение голоса и музыки}{43}{}%
-\contentsline {subsection}{\numberline {2.3.28}Визуальная сложность кадра}{43}{}%
-\contentsline {subsection}{\numberline {2.3.29}Совместные признаки разных модальностей}{43}{}%
-\contentsline {subsection}{\numberline {2.3.30}Финальные фрагменты ролика}{44}{}%
-\contentsline {subsection}{\numberline {2.3.31}Паузы и устойчивость темпа речи}{44}{}%
-\contentsline {subsection}{\numberline {2.3.32}Фоновая музыка и её изменение}{44}{}%
-\contentsline {subsection}{\numberline {2.3.33}Присутствие лица и крупность плана}{45}{}%
-\contentsline {section}{\numberline {2.4}Baseline-кривая удержания и параметрическая аппроксимация retention-кривых}{45}{}%
-\contentsline {subsection}{\numberline {2.4.1}Нормализация признаков.}{45}{}%
-\contentsline {subsection}{\numberline {2.4.2}Baseline-кривая удержания}{47}{}%
-\contentsline {subsection}{\numberline {2.4.3}Параметрическая аппроксимация retention-кривых}{48}{}%
-\contentsline {section}{\numberline {2.5}Архитектуры предсказания удержания зрителей}{48}{}%
-\contentsline {subsection}{\numberline {2.5.1}Transformer}{48}{}%
-\contentsline {subsection}{\numberline {2.5.2}LSTM}{50}{}%
-\contentsline {subsection}{\numberline {2.5.3}VIDEOMAE}{51}{}%
+\contentsline {subsection}{\numberline {2.3.19}Короткие визуальные вставки}{40}{}%
+\contentsline {subsection}{\numberline {2.3.20}Синхронизация монтажа с музыкой}{40}{}%
+\contentsline {subsection}{\numberline {2.3.21}Смех в аудиодорожке}{40}{}%
+\contentsline {subsection}{\numberline {2.3.22}Сложность восприятия речи}{41}{}%
+\contentsline {subsection}{\numberline {2.3.23}Структура смысловых глав}{41}{}%
+\contentsline {subsection}{\numberline {2.3.24}Эмоциональная окраска речи и изображения}{41}{}%
+\contentsline {subsection}{\numberline {2.3.25}Разделение голоса и музыки}{42}{}%
+\contentsline {subsection}{\numberline {2.3.26}Визуальная сложность кадра}{42}{}%
+\contentsline {subsection}{\numberline {2.3.27}Совместные признаки разных модальностей}{43}{}%
+\contentsline {subsection}{\numberline {2.3.28}Финальные фрагменты ролика}{43}{}%
+\contentsline {subsection}{\numberline {2.3.29}Паузы и устойчивость темпа речи}{43}{}%
+\contentsline {subsection}{\numberline {2.3.30}Фоновая музыка и её изменение}{44}{}%
+\contentsline {subsection}{\numberline {2.3.31}Присутствие лица и крупность плана}{44}{}%
+\contentsline {section}{\numberline {2.4}Baseline-кривая удержания и параметрическая аппроксимация retention-кривых}{44}{}%
+\contentsline {subsection}{\numberline {2.4.1}Нормализация признаков.}{44}{}%
+\contentsline {subsection}{\numberline {2.4.2}Baseline-кривая удержания}{46}{}%
+\contentsline {subsection}{\numberline {2.4.3}Параметрическая аппроксимация retention-кривых}{47}{}%
+\contentsline {section}{\numberline {2.5}Архитектуры предсказания удержания зрителей}{47}{}%
+\contentsline {subsection}{\numberline {2.5.1}Transformer}{47}{}%
+\contentsline {subsection}{\numberline {2.5.2}LSTM}{49}{}%
+\contentsline {subsection}{\numberline {2.5.3}VIDEOMAE}{50}{}%
 \contentsline {subsection}{\numberline {2.5.4}Архитектуры на основе языковой модели DeBERTa}{51}{}%
-\contentsline {subsection}{\numberline {2.5.5}Ансамбль llm}{52}{}%
-\contentsline {section}{\numberline {2.6}Анализ признаков и настройка моделей}{53}{}%
-\contentsline {subsection}{\numberline {2.6.1}Оценивание важности признаков}{53}{}%
+\contentsline {subsection}{\numberline {2.5.5}Ансамбль llm}{51}{}%
+\contentsline {section}{\numberline {2.6}Анализ признаков и настройка моделей}{52}{}%
+\contentsline {subsection}{\numberline {2.6.1}Оценивание важности признаков}{52}{}%
 \contentsline {subsubsection}{\numberline {2.6.1.1}Корреляционный анализ}{53}{}%
 \contentsline {subsubsection}{\numberline {2.6.1.2}Значимость по градиентному бустингу}{54}{}%
-\contentsline {subsubsection}{\numberline {2.6.1.3}Перестановочная значимость для табличных моделей}{56}{}%
+\contentsline {subsubsection}{\numberline {2.6.1.3}Перестановочная значимость для табличных моделей}{55}{}%
 \contentsline {subsubsection}{\numberline {2.6.1.4}Анализ через значения Шепли}{56}{}%
-\contentsline {subsubsection}{\numberline {2.6.1.5}Перестановочная значимость для последовательных нейросетевых моделей}{57}{}%
+\contentsline {subsubsection}{\numberline {2.6.1.5}Перестановочная значимость для последовательных нейросетевых моделей}{56}{}%
 \contentsline {subsubsection}{\numberline {2.6.1.6}Сводный рейтинг}{57}{}%
-\contentsline {subsection}{\numberline {2.6.2}Кластеризация видео}{58}{}%
+\contentsline {subsection}{\numberline {2.6.2}Кластеризация видео}{57}{}%
 \contentsline {subsection}{\numberline {2.6.3}Подбор гиперпараметров.}{60}{}%
 \contentsline {section}{Выводы по главе\nobreakspace 2}{61}{}%
 \contentsline {chapter}{\numberline {3}Реализация и экспериментальная оценка моделей}{64}{}%
 \contentsline {section}{\numberline {3.1}Тренировочный оркестратор}{66}{}%
 \contentsline {section}{\numberline {3.2}Агрегатор признаков}{67}{}%
-\contentsline {section}{\numberline {3.3}Фронтенд-интерфейс сервиса}{69}{}%
-\contentsline {section}{\numberline {3.4}Ключевые файлы и директории}{70}{}%
-\contentsline {section}{\numberline {3.5}Тестирование продукта}{71}{}%
+\contentsline {section}{\numberline {3.3}Ключевые файлы и директории}{69}{}%
+\contentsline {section}{\numberline {3.4}Тестирование продукта}{70}{}%
 \contentsline {section}{Выводы по главе\nobreakspace 3}{72}{}%
 \contentsline {chapter}{ЗАКЛЮЧЕНИЕ}{74}{}%
 \contentsline {chapter}{Библиографический список}{77}{}%
@@ -85,5 +82,5 @@
 \contentsline {chapter}{Приложение Е}{91}{}%
 \contentsline {chapter}{Приложение Ж}{95}{}%
 \contentsline {chapter}{Приложение З}{102}{}%
-\contentsline {chapter}{Приложение И}{105}{}%
+\contentsline {chapter}{Приложение И}{112}{}%
 \contentsfinish 

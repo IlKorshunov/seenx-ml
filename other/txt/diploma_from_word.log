@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.20)  28 MAY 2026 06:23
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.20)  28 MAY 2026 17:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1378,17 +1378,7 @@ Overfull \hbox (2.15993pt too wide) detected at line 45
  []
 
 
-Overfull \hbox (2.15993pt too wide) detected at line 46
-\TU/TimesNewRoman(0)/m/n/14.4 2.3.32. 
- []
-
-
-Overfull \hbox (2.15993pt too wide) detected at line 47
-\TU/TimesNewRoman(0)/m/n/14.4 2.3.33. 
- []
-
-
-Underfull \hbox (badness 2334) in paragraph at lines 48--48
+Underfull \hbox (badness 2334) in paragraph at lines 46--46
  []|| []\TU/TimesNewRoman(0)/m/n/14.4 Baseline-кривая удержания и параметрическ
 ая аппроксимация 
  []
@@ -1540,156 +1530,156 @@ Underfull \hbox (badness 10000) in paragraph at lines 660--661
 4.4 показывает, насколько часто зрители
  []
 
-[38] [39] [40]
-Underfull \hbox (badness 1769) in paragraph at lines 694--695
-\TU/TimesNewRoman(0)/m/n/14.4 личие коротких звуковых эффектов или акцентов, \T
-U/CourierNew(0)/m/n/14.4 spectral_flux \TU/TimesNewRoman(0)/m/n/14.4 по-
+[38] [39]
+Underfull \hbox (badness 10000) in paragraph at lines 694--695
+[]\TU/TimesNewRoman(0)/m/n/14.4 Для оценки сложности речевого потока использова
+лись при-
  []
 
 
-Underfull \hbox (badness 6412) in paragraph at lines 694--695
-\TU/TimesNewRoman(0)/m/n/14.4 казывает скорость изменения спектральной структур
-ы аудиосигнала, а
+Underfull \hbox (badness 10000) in paragraph at lines 694--695
+\TU/TimesNewRoman(0)/m/n/14.4 знаки \TU/CourierNew(0)/m/n/14.4 speech_predictab
+ility\TU/TimesNewRoman(0)/m/n/14.4 , \TU/CourierNew(0)/m/n/14.4 speech_lm_surpr
+isal \TU/TimesNewRoman(0)/m/n/14.4 и
  []
 
 
-Underfull \hbox (badness 2726) in paragraph at lines 700--701
-\TU/TimesNewRoman(0)/m/n/14.4 лись признаки \TU/CourierNew(0)/m/n/14.4 speech_p
-redictability\TU/TimesNewRoman(0)/m/n/14.4 , \TU/CourierNew(0)/m/n/14.4 speech_
-lm_surprisal \TU/TimesNewRoman(0)/m/n/14.4 и
+Underfull \hbox (badness 10000) in paragraph at lines 694--695
+\TU/CourierNew(0)/m/n/14.4 speech_lm_surprisal_vel\TU/TimesNewRoman(0)/m/n/14.4
+ . В упрощённом виде они показывают,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 706--707
-[]\TU/TimesNewRoman(0)/m/n/14.4 Для учёта конкретности содержания использовалис
-ь признаки
+Underfull \hbox (badness 1533) in paragraph at lines 694--695
+\TU/TimesNewRoman(0)/m/n/14.4 предположить продолжение, фрагмент считается боле
+е привычным; если
  []
 
-[41]
-Underfull \hbox (badness 1796) in paragraph at lines 712--713
+[40]
+Underfull \hbox (badness 1796) in paragraph at lines 700--701
 []\TU/TimesNewRoman(0)/m/n/14.4 Для описания крупной структуры ролика использов
 ались признаки
  []
 
 
-Underfull \hbox (badness 1874) in paragraph at lines 712--713
+Underfull \hbox (badness 1874) in paragraph at lines 700--701
 \TU/TimesNewRoman(0)/m/n/14.4 биение видео на смысловые блоки и частоту переход
 ов между темами.
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 714--715
+Underfull \hbox (badness 1117) in paragraph at lines 702--703
 []\TU/TimesNewRoman(0)/m/n/14.4 Такие признаки позволяют учитывать композицию р
 олика на более
  []
 
 
-Underfull \hbox (badness 2556) in paragraph at lines 720--721
+Underfull \hbox (badness 2556) in paragraph at lines 708--709
 []\TU/TimesNewRoman(0)/m/n/14.4 В итоговом признаковом пространстве использовал
 ись как отдель-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 720--721
+Underfull \hbox (badness 10000) in paragraph at lines 708--709
 \TU/TimesNewRoman(0)/m/n/14.4 ные вероятности эмоций, так и обобщённые признаки
  \TU/CourierNew(0)/m/n/14.4 ekman_joy\TU/TimesNewRoman(0)/m/n/14.4 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 720--721
+Underfull \hbox (badness 10000) in paragraph at lines 708--709
 \TU/CourierNew(0)/m/n/14.4 ekman_excitement\TU/TimesNewRoman(0)/m/n/14.4 , \TU/
 CourierNew(0)/m/n/14.4 ekman_sadness\TU/TimesNewRoman(0)/m/n/14.4 , \TU/Courier
 New(0)/m/n/14.4 ekman_neutral \TU/TimesNewRoman(0)/m/n/14.4 и
  []
 
 
-Underfull \hbox (badness 7116) in paragraph at lines 720--721
+Underfull \hbox (badness 7116) in paragraph at lines 708--709
 \TU/CourierNew(0)/m/n/14.4 ekman_intensity\TU/TimesNewRoman(0)/m/n/14.4 . Они п
 озволяют учитывать, меняется ли эмоцио-
  []
 
-[42]
-Underfull \hbox (badness 10000) in paragraph at lines 730--731
+[41]
+Underfull \hbox (badness 10000) in paragraph at lines 718--719
 []\TU/TimesNewRoman(0)/m/n/14.4 Для оценки насыщенности изображения использовал
 ись при-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 730--731
+Underfull \hbox (badness 10000) in paragraph at lines 718--719
 \TU/TimesNewRoman(0)/m/n/14.4 знаки \TU/CourierNew(0)/m/n/14.4 visual_complexit
 y\TU/TimesNewRoman(0)/m/n/14.4 , \TU/CourierNew(0)/m/n/14.4 visual_complexity_g
 radient \TU/TimesNewRoman(0)/m/n/14.4 и
  []
 
 
-Underfull \hbox (badness 3343) in paragraph at lines 730--731
+Underfull \hbox (badness 3343) in paragraph at lines 718--719
 \TU/CourierNew(0)/m/n/14.4 visual_complexity_acceleration\TU/TimesNewRoman(0)/m
 /n/14.4 . Они описывают не только об-
  []
 
-[43]
-Underfull \hbox (badness 10000) in paragraph at lines 754--755
+[42]
+Underfull \hbox (badness 10000) in paragraph at lines 742--743
 []\TU/TimesNewRoman(0)/m/n/14.4 Для учёта музыкального сопровождения применялис
 ь признаки
  []
 
 
-Underfull \hbox (badness 6461) in paragraph at lines 754--755
+Underfull \hbox (badness 6461) in paragraph at lines 742--743
 \TU/CourierNew(0)/m/n/14.4 has_background_music\TU/TimesNewRoman(0)/m/n/14.4 , 
 \TU/CourierNew(0)/m/n/14.4 music_only \TU/TimesNewRoman(0)/m/n/14.4 и \TU/Couri
 erNew(0)/m/n/14.4 music_changed\TU/TimesNewRoman(0)/m/n/14.4 . Первый
  []
 
-[44]
-Underfull \hbox (badness 10000) in paragraph at lines 760--761
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 748--749
 []\TU/TimesNewRoman(0)/m/n/14.4 Для описания роли автора в кадре использовались
  признаки
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 760--761
+Underfull \hbox (badness 10000) in paragraph at lines 748--749
 \TU/CourierNew(0)/m/n/14.4 speaker_prob\TU/TimesNewRoman(0)/m/n/14.4 , \TU/Cour
 ierNew(0)/m/n/14.4 face_screen_ratio\TU/TimesNewRoman(0)/m/n/14.4 , \TU/Courier
 New(0)/m/n/14.4 faces_total_ratio \TU/TimesNewRoman(0)/m/n/14.4 и
  []
 
 
-Underfull \hbox (badness 3323) in paragraph at lines 760--761
+Underfull \hbox (badness 3323) in paragraph at lines 748--749
 \TU/CourierNew(0)/m/n/14.4 face_area_ratio\TU/TimesNewRoman(0)/m/n/14.4 . Они п
 оказывают, присутствует ли в кадре основ-
  []
 
-[45] [46]
-Underfull \hbox (badness 4205) in paragraph at lines 818--819
+[44] [45] [46]
+Underfull \hbox (badness 4205) in paragraph at lines 806--807
 []\TU/TimesNewRoman(0)/m/n/14.4 Для дополнительного анализа формы удержания каж
 дая реальная
  []
 
-[47] [48]
-Underfull \hbox (badness 1789) in paragraph at lines 832--833
+[47]
+Underfull \hbox (badness 1789) in paragraph at lines 820--821
 []\TU/TimesNewRoman(0)/m/n/14.4 Выход кодировщика передаётся в голову предсказа
 ния отклонения:
  []
 
 File: diploma_from_word_media/Transformer.pdf Graphic file (type pdf)
 <use diploma_from_word_media/Transformer.pdf>
-[49]
+[48] [49]
 File: diploma_from_word_media/LSTM.pdf Graphic file (type pdf)
 <use diploma_from_word_media/LSTM.pdf>
- [50]
-Underfull \hbox (badness 10000) in paragraph at lines 872--873
+
+Underfull \hbox (badness 10000) in paragraph at lines 860--861
 []\TU/TimesNewRoman(0)/m/n/14.4 К матрицам запросов, ключей и значений механизм
 а внимания
  []
 
-[51] [52] [53] [54] [55] [56]
-Underfull \hbox (badness 2261) in paragraph at lines 989--990
+[50] [51] [52] [53] [54] [55]
+Underfull \hbox (badness 2261) in paragraph at lines 977--978
 []\TU/TimesNewRoman(0)/m/n/14.4 Описанная в подразделе о перестановочной значим
 ости процедура
  []
 
-
-Underfull \hbox (badness 1478) in paragraph at lines 1002--1003
+[56]
+Underfull \hbox (badness 1478) in paragraph at lines 990--991
 []\TU/TimesNewRoman(0)/m/n/14.4 Итоговая значимость каждого признака определяла
 сь объединением
  []
@@ -1699,52 +1689,28 @@ Underfull \hbox (badness 1478) in paragraph at lines 1002--1003
 [64
 
 ] [65] [66] [67] [68]
-Underfull \hbox (badness 7981) in paragraph at lines 1181--1182
-[]\TU/TimesNewRoman(0)/m/n/14.4 Для демонстрации пользовательского сценария был
-а реализована
- []
-
-[69]
-Underfull \hbox (badness 10000) in paragraph at lines 1190--1191
+Underfull \hbox (badness 10000) in paragraph at lines 1170--1171
 []\TU/CourierNew(0)/m/n/14.4 seenx-ml/src/extractors\TU/TimesNewRoman(0)/m/n/14
 .4 , \TU/CourierNew(0)/m/n/14.4 seenx-ml/src/cutting_shots
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1195--1196
+[69]
+Underfull \hbox (badness 10000) in paragraph at lines 1175--1176
 []\TU/CourierNew(0)/m/n/14.4 seenx-ml/analysis/embedding_clustering.py\TU/Times
 NewRoman(0)/m/n/14.4 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1195--1196
+Underfull \hbox (badness 10000) in paragraph at lines 1175--1176
 \TU/CourierNew(0)/m/n/14.4 seenx-ml/analysis/video_clustering.py \TU/TimesNewRo
 man(0)/m/n/14.4 — кластериза-
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1197--1198
-[]\TU/CourierNew(0)/m/n/14.4 seenx-ml/txt/diploma-/seenx-pages-demo.html\TU/Tim
-esNewRoman(0)/m/n/14.4 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1197--1198
-\TU/CourierNew(0)/m/n/14.4 seenx-ml/txt/diploma-/seenx-pages-demo.css \TU/Times
-NewRoman(0)/m/n/14.4 — де-
- []
-
-[70] [71]
-Underfull \hbox (badness 1205) in paragraph at lines 1216--1217
-[]\TU/TimesNewRoman(0)/m/n/14.4 Проведённые эксперименты показали, что использо
-вание мультимо-
- []
-
-[72] [73] [74
+[70] [71] [72] [73] [74
 
 
 ] [75] [76]
-Underfull \hbox (badness 3657) in paragraph at lines 1273--1274
+Underfull \hbox (badness 3657) in paragraph at lines 1256--1257
 []\TU/TimesNewRoman(0)/m/n/14.4 13. Gemini Team. Gemini 2.5: Pushing the Fronti
 er with Advanced
  []
@@ -1752,31 +1718,31 @@ er with Advanced
 [77
 
 ] [78]
-Underfull \hbox (badness 1292) in paragraph at lines 1321--1322
+Underfull \hbox (badness 1292) in paragraph at lines 1304--1305
 \TU/TimesNewRoman(0)/m/n/14.4 Finetuning and Inference // Proceedings of the 63
 rd Annual Meeting of the
  []
 
 
-Underfull \hbox (badness 5231) in paragraph at lines 1327--1328
+Underfull \hbox (badness 5231) in paragraph at lines 1310--1311
 []\TU/TimesNewRoman(0)/m/n/14.4 41. Wu H., Xu J., Wang J., Long M. Autoformer: 
 Decomposition
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1327--1328
+Underfull \hbox (badness 10000) in paragraph at lines 1310--1311
 \TU/TimesNewRoman(0)/m/n/14.4 Transformers with Auto-Correlation for Long-Term 
 Series Forecasting //
  []
 
 [79]
-Underfull \hbox (badness 1292) in paragraph at lines 1333--1334
+Underfull \hbox (badness 1292) in paragraph at lines 1316--1317
 []\TU/TimesNewRoman(0)/m/n/14.4 44. Zhang H., Cisse M., Dauphin Y.N., Lopez-Paz
  D. mixup: Beyond
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1343--1344
+Underfull \hbox (badness 10000) in paragraph at lines 1326--1327
 []\TU/TimesNewRoman(0)/m/n/14.4 49. CatBoost Documentation [Электронный ресурс]
 . – URL:
  []
@@ -1806,7 +1772,7 @@ File: diploma_from_word_media/image6.png Graphic file (type bmp)
  [85
 
 ]
-Underfull \hbox (badness 1810) in paragraph at lines 1429--1429
+Underfull \hbox (badness 1810) in paragraph at lines 1410--1410
 []|\TU/TimesNewRoman(0)/m/n/14.4 Transformer без мультимодальных
  []
 
@@ -1853,34 +1819,75 @@ File: ../seenx_first_2_diagrams_puml/06_c4_l3_analysis_tuning.png Graphic file
  [101
 
 ]
-File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834883-y
+File: diploma_from_word_media/telegram-cloud-photo-size-2-5242214783040297162-y
 .jpg Graphic file (type bmp)
-<diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834883-y.jpg>
+<diploma_from_word_media/telegram-cloud-photo-size-2-5242214783040297162-y.jpg>
 
-File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834884-y
+File: diploma_from_word_media/telegram-cloud-photo-size-2-5242214783040297164-y
 .jpg Graphic file (type bmp)
-<diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834884-y.jpg>
+<diploma_from_word_media/telegram-cloud-photo-size-2-5242214783040297164-y.jpg>
 
-File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834887-y
-.jpg Graphic file (type bmp)
-<diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834887-y.jpg>
-
+File: /Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-m
+l-seenx-ml/assets/telegram-cloud-photo-size-2-5242214783040297168-y-63a57f92-45
+20-452c-b37a-6e4b1a57dec8.png Graphic file (type bmp)
+</Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-ml-see
+nx-ml/assets/telegram-cloud-photo-size-2-5242214783040297168-y-63a57f92-4520-45
+2c-b37a-6e4b1a57dec8.png>
  [102
 
 ]
-File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834888-y
-.jpg Graphic file (type bmp)
-<diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834888-y.jpg>
+File: /Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-m
+l-seenx-ml/assets/telegram-cloud-photo-size-2-5242534685089405437-y-3fcf5bc3-14
+24-4eeb-8b10-193ebe8e3ffa.png Graphic file (type bmp)
+</Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-ml-see
+nx-ml/assets/telegram-cloud-photo-size-2-5242534685089405437-y-3fcf5bc3-1424-4e
+eb-8b10-193ebe8e3ffa.png>
+ [103]
+File: /Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-m
+l-seenx-ml/assets/telegram-cloud-photo-size-2-5242214783040297169-y-911e1c25-b1
+eb-4b00-932a-5e746141570c.png Graphic file (type bmp)
+</Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-ml-see
+nx-ml/assets/telegram-cloud-photo-size-2-5242214783040297169-y-911e1c25-b1eb-4b
+00-932a-5e746141570c.png>
+ [104]
+File: /Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-m
+l-seenx-ml/assets/telegram-cloud-photo-size-2-5242214783040297155-y-d3c4ef21-9b
+8a-442b-a7ac-259cfcb20035.png Graphic file (type bmp)
+</Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-ml-see
+nx-ml/assets/telegram-cloud-photo-size-2-5242214783040297155-y-d3c4ef21-9b8a-44
+2b-a7ac-259cfcb20035.png>
+ [105]
+File: /Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-m
+l-seenx-ml/assets/image-55b7668d-a21d-4e1a-b355-f0883aec7d60.png Graphic file (
+type bmp)
+</Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-ml-see
+nx-ml/assets/image-55b7668d-a21d-4e1a-b355-f0883aec7d60.png>
+ [106]
+File: /Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-m
+l-seenx-ml/assets/image-b6e2c660-f222-4418-8e65-c2bff1e1d4a2.png Graphic file (
+type bmp)
+</Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-ml-see
+nx-ml/assets/image-b6e2c660-f222-4418-8e65-c2bff1e1d4a2.png>
 
-File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834889-y
-.jpg Graphic file (type bmp)
-<diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834889-y.jpg>
-
-File: diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834898-y
-.jpg Graphic file (type bmp)
-<diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834898-y.jpg>
-
- [103] [104]
+[107]
+File: /Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-m
+l-seenx-ml/assets/image-4f0839ce-84b5-451b-8e37-af118b11b24c.png Graphic file (
+type bmp)
+</Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-ml-see
+nx-ml/assets/image-4f0839ce-84b5-451b-8e37-af118b11b24c.png>
+ [108]
+File: /Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-m
+l-seenx-ml/assets/image-28487b01-41ba-493a-870b-3d372c11c690.png Graphic file (
+type bmp)
+</Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-ml-see
+nx-ml/assets/image-28487b01-41ba-493a-870b-3d372c11c690.png>
+ [109]
+File: /Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-m
+l-seenx-ml/assets/image-7fc4a7e2-359b-4c6f-9178-11fb3c15594c.png Graphic file (
+type bmp)
+</Users/engineerharin/.cursor/projects/Users-engineerharin-diploma-seenx-ml-see
+nx-ml/assets/image-7fc4a7e2-359b-4c6f-9178-11fb3c15594c.png>
+ [110] [111]
 File: diploma_from_word_media/RYA_Akt_Vnedreniya_Korshunov_72_3_mart2026_may202
 6.pdf Graphic file (type pdf)
 <use diploma_from_word_media/RYA_Akt_Vnedreniya_Korshunov_72_3_mart2026_may2026
@@ -1893,7 +1900,7 @@ File: diploma_from_word_media/RYA_Akt_Vnedreniya_Korshunov_72_3_mart2026_may202
 6.pdf Graphic file (type pdf)
 <use diploma_from_word_media/RYA_Akt_Vnedreniya_Korshunov_72_3_mart2026_may2026
 .pdf, page 1>
- [105
+ [112
 
 ]
 File: diploma_from_word_media/RYA_Akt_Vnedreniya_Korshunov_72_3_mart2026_may202
@@ -1908,10 +1915,9 @@ File: diploma_from_word_media/RYA_Akt_Vnedreniya_Korshunov_72_3_mart2026_may202
 6.pdf Graphic file (type pdf)
 <use diploma_from_word_media/RYA_Akt_Vnedreniya_Korshunov_72_3_mart2026_may2026
 .pdf, page 1>
- [106
+ [113
 
-]
-(./diploma_from_word.aux)
+] (./diploma_from_word.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -1930,12 +1936,12 @@ Package logreq Info: Writing requests to 'diploma_from_word.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 24482 strings out of 468168
- 499261 string characters out of 5432815
- 2213082 words of memory out of 5000000
- 52776 multiletter control sequences out of 15000+600000
+ 24531 strings out of 468168
+ 508624 string characters out of 5432815
+ 2213390 words of memory out of 5000000
+ 52819 multiletter control sequences out of 15000+600000
  630754 words of font info for 93 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  88i,18n,131p,1194b,4034s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on diploma_from_word.xdv (106 pages, 1946880 bytes).
+Output written on diploma_from_word.xdv (113 pages, 1920180 bytes).

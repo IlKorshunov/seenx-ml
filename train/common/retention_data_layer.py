@@ -1,15 +1,5 @@
-"""
-Unified data layer for LOO retention experiments.
-
-Merges two data sources per video:
-  data/<video_id>/features_llm.json   — LLM-extracted video-level features (~64 cols)
-  data/<video_id>/retention.json      — YouTube retention curve
-  data/<video_id>/meta.json           — video metadata
-  output/<video_id>_features.csv      — per-second extracted features (~80 cols) → aggregated to video-level
-
-Re-exports helpers from train_utils so that all LOO scripts can do:
-    from train.common.retention_data_layer import build_rows_with_targets_source, _point_col, ...
-"""
+"""Unified data layer for LOO retention experiments.
+Combines per-video metadata, retention curves, LLM features, and aggregated per-second features."""
 
 from __future__ import annotations
 

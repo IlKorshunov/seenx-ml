@@ -26,7 +26,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Семантический анализ комментариев}{19}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Извлечение признаков}{20}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Пространство признаков}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Извлечение границ заставок.}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Извлечение границ повторяющихся вставок.}{23}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Посекундный признак вероятности заставки (\texttt  {bumper\_score}) и его сглаженная версия}}{25}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Векторный анализ модальных составляющих}{25}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}Признаки громкости и динамики звукового сигнала.}{27}{}\protected@file@percent }
@@ -48,42 +48,40 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.16}Признаки комментариев аудитории}{38}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.17}Соответствие заголовка содержанию}{39}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.18}Цветовые характеристики кадра}{39}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.19}Объектная насыщенность кадра}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.20}Короткие визуальные вставки}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.21}Синхронизация монтажа с музыкой}{40}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.22}Звуковые события и смех}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.23}Сложность восприятия речи}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.24}Упоминания людей и организаций}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.25}Структура смысловых глав}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.26}Эмоциональная окраска речи и изображения}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.27}Разделение голоса и музыки}{43}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.28}Визуальная сложность кадра}{43}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.29}Совместные признаки разных модальностей}{43}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.30}Финальные фрагменты ролика}{44}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.31}Паузы и устойчивость темпа речи}{44}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.32}Фоновая музыка и её изменение}{44}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.33}Присутствие лица и крупность плана}{45}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Baseline-кривая удержания и параметрическая аппроксимация retention-кривых}{45}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Нормализация признаков.}{45}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Baseline-кривая удержания}{47}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}Параметрическая аппроксимация retention-кривых}{48}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}Архитектуры предсказания удержания зрителей}{48}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Transformer}{48}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.19}Короткие визуальные вставки}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.20}Синхронизация монтажа с музыкой}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.21}Смех в аудиодорожке}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.22}Сложность восприятия речи}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.23}Структура смысловых глав}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.24}Эмоциональная окраска речи и изображения}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.25}Разделение голоса и музыки}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.26}Визуальная сложность кадра}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.27}Совместные признаки разных модальностей}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.28}Финальные фрагменты ролика}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.29}Паузы и устойчивость темпа речи}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.30}Фоновая музыка и её изменение}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.31}Присутствие лица и крупность плана}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Baseline-кривая удержания и параметрическая аппроксимация retention-кривых}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Нормализация признаков.}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Baseline-кривая удержания}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}Параметрическая аппроксимация retention-кривых}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Архитектуры предсказания удержания зрителей}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Transformer}{47}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Схема мультимодальной трансформерной архитектуры прогнозирования удержания}}{49}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}LSTM}{50}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Схема мультимодальной рекуррентной (LSTM) архитектуры прогнозирования удержания}}{51}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}VIDEOMAE}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}LSTM}{49}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Схема мультимодальной рекуррентной (LSTM) архитектуры прогнозирования удержания}}{50}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}VIDEOMAE}{50}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5.4}Архитектуры на основе языковой модели DeBERTa}{51}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.5}Ансамбль llm}{52}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.6}Анализ признаков и настройка моделей}{53}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.1}Оценивание важности признаков}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.5}Ансамбль llm}{51}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.6}Анализ признаков и настройка моделей}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.1}Оценивание важности признаков}{52}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1.1}Корреляционный анализ}{53}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1.2}Значимость по градиентному бустингу}{54}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1.3}Перестановочная значимость для табличных моделей}{56}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1.3}Перестановочная значимость для табличных моделей}{55}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1.4}Анализ через значения Шепли}{56}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1.5}Перестановочная значимость для последовательных нейросетевых моделей}{57}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1.5}Перестановочная значимость для последовательных нейросетевых моделей}{56}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1.6}Сводный рейтинг}{57}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.2}Кластеризация видео}{58}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.2}Кластеризация видео}{57}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.6.3}Подбор гиперпараметров.}{60}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{Выводы по главе\nobreakspace  2}{61}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Реализация и экспериментальная оценка моделей}{64}{}\protected@file@percent }
@@ -91,11 +89,10 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Тренировочный оркестратор}{66}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Агрегатор признаков}{67}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Фронтенд-интерфейс сервиса}{69}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Ключевые файлы и директории}{70}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Тестирование продукта}{71}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Ключевые файлы и директории}{69}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Тестирование продукта}{70}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{Выводы по главе\nobreakspace  3}{72}{}\protected@file@percent }
-\newlabel{chapter:conclusion}{{3.5}{74}{}{section.3.5}{}}
+\newlabel{chapter:conclusion}{{3.4}{74}{}{section.3.4}{}}
 \@writefile{toc}{\contentsline {chapter}{ЗАКЛЮЧЕНИЕ}{74}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{Библиографический список}{77}{}\protected@file@percent }
 \@writefile{toc}{\ttl@change@i {\@ne }{chapter}{\appendixPrefix }{}{\contentslabel [\@appendixname ~\thecontentslabel .]{\the \appendixPrefix }}{\hspace *{-\the \appendixPrefix }}{\titlerule *[0.5pc]{.}\contentspage }\relax }
@@ -127,14 +124,30 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Схема анализа значимости признаков и формирования сводных отчётов (C4 L3)}}{101}{}\protected@file@percent }
 \newlabel{fig:c4-l3-analysis}{{19}{101}{}{figure.0.19}{}}
 \@writefile{toc}{\contentsline {chapter}{Приложение З}{102}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Главная страница интерфейса аналитического сервиса SeenX}}{102}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Экран ввода параметров видео и предпросмотра прогноза удержания}}{102}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Экран рекомендаций по усилению результата видеоролика}}{103}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Экран профиля пользователя}}{103}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Экран редактирования данных аккаунта и параметров подписки}}{103}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Экран плейлистов и списка видеороликов}}{104}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{Приложение И}{105}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Пример аппроксимации retention-кривой для видеоролика из обучающей выборки}}{102}{}\protected@file@percent }
+\newlabel{fig:retention-approx-train-example}{{20}{102}{}{figure.0.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Пример аппроксимации retention-кривой для видеоролика из валидационной выборки}}{102}{}\protected@file@percent }
+\newlabel{fig:retention-approx-val-example}{{21}{102}{}{figure.0.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Карта визуального сходства между сегментами одного видеоролика}}{103}{}\protected@file@percent }
+\newlabel{fig:visual-similarity-map}{{22}{103}{}{figure.0.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Карта текстового сходства между сегментами одного видеоролика}}{104}{}\protected@file@percent }
+\newlabel{fig:text-similarity-map}{{23}{104}{}{figure.0.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Карта аудиального сходства между сегментами одного видеоролика}}{105}{}\protected@file@percent }
+\newlabel{fig:audio-similarity-map}{{24}{105}{}{figure.0.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Корреляционная матрица групп признаков}}{106}{}\protected@file@percent }
+\newlabel{fig:feature-group-correlation}{{25}{106}{}{figure.0.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Фрагмент отчёта покрытия кода автоматизированными тестами}}{107}{}\protected@file@percent }
+\newlabel{fig:coverage-report-summary}{{26}{107}{}{figure.0.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Фрагмент отчёта покрытия кода автоматизированными тестами}}{108}{}\protected@file@percent }
+\newlabel{fig:coverage-report-audio}{{27}{108}{}{figure.0.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Фрагмент отчёта покрытия кода автоматизированными тестами}}{109}{}\protected@file@percent }
+\newlabel{fig:coverage-report-text}{{28}{109}{}{figure.0.28}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces Фрагмент отчёта покрытия кода автоматизированными тестами}}{110}{}\protected@file@percent }
+\newlabel{fig:coverage-report-video}{{29}{110}{}{figure.0.29}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces Фрагмент отчёта покрытия кода автоматизированными тестами}}{111}{}\protected@file@percent }
+\newlabel{fig:coverage-report-mm-utils}{{30}{111}{}{figure.0.30}{}}
+\@writefile{toc}{\contentsline {chapter}{Приложение И}{112}{}\protected@file@percent }
 \ttl@finishall
 \abx@aux@read@bbl@mdfivesum{D41D8CD98F00B204E9800998ECF8427E}
 \abx@aux@read@bblrerun
-\gdef \@abspage@last{106}
+\gdef \@abspage@last{113}
