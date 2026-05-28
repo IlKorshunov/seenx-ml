@@ -12,11 +12,11 @@ from argparse import Namespace
 from pathlib import Path
 from typing import Literal, TypedDict
 
-import matplotlib  # type: ignore[reportMissingImports]
-import numpy as np  # type: ignore[reportMissingImports]
-import pandas as pd  # type: ignore[reportMissingImports]
+import matplotlib
+import numpy as np
+import pandas as pd
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # type: ignore[reportMissingImports]
+import matplotlib.pyplot as plt
 
 AdviceDirection = Literal["low", "high"]
 AdviceRule = tuple[AdviceDirection, str]

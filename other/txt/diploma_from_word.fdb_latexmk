@@ -1,21 +1,22 @@
 # Fdb version 4
-["biber diploma_from_word"] 1779884064.22923 "diploma_from_word.bcf" "diploma_from_word.bbl" "diploma_from_word" 1779894766.72791 0
-  "diploma_from_word.bcf" 1779894758.07009 155115 a9019c0cb2f54810f4f9d7cef1b25496 "xelatex"
+["biber diploma_from_word"] 1779884064.22923 "diploma_from_word.bcf" "diploma_from_word.bbl" "diploma_from_word" 1779938616.32357 0
+  "diploma_from_word.bcf" 1779938611.82031 155115 a9019c0cb2f54810f4f9d7cef1b25496 "xelatex"
   (generated)
   "diploma_from_word.bbl"
   "diploma_from_word.blg"
   (rewritten before read)
-["xdvipdfmx"] 1779894758.26078 "diploma_from_word.xdv" "diploma_from_word.pdf" "diploma_from_word" 1779894766.73042 0
-  "diploma_from_word.xdv" 1779894758.07166 1935220 34cf123d512835cd8bbbcc596f0ab510 "xelatex"
+["xdvipdfmx"] 1779938611.92308 "diploma_from_word.xdv" "diploma_from_word.pdf" "diploma_from_word" 1779938616.32499 0
+  "diploma_from_word.xdv" 1779938611.82253 1946880 3dc2999d630d7200f79022367d0aa15d "xelatex"
   (generated)
   "diploma_from_word.pdf"
   (rewritten before read)
-["xelatex"] 1779894754.63376 "diploma_from_word.tex" "diploma_from_word.xdv" "diploma_from_word" 1779894766.72802 0
+["xelatex"] 1779938610.22851 "diploma_from_word.tex" "diploma_from_word.xdv" "diploma_from_word" 1779938616.32363 0
   "../seenx_first_2_diagrams_puml/00_c4_l1_project_overview.png" 1779739034.85709 45373 37665778f274d14ec6fbbfe68f267263 ""
   "../seenx_first_2_diagrams_puml/01_c4_container_system_architecture.png" 1779743361.7843 158384 faa5d792ef57d0adcf02b3107b7d7fdf ""
   "../seenx_first_2_diagrams_puml/05_c4_l3_prediction_architectures.png" 1779741280.14169 87570 c3472d0c3f9a60f3dbfb4a57e6e5bde5 ""
   "../seenx_first_2_diagrams_puml/06_c4_l3_analysis_tuning.png" 1779740987.47606 101897 f59d2762b332e4a0f355c2a1ac9c5e66 ""
   "../seenx_first_2_diagrams_puml/08_c4_l2_model_architecture.png" 1779740987.49231 160603 104a18865e6a8005b921084f3b9a46b3 ""
+  "../seenx_first_2_diagrams_puml/telegram-cloud-photo-size-2-5240193592905637620-y.jpg" 1779923869.26781 102777 c0e8a78d7d5698fa78d34f8c6a6ee493 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -92,6 +93,7 @@
   "/usr/local/texlive/2026/texmf-dist/tex/latex/csquotes/csquotes.def" 1712263026 22135 0975a49eeaed232aa861e9425ffb2e7c ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/csquotes/csquotes.sty" 1712263026 62767 e79d6d7a989e7da62dcf3d0a65c1faee ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty" 1738874546 52272 63d293bc0d496619edb57585740861a2 ""
+  "/usr/local/texlive/2026/texmf-dist/tex/latex/eso-pic/eso-pic.sty" 1765400421 11838 c56b1b2e06d66f65afcf19adbfba71b5 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1759437024 46885 8953c67ffba03252c6090aa19568b8ba ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/extsizes/extreport.cls" 1137110130 23786 cbd79291aa0922c48a73753b97cabb5f ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/extsizes/size14.clo" 1137110130 6214 cc6d832fdd2fc5f4a20ee1a002f45d0f ""
@@ -128,10 +130,13 @@
   "/usr/local/texlive/2026/texmf-dist/tex/latex/logreq/logreq.sty" 1284153563 6187 b27afc771af565d3a9ff1ca7d16d0d46 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty" 1750707802 6572 d45c2321088e3d0226f5e476049fa5ec ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/pdflscape/pdflscape.sty" 1750707802 2122 fa66f24d79b913f2d7ab2599d50e1aed ""
+  "/usr/local/texlive/2026/texmf-dist/tex/latex/pdfpages/pdfpages.sty" 1753385742 56631 520872fa620d78de49638b8237adcdce ""
+  "/usr/local/texlive/2026/texmf-dist/tex/latex/pdfpages/ppxetex.def" 1753385742 6571 072755c6e4f6a1be0e796956bc595b9e ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/setspace/setspace.sty" 1670275497 22490 8cac309b79a4c53a4ffce4b1b07aead0 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/titlesec/titlesec.sty" 1736023606 48766 87a17a4ef312a39cd43896e34a679a56 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/titlesec/titletoc.sty" 1736023606 16594 e070b7268023b1ec1b45c44617ea64f9 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/tools/array.sty" 1761946296 15651 9d7c62df82cb29a555c00550babfe364 ""
+  "/usr/local/texlive/2026/texmf-dist/tex/latex/tools/calc.sty" 1748806692 10374 2ffd4f27c7f90b8a300608069537743c ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty" 1761946296 16014 dfa4b4d4e04a78a3f05a90c19711737a ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/tools/tabularx.sty" 1748806692 7243 a2c17f18e2c9b702b84fad03d5f9c78b ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/totcount/totcount.sty" 1296083878 5857 486f8b9b567dcfc1437aed4344eff39b ""
@@ -145,16 +150,17 @@
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
   "appendix_d.py" 1779292211.19209 10808 11f665d36db56df4dd08bb98ddf38814 ""
   "appendix_e.py" 1779292383.46654 10765 b690ca458f184a0f9c68f1221c36f1f2 ""
-  "diploma_from_word.aux" 1779894758.05716 18910 5cb6138f8de3f6ebe75f553812eb60f3 "xelatex"
+  "diploma_from_word.aux" 1779938611.81383 19695 fb59e2d97be871f7bf61166901aa7131 "xelatex"
   "diploma_from_word.bbl" 1779884065.76149 0 d41d8cd98f00b204e9800998ecf8427e "biber diploma_from_word"
-  "diploma_from_word.run.xml" 1779894758.07132 2578 c4e24ba5067a2443ce63fcd9ace460e4 "xelatex"
-  "diploma_from_word.tct" 1779894758.07153 1828 ba488ad1e49296157773b9befc037556 "xelatex"
-  "diploma_from_word.tex" 1779888073.39423 266279 fe0cee221822ae28ba22b3f2d43900ba ""
-  "diploma_from_word.toc" 1779894758.07158 8824 9315b59e593725fba543c53ecbddcc60 "xelatex"
+  "diploma_from_word.run.xml" 1779938611.82125 2578 c4e24ba5067a2443ce63fcd9ace460e4 "xelatex"
+  "diploma_from_word.tct" 1779938611.82144 1828 1dcee3a1ad7c8b5ca7a12d8527e49b42 "xelatex"
+  "diploma_from_word.tex" 1779938588.19963 267581 1c57e77904b5ac8f683d2085dc7d1a26 ""
+  "diploma_from_word.toc" 1779938611.82156 8881 66c5f42857b24f7c21b43ad0934226de "xelatex"
   "diploma_from_word_media/Ad.png" 1779296578.88812 62318 06bc684d6ac98e1bb50e4cdc1d8287c1 ""
   "diploma_from_word_media/Bumper.png" 1779296708.20375 62155 9970655c8d309b30ba1dce9b917fa734 ""
   "diploma_from_word_media/LSTM.pdf" 1779296388.99647 240020 151495c48920bd7480272295210a9f7e ""
   "diploma_from_word_media/RMS.png" 1779296765.86316 320505 858e0d47a51e0737cc509821c0494782 ""
+  "diploma_from_word_media/RYA_Akt_Vnedreniya_Korshunov_72_3_mart2026_may2026.pdf" 1779937634.55442 215077 d8adb89e47af852c26433e06938f1dc5 ""
   "diploma_from_word_media/Transformer.pdf" 1779296343.04376 280839 308ca32b708bcba8f83602a3e56fac64 ""
   "diploma_from_word_media/image1.jpg" 1779223534.43288 46547 6481f1d98ca0cd867da735250beeaec6 ""
   "diploma_from_word_media/image2.png" 1779223534.43276 163620 bd429e9affab57865ffb478b1628db46 ""
@@ -170,6 +176,7 @@
   "diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834888-y.jpg" 1779302334.45942 38811 639cecb2025ffc64ddb4f5b5e77aafe1 ""
   "diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834889-y.jpg" 1779302346.52524 39476 1fdee10875997040b0a736db553049a2 ""
   "diploma_from_word_media/telegram-cloud-photo-size-2-5219793391602834898-y.jpg" 1779302361.85839 47875 b9995c8e095e39936d0102cbbbc94617 ""
+  "diploma_from_word_media/telegram-cloud-photo-size-2-5240351858155527896-y.jpg" 1779918830.0271 44083 487a6475baf480f0d9f61ea0ce9063d4 ""
   "itmo-student-thesis.cls" 1779222701.95021 59634 79107a26e263bfc34b9053f7c21f5e91 ""
   (generated)
   "diploma_from_word.aux"

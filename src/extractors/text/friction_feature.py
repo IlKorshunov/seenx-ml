@@ -82,8 +82,13 @@ def _parse_scores(response: str) -> dict[int, tuple[float, float, float, float]]
         match = re.match(r"\[(\d+)\]\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)", line)
         if match:
             segment_idx = int(match.group(1))
-            scores = tuple(float(np.clip(float(match.group(score_group_idx)), 0.0, 1.0)) for score_group_idx in range(2, 6))
-            result[segment_idx] = scores  # type: ignore[assignment]
+            scores = (
+                float(np.clip(float(match.group(2)), 0.0, 1.0)),
+                float(np.clip(float(match.group(3)), 0.0, 1.0)),
+                float(np.clip(float(match.group(4)), 0.0, 1.0)),
+                float(np.clip(float(match.group(5)), 0.0, 1.0)),
+            )
+            result[segment_idx] = scores
     return result
 
 
@@ -136,9 +141,6 @@ def extract_friction(video_path, config, existing_features=None) -> pd.DataFrame
             break
 
     release_models(model, tokenizer, device=None)
-
     total = (jargon + repetition + abstract + digression) / 4.0
-
     logger.info("Friction: jargon=%.2f rep=%.2f abstract=%.2f digress=%.2f (means)", jargon.mean(), repetition.mean(), abstract.mean(), digression.mean())
-
     return pd.DataFrame({"friction_jargon": jargon, "friction_repetition": repetition, "friction_abstract": abstract, "friction_digression": digression, "friction_total": total})

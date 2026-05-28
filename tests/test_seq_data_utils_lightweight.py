@@ -163,6 +163,106 @@ class TestSeqFeatureFiltering:
         assert mod._load_redundant_pairs(tmp_path) == []
         assert mod._load_master_ranking(tmp_path) == {}
 
+    def test_loader_edge_cases_return_none_or_defaults(self, tmp_path, monkeypatch):
+        mod = _load_seq_utils(monkeypatch)
+        out = tmp_path / "output"
+        snap = tmp_path / "snapshot"
+        out.mkdir()
+        (snap / "bad" / "transcripts").mkdir(parents=True)
+        (snap / "bad" / "retention.json").write_text("{broken", encoding="utf-8")
+        (snap / "bad" / "features_llm.json").write_text("{broken", encoding="utf-8")
+        (snap / "bad" / "meta.json").write_text("[1,2]", encoding="utf-8")
+        (out / "no_ret_features.csv").write_text("time,x\n00:00:00,1\n", encoding="utf-8")
+        (out / "badtime_features.csv").write_text("time,retention,x\nbad,100,1\n", encoding="utf-8")
+
+        assert mod._load_output_features("missing", out) is None
+        assert mod._load_output_features("no_ret", out) is None
+        assert mod._load_output_features("badtime", out) is not None
+        assert mod._load_curve_raw("bad", snap) is None
+        assert mod._load_llm_features("bad", snap) is None
+        assert mod._read_video_meta("bad", snap) == {}
+        assert mod._meta_duration_sec({}, pd.DataFrame({"time_sec": [1.0, 4.0]})) == 4.0
+        assert mod._meta_duration_sec({"duration": "bad"}, pd.DataFrame({"x": [1, 2, 3]})) == 2.0
+        assert mod._meta_view_count({"view_count": "bad"}) == 0.0
+        assert mod._meta_published_at({}) is pd.NaT
+        assert mod._load_snapshot_only_video("bad", snap) is None
+        assert mod.load_merged_video("missing", out, snap) is None
+
+    def test_load_all_merged_discovers_filters_and_snapshot_only(self, tmp_path, monkeypatch):
+        mod = _load_seq_utils(monkeypatch)
+        out = tmp_path / "output"
+        snap = tmp_path / "snapshot"
+        emb = tmp_path / "missing_embeddings"
+        out.mkdir()
+        for vid, duration, base_ret in [("flat", 20, 120), ("sub", 30, 80), ("snap_only", 25, 1.0)]:
+            (snap / vid).mkdir(parents=True)
+            (snap / vid / "meta.json").write_text(f'{{"duration": {duration}, "view_count": 10}}', encoding="utf-8")
+        pd.DataFrame({"retention": [base_ret for base_ret in range(12)], "x": np.arange(12)}).to_csv(out / "flat_features.csv")
+        (out / "ignored_features.csv.partial").write_text("retention\n1\n", encoding="utf-8")
+        (out / "sub").mkdir()
+        pd.DataFrame({"retention": np.linspace(90, 70, 12), "y": np.arange(12)}).to_csv(out / "sub" / "features_readable.csv", index=False)
+        (snap / "snap_only" / "retention.json").write_text(
+            str([{"audience_watch_ratio": 1.0 - i * 0.02, "time_ratio": i / 11} for i in range(12)]).replace("'", '"'),
+            encoding="utf-8",
+        )
+
+        loaded = mod.load_all_merged(out, snap, use_curve_raw=False, embeddings_root=emb, emb_pca_components=2, min_duration_sec=21, max_duration_sec=29)
+
+        assert list(loaded) == ["snap_only"]
+        assert loaded["snap_only"]["duration_sec"].iloc[0] == 25
+
+        with np.testing.assert_raises(RuntimeError):
+            mod.load_all_merged(out, snap, use_curve_raw=False, embeddings_root=emb, emb_pca_components=0, min_duration_sec=999)
+        with np.testing.assert_raises(RuntimeError):
+            mod.load_all_merged(out, snap, use_curve_raw=False, embeddings_root=emb, emb_pca_components=0, max_duration_sec=1)
+        with np.testing.assert_raises(FileNotFoundError):
+            mod.load_all_merged(tmp_path / "absent", snap)
+
+
+    def test_merge_embedding_pca_handles_missing_empty_and_present_embeddings(self, tmp_path, monkeypatch):
+        mod = _load_seq_utils(monkeypatch)
+        dfs = {
+            "has": pd.DataFrame({"retention": [1.0, 2.0, 3.0]}),
+            "missing": pd.DataFrame({"retention": [1.0, 2.0]}),
+            "empty": pd.DataFrame({"retention": [1.0]}),
+        }
+
+        skipped = mod._merge_embedding_pca({k: v.copy() for k, v in dfs.items()}, tmp_path / "absent", n_components=2)
+        assert all(list(skipped[vid].columns) == list(dfs[vid].columns) for vid in dfs)
+
+        emb_root = tmp_path / "emb"
+        emb_root.mkdir()
+
+        def fake_load(vid, _root, duration_sec):
+            if vid == "has":
+                return np.ones((duration_sec, 9), dtype=np.float32), {}
+            if vid == "empty":
+                return np.zeros((0, 0), dtype=np.float32), {}
+            raise RuntimeError("no embeddings")
+
+        class FakePCA:
+            def __init__(self, n_components):
+                self.n_components = n_components
+
+            def fit(self, _arr):
+                return self
+
+            def explained_variance_ratio(self):
+                return {"vis": np.array([0.5, 0.25]), "aud": np.array([0.1]), "txt": np.array([0.05])}
+
+            def transform(self, arr):
+                return np.arange(arr.shape[0] * self.n_components * 3, dtype=np.float32).reshape(arr.shape[0], self.n_components * 3)
+
+        monkeypatch.setattr(mod, "load_aligned_embeddings", fake_load)
+        monkeypatch.setattr(mod, "PerModalityPCA", FakePCA)
+
+        merged = mod._merge_embedding_pca({k: v.copy() for k, v in dfs.items()}, emb_root, n_components=2)
+
+        assert "emb_vis_pc0" in merged["has"].columns
+        assert merged["has"].filter(like="emb_").shape[1] == 6
+        assert merged["missing"].filter(like="emb_").to_numpy().sum() == 0.0
+
+
 
 class TestFeatureNormalizer:
     def test_fit_transform_and_retention_roundtrip(self, monkeypatch):

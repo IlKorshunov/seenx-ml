@@ -21,7 +21,7 @@ def _install_base_stubs(monkeypatch, segments: list[dict] | None = None, duratio
 
     logger = types.ModuleType("src.utils.logger")
     logger.Logger = lambda show=True: types.SimpleNamespace(  # type: ignore[attr-defined]
-        get_logger=lambda: types.SimpleNamespace(info=lambda *a, **k: None, warning=lambda *a, **k: None)
+        get_logger=lambda: types.SimpleNamespace(info=lambda *a, **k: None, warning=lambda *a, **k: None, error=lambda *a, **k: None)
     )
 
     config = types.ModuleType("src.utils.config")

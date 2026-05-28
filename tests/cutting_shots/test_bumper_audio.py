@@ -189,3 +189,137 @@ class TestFindBumperTemplate:
         mask_a = np.ones(chroma_a.shape[0], dtype=bool)
         result = audio.find_bumper_template(chroma_a, chroma_b, cfg, mask_a=mask_a)
         assert result is None
+
+
+class TestExtractChroma:
+    def test_extract_chroma_normalizes_pads_rms_and_mutes_silence(self, monkeypatch):
+        audio, cfg_mod = _install_stubs(monkeypatch)
+        cfg = _cfg(cfg_mod, audio_sr=8, chroma_fps=2, silence_thresh=0.2)
+        y = np.ones(16, dtype=np.float32)
+        rms = np.array([[0.1], [0.5]], dtype=np.float32)
+        chroma = np.array(
+            [
+                [3.0, 4.0] + [0.0] * 10,
+                [1.0, 0.0] + [0.0] * 10,
+                [0.0, 2.0] + [0.0] * 10,
+            ],
+            dtype=np.float32,
+        )
+
+        monkeypatch.setattr(audio.librosa, "load", lambda path, sr, mono, duration: (y, sr))
+        monkeypatch.setattr(audio.librosa.feature, "rms", lambda **_kwargs: rms.T)
+        monkeypatch.setattr(audio.librosa.feature, "chroma_cqt", lambda **_kwargs: chroma.T)
+
+        out = audio.extract_chroma("fake.mp4", cfg, max_sec=3.0)
+
+        assert out.shape == (3, 12)
+        np.testing.assert_allclose(out[0], np.zeros(12), atol=1e-6)
+        assert np.linalg.norm(out[1]) == pytest.approx(1.0, abs=1e-6)
+        np.testing.assert_allclose(out[2], np.zeros(12), atol=1e-6)
+
+    def test_extract_chroma_truncates_longer_rms(self, monkeypatch):
+        audio, cfg_mod = _install_stubs(monkeypatch)
+        cfg = _cfg(cfg_mod, audio_sr=8, chroma_fps=2, silence_thresh=0.2)
+        chroma = np.ones((2, 12), dtype=np.float32)
+        rms = np.array([[0.1], [0.5], [0.1], [0.5]], dtype=np.float32)
+
+        monkeypatch.setattr(audio.librosa, "load", lambda path, sr, mono, duration: (np.ones(16), sr))
+        monkeypatch.setattr(audio.librosa.feature, "rms", lambda **_kwargs: rms.T)
+        monkeypatch.setattr(audio.librosa.feature, "chroma_cqt", lambda **_kwargs: chroma.T)
+
+        out = audio.extract_chroma("fake.mp4", cfg)
+
+        assert out.shape == (2, 12)
+        np.testing.assert_allclose(out[0], np.zeros(12), atol=1e-6)
+        assert out[1].sum() > 0
+
+
+class TestFindAllTemplates:
+    def test_finds_template_across_video_pairs_and_masks_reuse(self, monkeypatch):
+        audio, cfg_mod = _install_stubs(monkeypatch)
+        cfg = _cfg(cfg_mod, min_bumper_sec=2, max_bumper_sec=3, match_threshold=0.80, mask_score_ratio=0.9, mask_radius_sec=1)
+        fps = cfg.chroma_fps
+        template = _unit_chroma(fps * 2, seed=123)
+        chromas = {
+            "a": _embed(_unit_chroma(70, seed=1), template, 4),
+            "b": _embed(_unit_chroma(70, seed=2), template, 18),
+            "c": _embed(_unit_chroma(70, seed=3), template, 32),
+        }
+
+        templates = audio.find_all_templates(chromas, ["a", "b", "c"], cfg, max_types=2)
+
+        assert templates
+        found_template, dur_sec, score, pair = templates[0]
+        assert found_template.shape[0] == dur_sec * fps
+        assert score >= cfg.match_threshold
+        assert set(pair) <= {"a", "b", "c"}
+
+    def test_returns_empty_when_no_pair_matches(self, monkeypatch):
+        audio, cfg_mod = _install_stubs(monkeypatch)
+        cfg = _cfg(cfg_mod, match_threshold=1.1)
+        chromas = {"a": _unit_chroma(30, seed=1), "b": _unit_chroma(30, seed=2)}
+
+        assert audio.find_all_templates(chromas, ["a", "b"], cfg, max_types=1) == []
+
+
+class TestRunAudioPipeline:
+    def test_requires_at_least_two_videos(self, monkeypatch, tmp_path):
+        audio, cfg_mod = _install_stubs(monkeypatch)
+        (tmp_path / "one").mkdir()
+        (tmp_path / "one" / "video.mp4").write_text("", encoding="utf-8")
+
+        candidates, paths = audio.run_audio_pipeline(str(tmp_path), _cfg(cfg_mod))
+
+        assert candidates == []
+        assert paths == {}
+
+    def test_returns_paths_when_no_templates_found(self, monkeypatch, tmp_path):
+        audio, cfg_mod = _install_stubs(monkeypatch)
+        for vid in ("a", "b"):
+            (tmp_path / vid).mkdir()
+            (tmp_path / vid / "video.mp4").write_text("", encoding="utf-8")
+        cfg = _cfg(cfg_mod)
+
+        monkeypatch.setattr(audio, "extract_chroma", lambda path, cfg, max_sec=None: _unit_chroma(20, seed=len(path)))
+        monkeypatch.setattr(audio, "find_all_templates", lambda *_a, **_k: [])
+
+        candidates, paths = audio.run_audio_pipeline(str(tmp_path), cfg)
+
+        assert candidates == []
+        assert set(paths) == {"a", "b"}
+
+    def test_builds_candidates_and_filters_types_by_video_count(self, monkeypatch, tmp_path):
+        audio, cfg_mod = _install_stubs(monkeypatch)
+        for vid in ("a", "b", "c"):
+            (tmp_path / vid).mkdir()
+            (tmp_path / vid / "video.mp4").write_text("", encoding="utf-8")
+        cfg = _cfg(cfg_mod, min_candidate_videos=2)
+        template0 = _unit_chroma(4, seed=44)
+        template1 = _unit_chroma(4, seed=55)
+
+        monkeypatch.setattr(audio, "extract_chroma", lambda path, cfg, max_sec=None: _unit_chroma(30, seed=len(path)))
+        monkeypatch.setattr(audio, "find_all_templates", lambda *_a, **_k: [(template0, 2, 0.95, ("a", "b")), (template1, 2, 0.94, ("a", "c"))])
+
+        def fake_locate(template, chroma, cfg):
+            if template is template0:
+                return [(1.234, 0.923)]
+            return [(5.0, 0.8)] if float(chroma[0, 0]) > 0.0 else []
+
+        calls = {"n": 0}
+
+        def locate_with_filter(template, chroma, cfg):
+            calls["n"] += 1
+            if template is template0:
+                return [(1.234, 0.923)]
+            return [(5.0, 0.8)] if calls["n"] == 4 else []
+
+        monkeypatch.setattr(audio, "locate_in_video", locate_with_filter)
+
+        candidates, paths = audio.run_audio_pipeline(str(tmp_path), cfg, max_types=2)
+
+        assert set(paths) == {"a", "b", "c"}
+        assert len(candidates) == 3
+        assert {candidate.bumper_type for candidate in candidates} == {0}
+        assert candidates[0].start_sec == 1.23
+        assert candidates[0].end_sec == 3.23
+        assert candidates[0].audio_score == 0.923

@@ -398,7 +398,8 @@ def aggregate( video_path: str, audio_path: str, output_path: str, config: Confi
     if "is_question" in accumulated.columns and "question_density" not in accumulated.columns:
         iq = accumulated["is_question"].values.astype(np.float64)
         q_starts = (np.diff(iq, prepend=0) > 0).astype(np.float64)
-        rolling_count = np.convolve(q_starts, np.ones(_QD_WINDOW_SEC), mode="same")
+        q_window = max(1, min(_QD_WINDOW_SEC, len(q_starts)))
+        rolling_count = np.convolve(q_starts, np.ones(q_window), mode="same")
         accumulated["question_density"] = rolling_count / (_QD_WINDOW_SEC / 60.0)
         logger.info("Derived question_density from is_question (window=%ds)", _QD_WINDOW_SEC)
 
@@ -684,7 +685,8 @@ def _batch_finalize(acc: pd.DataFrame, output_path: str, *, skip_emotion_feature
     if "is_question" in acc.columns and "question_density" not in acc.columns:
         iq = acc["is_question"].values.astype(np.float64)
         q_starts = (np.diff(iq, prepend=0) > 0).astype(np.float64)
-        rolling_count = np.convolve(q_starts, np.ones(_QD_WINDOW_SEC), mode="same")
+        q_window = max(1, min(_QD_WINDOW_SEC, len(q_starts)))
+        rolling_count = np.convolve(q_starts, np.ones(q_window), mode="same")
         acc["question_density"] = rolling_count / (_QD_WINDOW_SEC / 60.0)
 
     if not skip_emotion_features:

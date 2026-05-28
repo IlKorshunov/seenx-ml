@@ -3,6 +3,7 @@
 import sys
 import types
 import importlib
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -57,6 +58,44 @@ class TestPermutationImportance:
 
         assert out.equals(called["out"])
 
+    def test_loo_permutation_aggregates_fold_importances(self, monkeypatch):
+        from analysis.feature_importance import permutation_importance as perm
+
+        X = pd.DataFrame({"rms": [0, 1, 2, 3, 4], "edit_pace": [4, 3, 2, 1, 0]})
+        y = pd.Series([0, 1, 2, 3, 4])
+
+        class Model:
+            def fit(self, X_arr, y_arr):
+                return self
+
+        monkeypatch.setitem(perm.MODEL_BUILDERS, "fake_loo", lambda _n: Model())
+        monkeypatch.setattr(
+            perm,
+            "sklearn_perm",
+            lambda *args, **kwargs: types.SimpleNamespace(importances_mean=np.array([0.2, 0.4])),
+        )
+
+        out = perm.compute_loo_permutation_importance(X, y, model_name="fake_loo", n_repeats=1)
+
+        assert out["feature"].tolist() == ["edit_pace", "rms"]
+        assert out["model"].unique().tolist() == ["fake_loo_loo"]
+
+    def test_run_permutation_importance_orchestrates_models(self, tmp_path, monkeypatch):
+        from analysis.feature_importance import permutation_importance as perm
+
+        X, y = _toy_xy()
+        monkeypatch.setattr(perm, "load_all_videos", lambda output_dir: {"v": pd.DataFrame()})
+        monkeypatch.setattr(perm, "aggregate_per_video", lambda video_dfs: pd.DataFrame({"dummy": [1]}))
+        monkeypatch.setattr(perm, "prepare_X_y", lambda agg_df, target: (X, y))
+        monkeypatch.setattr(perm, "compute_permutation_importance", lambda X, y, model_name, **kwargs: perm._importance_frame(X.columns.tolist(), np.arange(len(X.columns)), np.zeros(len(X.columns)), model_name))
+        monkeypatch.setattr(perm, "plot_permutation_importance", lambda *args, **kwargs: None)
+        monkeypatch.setattr(perm, "plot_multi_model_comparison", lambda *args, **kwargs: None)
+
+        out = perm.run_permutation_importance(output_dir="unused", results_dir=str(tmp_path), use_loo=False, models=["ridge", "rf"], top_n=2)
+
+        assert set(out) == {"ridge", "rf"}
+        assert (tmp_path / "permutation" / "perm_importance_ridge.csv").exists()
+
 
 class TestCatBoostImportance:
     def test_builtin_and_shap_importance_with_fake_model(self, monkeypatch):
@@ -108,6 +147,37 @@ class TestCatBoostImportance:
         assert plots == [frame]
         assert (tmp_path / "imp.csv").exists()
 
+    def test_plot_helpers_and_run_catboost_importance(self, tmp_path, monkeypatch):
+        from analysis.feature_importance import catboost_importance as cb
+
+        X, y = _toy_xy()
+        frame = pd.DataFrame({"feature": ["rms", "edit_pace", "unknown_x"], "importance": [3.0, 2.0, 1.0], "group": ["audio_basic", "visual_motion", "unknown"], "method": ["m"] * 3})
+        shap_matrix = np.arange(12, dtype=float).reshape(4, 3)
+
+        cb.plot_top_features(frame, "top", tmp_path / "top.png", top_n=3, color_by_group=True)
+        cb.plot_top_features(frame, "top", tmp_path / "top_plain.png", top_n=2, color_by_group=False)
+        cb.plot_group_importance(cb.compute_group_importance(frame), "groups", tmp_path / "groups.png")
+        cb.plot_shap_beeswarm(X, shap_matrix, tmp_path / "beeswarm.png", top_n=2)
+
+        assert (tmp_path / "top.png").exists()
+        assert (tmp_path / "top_plain.png").exists()
+        assert (tmp_path / "groups.png").exists()
+        assert (tmp_path / "beeswarm.png").exists()
+
+        monkeypatch.setattr(cb, "load_all_videos", lambda output_dir: {"v": pd.DataFrame()})
+        monkeypatch.setattr(cb, "aggregate_per_video", lambda video_dfs: pd.DataFrame({"dummy": [1]}))
+        monkeypatch.setattr(cb, "prepare_X_y", lambda agg_df, target: (X, y))
+        monkeypatch.setattr(cb, "compute_builtin_importance", lambda X, y, importance_type: frame.assign(method=importance_type))
+        monkeypatch.setattr(cb, "compute_shap_importance", lambda X, y: (frame.assign(method="SHAP_mean_abs"), shap_matrix))
+        monkeypatch.setattr(cb, "plot_top_features", lambda *args, **kwargs: None)
+        monkeypatch.setattr(cb, "plot_group_importance", lambda *args, **kwargs: None)
+        monkeypatch.setattr(cb, "plot_shap_beeswarm", lambda *args, **kwargs: None)
+
+        result = cb.run_catboost_importance(output_dir="unused", results_dir=str(tmp_path), top_n=2)
+
+        assert {"pvc", "lfc", "shap", "group", "consensus"} <= set(result)
+        assert (tmp_path / "catboost" / "importance_consensus.csv").exists()
+
 
 class TestShapAnalysis:
     def test_shap_value_helpers_and_group_bar(self, tmp_path, monkeypatch):
@@ -146,6 +216,68 @@ class TestShapAnalysis:
         assert (tmp_path / "bar.png").exists()
         assert (tmp_path / "dep.png").exists()
         assert not (tmp_path / "missing.png").exists()
+
+    def test_sklearn_shap_and_plot_wrappers(self, tmp_path, monkeypatch):
+        from analysis.feature_importance import shap_analysis as shap_mod
+
+        X, _ = _toy_xy()
+
+        class Model:
+            def predict(self, X_arr):
+                return X_arr.sum(axis=1)
+
+        class FakeExplainer:
+            expected_value = 1.25
+
+            def shap_values(self, X_arr, nsamples=100):
+                return np.ones_like(X_arr, dtype=float)
+
+        monkeypatch.setattr(shap_mod.shap, "sample", lambda X_arr, n: X_arr[:n])
+        monkeypatch.setattr(shap_mod.shap, "KernelExplainer", lambda predict, background: FakeExplainer())
+
+        values, expected = shap_mod.compute_shap_values_sklearn(Model(), X, background_samples=2)
+
+        assert values.shape == X.shape
+        assert expected == 1.25
+
+        monkeypatch.setattr(shap_mod.shap, "summary_plot", lambda *args, **kwargs: None)
+        monkeypatch.setattr(shap_mod.shap, "waterfall_plot", lambda *args, **kwargs: None)
+        monkeypatch.setattr(shap_mod.shap, "dependence_plot", lambda *args, **kwargs: None)
+        monkeypatch.setattr(shap_mod.shap, "force_plot", lambda *args, **kwargs: "<html>force</html>")
+        monkeypatch.setattr(shap_mod.shap, "save_html", lambda path, html: Path(path).write_text(str(html), encoding="utf-8"))
+
+        shap_mod.plot_shap_summary(values, X, tmp_path / "summary.png", max_display=2, plot_type="bar")
+        shap_mod.plot_shap_waterfall(values, X, expected, 0, tmp_path / "waterfall.png", title="sample")
+        shap_mod.plot_shap_dependence(values, X, "rms", tmp_path / "dep_real.png")
+        shap_mod.save_shap_html(values, X, expected, tmp_path / "force.html")
+
+        assert (tmp_path / "summary.png").exists()
+        assert (tmp_path / "waterfall.png").exists()
+        assert (tmp_path / "dep_real.png").exists()
+        assert (tmp_path / "force.html").exists()
+
+    def test_run_shap_analysis_orchestrates_outputs(self, tmp_path, monkeypatch):
+        from analysis.feature_importance import shap_analysis as shap_mod
+
+        X, y = _toy_xy()
+        matrix = np.arange(12, dtype=float).reshape(4, 3)
+
+        class Model:
+            def predict(self, X_arr):
+                return X_arr[:, 0]
+
+        monkeypatch.setattr(shap_mod, "load_all_videos", lambda output_dir: {"v": pd.DataFrame()})
+        monkeypatch.setattr(shap_mod, "aggregate_per_video", lambda video_dfs: pd.DataFrame({"dummy": [1]}))
+        monkeypatch.setattr(shap_mod, "prepare_X_y", lambda agg_df, target: (X, y))
+        monkeypatch.setattr(shap_mod, "_train_catboost", lambda X, y: Model())
+        monkeypatch.setattr(shap_mod, "compute_shap_values_catboost", lambda model, X: (matrix, 0.5))
+        for name in ("plot_shap_summary", "plot_shap_group_bar", "plot_shap_waterfall", "save_shap_html", "plot_shap_dependence"):
+            monkeypatch.setattr(shap_mod, name, lambda *args, **kwargs: None)
+
+        result = shap_mod.run_shap_analysis(output_dir="unused", results_dir=str(tmp_path), top_n=2, n_dependence_plots=2)
+
+        assert result["shap_matrix"].shape == matrix.shape
+        assert (tmp_path / "shap" / "shap_values.csv").exists()
 
 
 class TestRunAllFeatureImportance:

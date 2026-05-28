@@ -11,13 +11,13 @@
 \contentsline {section}{\numberline {2.1}Основные этапы работы}{17}{}%
 \contentsline {section}{\numberline {2.2}Сбор комментариев}{18}{}%
 \contentsline {subsection}{\numberline {2.2.1}Семантический анализ комментариев}{19}{}%
-\contentsline {section}{\numberline {2.3}Извлечение признаков}{19}{}%
+\contentsline {section}{\numberline {2.3}Извлечение признаков}{20}{}%
 \contentsline {subsection}{\numberline {2.3.1}Пространство признаков}{21}{}%
 \contentsline {subsection}{\numberline {2.3.2}Извлечение границ заставок.}{23}{}%
 \contentsline {subsection}{\numberline {2.3.3}Векторный анализ модальных составляющих}{25}{}%
 \contentsline {subsection}{\numberline {2.3.4}Признаки громкости и динамики звукового сигнала.}{27}{}%
 \contentsline {subsection}{\numberline {2.3.5}Визуальная составляющая кадра}{28}{}%
-\contentsline {subsection}{\numberline {2.3.6}Признаки рекламных интеграций}{29}{}%
+\contentsline {subsection}{\numberline {2.3.6}Признаки рекламных интеграций}{30}{}%
 \contentsline {subsection}{\numberline {2.3.7}Признаки движения в кадре.}{31}{}%
 \contentsline {subsection}{\numberline {2.3.8}Скорость речи и плотность слов}{33}{}%
 \contentsline {subsection}{\numberline {2.3.9}Обращения к зрителю}{34}{}%
@@ -84,5 +84,6 @@
 \contentsline {chapter}{Приложение Д}{87}{}%
 \contentsline {chapter}{Приложение Е}{91}{}%
 \contentsline {chapter}{Приложение Ж}{95}{}%
-\contentsline {chapter}{Приложение З}{101}{}%
+\contentsline {chapter}{Приложение З}{102}{}%
+\contentsline {chapter}{Приложение И}{105}{}%
 \contentsfinish 

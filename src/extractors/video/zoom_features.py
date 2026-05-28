@@ -9,18 +9,22 @@ import pandas as pd
 import torch
 from tqdm import tqdm
 
+ROOT = os.environ.get("WORKING_DIR", str(Path(__file__).resolve().parent.parent.parent.parent))
+sys.path.insert(0, os.path.join(ROOT, "RAFT/core"))
+
 from ...utils.config import Config
 from ...utils.logger import Logger
 from ...video_dataset import VideoBatchDataset
 from .shot_segmentation import batch_shot_segmentation
 
-from utils.utils import InputPadder
-from raft import RAFT
+try:
+    from utils.utils import InputPadder
+    from raft import RAFT
+except ModuleNotFoundError:
+    InputPadder = None
+    RAFT = None
 
 logger = Logger(show=True).get_logger()
-
-ROOT = os.environ.get("WORKING_DIR", str(Path(__file__).resolve().parent.parent.parent.parent))
-sys.path.insert(0, os.path.join(ROOT, "RAFT/core"))
 
 
 class _RaftArgs:
@@ -49,6 +53,8 @@ class ZoomFeatureExtractor:
         self.model = self._load_model(weights_path)
 
     def _load_model(self, weights_path: str):
+        if RAFT is None or InputPadder is None:
+            raise ModuleNotFoundError("RAFT is required for ZoomFeatureExtractor. Put RAFT/core on WORKING_DIR/RAFT/core or install its modules.")
         model = torch.nn.DataParallel(RAFT(self._raft_args))
         model.load_state_dict(torch.load(weights_path, map_location=self.device))
         model = model.module.to(self.device).eval()

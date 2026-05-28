@@ -17,7 +17,6 @@ matplotlib.use("Agg")
 import seaborn as sns
 from scipy import stats
 from sklearn.feature_selection import mutual_info_regression
-
 from .utils import NON_FEATURE_COLS, aggregate_per_video, default_output_dir, feature_group_of, load_all_videos, prepare_X_y, save_importance_csv
 
 
@@ -63,9 +62,9 @@ def compute_per_second_correlation(video_dfs: dict[str, pd.DataFrame], target_co
 
 def compute_feature_correlation_matrix(X: pd.DataFrame, method: str = "spearman") -> pd.DataFrame:
     if method == "spearman":
-        corr_matrix, _ = stats.spearmanr(X.values)
         if X.shape[1] == 1:
             return pd.DataFrame([[1.0]], index=X.columns, columns=X.columns)
+        corr_matrix, _ = stats.spearmanr(X.values)
         return pd.DataFrame(corr_matrix, index=X.columns, columns=X.columns)
     else:
         return X.corr(method="pearson")

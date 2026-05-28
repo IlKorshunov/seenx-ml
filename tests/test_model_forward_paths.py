@@ -59,10 +59,11 @@ def test_unimodal_retention_models_forward(head_type):
 
 
 def test_multimodal_retention_models_forward_with_tabular_and_convs():
+    from src.models import model_base as mb
     from src.models.retention_multimodal_lstm import MultimodalRetentionLSTM, PreConvBlock as LstmPreConv
     from src.models.retention_multimodal_transformer import MultimodalRetentionTransformer, PreConvBlock as TransformerPreConv
 
-    emb = torch.randn(2, 5, 3 + 2 + 4)
+    emb = torch.randn(2, 5, mb.VISUAL_DIM + mb.AUDIO_DIM + mb.TEXT_DIM)
     tab = torch.randn(2, 5, 2)
     mask = torch.tensor([[False, False, False, True, True], [False, False, False, False, False]])
 
@@ -76,9 +77,6 @@ def test_multimodal_retention_models_forward_with_tabular_and_convs():
         bidirectional=True,
         n_tabular_features=2,
         n_attn_heads=2,
-        emb_visual_dim=3,
-        emb_audio_dim=2,
-        emb_text_dim=4,
         use_conv_blocks=True,
     )
     lstm.set_baseline(torch.tensor([80.0, 79.0]))
@@ -91,9 +89,6 @@ def test_multimodal_retention_models_forward_with_tabular_and_convs():
         d_ff=16,
         dropout=0.0,
         n_tabular_features=2,
-        emb_visual_dim=3,
-        emb_audio_dim=2,
-        emb_text_dim=4,
         use_conv_blocks=True,
     )
     transformer.set_baseline(torch.tensor([80.0, 79.0, 78.0]))
@@ -106,20 +101,19 @@ def test_multimodal_retention_models_forward_with_tabular_and_convs():
         d_ff=16,
         dropout=0.0,
         use_modality_embeddings=False,
-        emb_visual_dim=3,
-        emb_audio_dim=2,
-        emb_text_dim=4,
     )
     assert no_mod(emb).shape == (2, 5)
 
 
 class TinyBackbone(torch.nn.Module):
-    def __init__(self, hidden_size=6):
+    def __init__(self, hidden_size=8):
         super().__init__()
         self.config = types.SimpleNamespace(hidden_size=hidden_size)
         self.proj = torch.nn.Linear(hidden_size, hidden_size)
 
     def forward(self, input_ids=None, attention_mask=None, pixel_values=None, **kwargs):
+        if pixel_values is None and torch.is_tensor(input_ids) and input_ids.dtype.is_floating_point and input_ids.ndim > 2:
+            pixel_values, input_ids = input_ids, None
         if pixel_values is not None:
             batch = pixel_values.shape[0]
             hidden = pixel_values.reshape(batch, pixel_values.shape[1], -1)[..., : self.config.hidden_size]
@@ -146,32 +140,32 @@ class TinyTokenizer:
 def test_bert_helpers_and_retention_heads(monkeypatch):
     from src.models import bert_retention as br
 
-    monkeypatch.setattr(br, "_load_backbone", lambda backbone, device: (TinyBackbone(hidden_size=6).to(device), TinyTokenizer(), 6))
+    monkeypatch.setattr(br, "_load_backbone", lambda backbone, device: (TinyBackbone(hidden_size=8).to(device), TinyTokenizer(), 8))
     monkeypatch.setattr(br, "_apply_lora", lambda model, **kwargs: model)
 
-    pe = br.SinusoidalPE(6, max_len=8, dropout=0.0)
-    assert pe(torch.zeros(1, 4, 6)).shape == (1, 4, 6)
+    pe = br.SinusoidalPE(8, max_len=8, dropout=0.0)
+    assert pe(torch.zeros(1, 4, 8)).shape == (1, 4, 8)
 
-    head = br.TemporalRegressionHead(d_model=6, n_heads=2, n_layers=1, d_ff=12, dropout=0.0)
-    assert head(torch.randn(2, 4, 6), mask=torch.zeros(2, 4, dtype=torch.bool)).shape == (2, 4)
+    head = br.TemporalRegressionHead(d_model=8, n_heads=2, n_layers=1, d_ff=12, dropout=0.0)
+    assert head(torch.randn(2, 4, 8), mask=torch.zeros(2, 4, dtype=torch.bool)).shape == (2, 4)
 
-    embs = br._encode_segments(["a", "b"], TinyBackbone(6), TinyTokenizer(), torch.device("cpu"), batch_size=1)
+    embs = br._encode_segments(["a", "b"], TinyBackbone(8), TinyTokenizer(), torch.device("cpu"), batch_size=1)
     aligned = br._align_segments_to_1fps(embs, [{"start": 0, "end": 1.5}, {"start": 1, "end": 3}], duration_sec=3)
-    assert aligned.shape == (3, 6)
+    assert aligned.shape == (3, 8)
 
     extractor = br.BERTFeatureExtractor(device=torch.device("cpu"))
-    assert extractor.extract([], [], duration_sec=2).shape == (2, 6)
-    assert extractor.extract(["hello"], [{"start": 0, "end": 2}], duration_sec=2, batch_size=1).shape == (2, 6)
-    assert extractor(torch.ones(1, 3, dtype=torch.long), torch.ones(1, 3, dtype=torch.long)).shape == (1, 3, 6)
+    assert extractor.extract([], [], duration_sec=2).shape == (2, 8)
+    assert extractor.extract(["hello"], [{"start": 0, "end": 2}], duration_sec=2, batch_size=1).shape == (2, 8)
+    assert extractor(torch.ones(1, 3, dtype=torch.long), torch.ones(1, 3, dtype=torch.long)).shape == (1, 3, 8)
 
     retention = br.BERTRetention(n_head_layers=1, d_ff=12, dropout=0.0)
     retention.set_baseline(torch.tensor([50.0, 49.0]))
-    assert retention(torch.randn(2, 4, 6), padding_mask=torch.zeros(2, 4, dtype=torch.bool)).shape == (2, 4)
+    assert retention(torch.randn(2, 4, 8), padding_mask=torch.zeros(2, 4, dtype=torch.bool)).shape == (2, 4)
     assert retention.trainable_parameters()
 
-    hybrid = br.BERTHybridRetention(d_model=6, n_heads=2, n_layers=1, d_ff=12, dropout=0.0, n_tabular_features=2, visual_dim=3, audio_dim=4)
+    hybrid = br.BERTHybridRetention(d_model=8, n_heads=2, n_layers=1, d_ff=12, dropout=0.0, n_tabular_features=2, visual_dim=3, audio_dim=4)
     hybrid.set_baseline(torch.tensor([60.0, 59.0]))
-    out = hybrid(torch.randn(2, 4, 6), torch.randn(2, 4, 3), torch.randn(2, 4, 4), tabular=torch.randn(2, 4, 2))
+    out = hybrid(torch.randn(2, 4, 8), torch.randn(2, 4, 3), torch.randn(2, 4, 4), tabular=torch.randn(2, 4, 2))
     assert out.shape == (2, 4)
     assert hybrid.trainable_parameters()
 
@@ -181,28 +175,28 @@ def test_videomae_heads_with_tiny_backbone(monkeypatch):
 
     class TinyProcessor:
         def __call__(self, frames, return_tensors="pt"):
-            return {"pixel_values": torch.ones(1, 16, 1, 1, 6)}
+            return {"pixel_values": torch.ones(1, 16, 1, 1, 8)}
 
-    monkeypatch.setattr(vm, "_load_backbone", lambda backbone, device: (TinyBackbone(hidden_size=6).to(device), TinyProcessor(), 6))
+    monkeypatch.setattr(vm, "_load_backbone", lambda backbone, device: (TinyBackbone(hidden_size=8).to(device), TinyProcessor(), 8))
     monkeypatch.setattr(vm, "_apply_lora", lambda model, **kwargs: model)
 
-    head = vm.TemporalRegressionHead(d_model=6, n_heads=2, n_layers=1, d_ff=12, dropout=0.0)
-    assert head(torch.randn(1, 4, 6)).shape == (1, 4)
-    assert vm._interp_to_seconds(torch.randn(1, 3, 6), 5).shape == (1, 5, 6)
+    head = vm.TemporalRegressionHead(d_model=8, n_heads=2, n_layers=1, d_ff=12, dropout=0.0)
+    assert head(torch.randn(1, 4, 8)).shape == (1, 4)
+    assert vm._interp_to_seconds(torch.randn(1, 3, 8), 5).shape == (1, 5, 8)
 
     extractor = vm.VideoMAEFeatureExtractor(backbone="tiny", device=torch.device("cpu"))
     frames = [np.zeros((2, 2, 3), dtype=np.uint8) for _ in range(3)]
-    assert extractor.extract(frames, clip_stride=2).shape == (3, 6)
-    assert extractor(torch.ones(1, 16, 1, 1, 6)).shape[0] == 1
+    assert extractor.extract(frames, clip_stride=2).shape == (3, 8)
+    assert extractor(torch.ones(1, 16, 1, 1, 8)).shape[0] == 1
 
     retention = vm.VideoMAERetention(backbone="tiny", n_head_layers=1, d_ff=12, dropout=0.0)
     retention.set_baseline(torch.tensor([70.0, 69.0]))
-    assert retention(torch.ones(1, 16, 1, 1, 6), n_seconds=4).shape == (1, 4)
+    assert retention(torch.ones(1, 16, 1, 1, 8), n_seconds=4).shape == (1, 4)
     assert retention.trainable_parameters()
 
-    hybrid = vm.VideoMAEHybridRetention(backbone="tiny", d_model=6, n_heads=2, n_layers=1, d_ff=12, dropout=0.0, n_tabular_features=2, audio_dim=3, text_dim=4)
+    hybrid = vm.VideoMAEHybridRetention(backbone="tiny", d_model=8, n_heads=2, n_layers=1, d_ff=12, dropout=0.0, n_tabular_features=2, audio_dim=3, text_dim=4)
     hybrid.set_baseline(torch.tensor([80.0, 79.0]))
-    assert hybrid.encode_video(torch.ones(1, 16, 1, 1, 6), n_seconds=4).shape == (1, 4, 6)
-    out = hybrid(torch.randn(2, 4, 6), torch.randn(2, 4, 3), torch.randn(2, 4, 4), tabular=torch.randn(2, 4, 2))
+    assert hybrid.encode_video(torch.ones(1, 16, 1, 1, 8), n_seconds=4).shape == (1, 4, 8)
+    out = hybrid(torch.randn(2, 4, 8), torch.randn(2, 4, 3), torch.randn(2, 4, 4), tabular=torch.randn(2, 4, 2))
     assert out.shape == (2, 4)
     assert hybrid.trainable_parameters()

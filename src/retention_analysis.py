@@ -1,3 +1,4 @@
+import glob
 import os
 from typing import Literal
 
@@ -78,6 +79,25 @@ def load_channel_retentions_csv(data_dir: str) -> list[dict]:
     return channel_data
 
 
+def parse_retention(html_path: str) -> pd.DataFrame:
+    return pd.read_html(html_path)[0]
+
+
+def load_channel_retentions(html_dir: str, video_dir: str | None = None) -> list[dict]:
+    channel_data = []
+    for html_path in sorted(glob.glob(os.path.join(html_dir, "*.html"))):
+        name = os.path.splitext(os.path.basename(html_path))[0]
+        try:
+            ret_df = parse_retention(html_path)
+            retention_values = ret_df["retention"].to_numpy(dtype=float)
+            video_path = os.path.join(video_dir or html_dir, f"{name}.mp4")
+            duration_sec = get_video_duration(video_path) if os.path.exists(video_path) else float(max(len(retention_values) - 1, 0))
+            channel_data.append({"name": name, "retention_series": retention_values, "duration_sec": float(duration_sec), "time_index": np.arange(len(retention_values))})
+        except Exception as e:
+            logger.warning("Failed to load %s: %s", name, e)
+    return channel_data
+
+
 def _resample_retention(retention: np.ndarray, target_length: int) -> np.ndarray:
     if len(retention) == target_length:
         return retention.copy()
@@ -115,7 +135,7 @@ def _normalized_baseline_metrics(baseline: np.ndarray, time_axis: np.ndarray, du
 
 def compute_channel_baseline(channel_data: list[dict], strategy: AlignStrategy = "mean_duration", trend_window: int = 30) -> dict | None:
     if not channel_data:
-        raise ValueError("channel_data is empty")
+        return None
     lengths = [len(d["retention_series"]) for d in channel_data]
     durations = [d["duration_sec"] for d in channel_data]
     is_normalized = strategy == "normalized_100"
@@ -157,6 +177,8 @@ def format_time(seconds: float) -> str:
     m, s = divmod(int(seconds), 60)
     return f"{m}:{s:02d}"
 
+
+_format_time = format_time
 
 def _add_vline(ax, x, color, label):
     ax.axvline(x=x, color=color, linestyle="--", linewidth=1.5, label=label)

@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..curve_fitting import *
+from ..curve_fitting import double_exp_curve as double_exp
+from ..curve_fitting import fit_double_exp, fit_hill_curve, fit_weibull
+from ..curve_fitting import hill_curve as hill
+from ..curve_fitting import weibull_curve as weibull
 
 N_POINTS = 100
 MAX_PARAMS = 5
