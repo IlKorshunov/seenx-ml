@@ -107,7 +107,14 @@ def test_advice_for_segment_returns_highest_severity_low_and_high_rules():
         }
     )
 
-    items = advice._advice_for_segment(df, start=2, end=3, ranked=["rms", "confusion"], top_n=2)
+    stats = advice._reference_stats([])
+    stats.update(
+        {
+            "rms": {"median": 0.85, "q15": 0.1, "q85": 0.95},
+            "confusion": {"median": 0.15, "q15": 0.05, "q85": 0.9},
+        }
+    )
+    items = advice._advice_for_segment(df, start=2, end=3, ranked=["rms", "confusion"], top_n=2, reference_stats=stats)
 
     assert [item["feature"] for item in items] == ["rms", "confusion"]
     assert items[0]["value"] == 0.0
@@ -128,6 +135,7 @@ def test_analyze_video_writes_empty_report_when_no_drop_segments(tmp_path, monke
     segments = advice.analyze_video(
         features_dir / "vid_features.csv",
         ranked=[],
+        reference_stats=advice._reference_stats([features_dir / "vid_features.csv"]),
         args=Namespace(
             predictions_root=str(tmp_path / "preds"),
             output_dir=str(out_dir),

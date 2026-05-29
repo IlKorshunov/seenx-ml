@@ -1,13 +1,4 @@
-"""
-Align multimodal embeddings to 1 fps and optional projection to common space.
-
-Current extraction rates (разная частота):
-  - Visual (CLIP):  ~1 fps   (step=FPS → 1 frame/sec), dim 768
-  - Audio (CLAP):   ~0.2 fps (chunk 5 sec), dim 512
-  - Text (USER2):   variable (Whisper segments), dim 256
-
-This module resamples all to 1 fps and optionally projects to d_model.
-"""
+"""Align multimodal embeddings to 1 fps and optional projection to common space."""
 
 from __future__ import annotations
 

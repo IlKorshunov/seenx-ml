@@ -96,7 +96,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxbibnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxcitenames</bcf:key>
@@ -104,7 +104,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxsortnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxitems</bcf:key>
@@ -355,7 +355,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxbibnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxcitenames</bcf:key>
@@ -363,7 +363,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxsortnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxitems</bcf:key>
@@ -594,7 +594,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxbibnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxcitenames</bcf:key>
@@ -602,7 +602,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxsortnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxitems</bcf:key>
@@ -833,7 +833,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxbibnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxcitenames</bcf:key>
@@ -841,7 +841,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxsortnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxitems</bcf:key>
@@ -1072,7 +1072,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxbibnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxcitenames</bcf:key>
@@ -1080,7 +1080,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxsortnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>99</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxitems</bcf:key>
@@ -3543,8 +3543,47 @@
   <!-- CITATION DATA -->
   <!-- SECTION 0 -->
   <bcf:bibdata section="0">
+    <bcf:datasource type="file" datatype="bibtex" glob="false">references.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
+    <bcf:citekey order="1" intorder="1">habr2024netflix</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">altman2019retention</bcf:citekey>
+    <bcf:citekey order="2" intorder="2">wu2018beyondviews</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">trzcinski2017popularity</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">li2024delving</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">guo2014mooc</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">youtube2026retention</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">youtube2026retention</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">radford2021clip</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">ultralytics2026yolo11</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">teed2020raft</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">elizalde2022clap</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">ultralytics2026yolo11</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">teed2020raft</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">elizalde2022clap</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">deepvk2024user</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">soucek2020transnetv2</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">retkowski2024smartchaptering</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">vaswani2017attention</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">radford2021clip</bcf:citekey>
+    <bcf:citekey order="19" intorder="2">tong2022videomae</bcf:citekey>
+    <bcf:citekey order="19" intorder="3">deepvk2024user</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">hochreiter1997lstm</bcf:citekey>
+    <bcf:citekey order="20" intorder="2">schuster1997bidirectional</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">tong2022videomae</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">he2021deberta</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">devlin2019bert</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">prokhorenkova2018catboost</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">lundberg2017shap</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">arthur2007kmeans</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">reynolds2009gmm</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">schubert2017dbscan</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">ng2001spectral</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">dtw1994</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">murtagh2012hierarchical</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">mcinnes2018umap</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">akiba2019optuna</bcf:citekey>
+    <bcf:citekey order="34" intorder="1" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
@@ -3556,4 +3595,14 @@
     </bcf:sort>
   </bcf:sortingtemplate>
   <!-- DATALISTS -->
+  <bcf:datalist section="0"
+                name="none/global//global/global/global"
+                type="entry"
+                sortingtemplatename="none"
+                sortingnamekeytemplatename="global"
+                labelprefix=""
+                uniquenametemplatename="global"
+                labelalphanametemplatename="global"
+                namehashtemplatename="global">
+  </bcf:datalist>
 </bcf:controlfile>

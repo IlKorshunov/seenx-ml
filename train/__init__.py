@@ -1,4 +1,4 @@
-"""Training package: adds repo root to sys.path on first import."""
+"""Training package."""
 
 from __future__ import annotations
 

@@ -43,6 +43,12 @@ class SegmentAdvice(TypedDict):
     advice: list[AdviceItem]
 
 
+class FeatureStats(TypedDict):
+    median: float
+    q15: float
+    q85: float
+
+
 NON_FEATURE_COLS = {
     "time",
     "time_sec",
@@ -280,12 +286,35 @@ def _feature_cols(df: pd.DataFrame, ranked: list[str], top_n: int) -> list[str]:
     return (ranked_present + rest)[: max(top_n * 8, top_n)]
 
 
+def _reference_stats(paths: list[Path]) -> dict[str, FeatureStats]:
+    values_by_feature: dict[str, list[pd.Series]] = {}
+    for path in paths:
+        df = pd.read_csv(path)
+        for col in df.columns:
+            if col not in ADVICE_RULES or col in NON_FEATURE_COLS:
+                continue
+            vals = pd.to_numeric(df[col], errors="coerce").dropna()
+            if not vals.empty:
+                values_by_feature.setdefault(col, []).append(vals)
+
+    stats: dict[str, FeatureStats] = {}
+    for col, chunks in values_by_feature.items():
+        vals = pd.concat(chunks, ignore_index=True)
+        stats[col] = {
+            "median": float(vals.median()),
+            "q15": float(vals.quantile(0.15)),
+            "q85": float(vals.quantile(0.85)),
+        }
+    return stats
+
+
 def _advice_for_segment(
     df: pd.DataFrame,
     start: int,
     end: int,
     ranked: list[str],
     top_n: int,
+    reference_stats: dict[str, FeatureStats],
 ) -> list[AdviceItem]:
     cols = _feature_cols(df, ranked, top_n)
     candidates: list[tuple[float, AdviceItem]] = []
@@ -294,8 +323,12 @@ def _advice_for_segment(
             continue
         vals = pd.to_numeric(df[col], errors="coerce")
         seg_mean = float(vals.iloc[start : end + 1].mean())
-        med = float(vals.median())
-        q15, q85 = float(vals.quantile(0.15)), float(vals.quantile(0.85))
+        stats = reference_stats.get(col)
+        if stats is None:
+            continue
+        med = stats["median"]
+        q15 = stats["q15"]
+        q85 = stats["q85"]
         direction, message = ADVICE_RULES[col]
         triggered = (direction == "low" and seg_mean <= q15) or (direction == "high" and seg_mean >= q85)
         if triggered:
@@ -331,7 +364,7 @@ def _plot(video_id: str, y: np.ndarray, segments: list[SegmentAdvice], out_path:
     plt.close(fig)
 
 
-def analyze_video(path: Path, ranked: list[str], args: Namespace) -> list[SegmentAdvice]:
+def analyze_video(path: Path, ranked: list[str], args: Namespace, reference_stats: dict[str, FeatureStats]) -> list[SegmentAdvice]:
     video_id = _video_id(path)
     df = pd.read_csv(path)
     pred_df = _find_prediction(Path(args.predictions_root) if args.predictions_root else None, video_id)
@@ -350,7 +383,7 @@ def analyze_video(path: Path, ranked: list[str], args: Namespace) -> list[Segmen
             "percentile": args.drop_percentile,
             "threshold": round(effective_threshold, 4),
         }
-        advice = _advice_for_segment(df, start, min(end, len(df) - 1), ranked, args.top_n)
+        advice = _advice_for_segment(df, start, min(end, len(df) - 1), ranked, args.top_n, reference_stats)
         if advice:
             segments.append(
                 {
@@ -378,13 +411,15 @@ def analyze_video(path: Path, ranked: list[str], args: Namespace) -> list[Segmen
 
 def run(args: Namespace) -> None:
     ranked = _load_ranked_features(Path(args.importance_path))
+    feature_paths = sorted(Path(args.features_dir).glob("*_features.csv"))
+    reference_stats = _reference_stats(feature_paths)
     all_segments = []
-    for path in sorted(Path(args.features_dir).glob("*_features.csv")):
-        all_segments.extend(analyze_video(path, ranked, args))
+    for path in feature_paths:
+        all_segments.extend(analyze_video(path, ranked, args, reference_stats))
     out = Path(args.output_dir)
     out.mkdir(parents=True, exist_ok=True)
     pd.DataFrame([{**{k: v for k, v in s.items() if k != "advice"}, "n_advice": len(s["advice"])} for s in all_segments]).to_csv(out / "summary.csv", index=False)
-    print(f"[retention_advice] videos={len(list(Path(args.features_dir).glob('*_features.csv')))} segments={len(all_segments)} -> {out}")
+    print(f"[retention_advice] videos={len(feature_paths)} segments={len(all_segments)} -> {out}")
 
 
 def main() -> None:
