@@ -31,7 +31,7 @@ echo "[setup] installing dependecies"
 python -m pip install -r requirements.txt
 
 echo "[setup] prepare folders"
-mkdir -p static/weights output embeddings data my_metrics experiments
+mkdir -p static/weights output embeddings data my_metrics experiments src/tune_hp/results src/get_data/comments
 
 download_if_missing() {
   local path="$1"

@@ -11,7 +11,7 @@ Produces per-second columns:
   - title_claim_intensity  : scalar (broadcast) — density of clickbait-style language
                              in the title + first line of description (rules-based).
 
-Title & description from get_data/comments/<playlist>/<vid>/comments.json
+Title & description from src/get_data/comments/<playlist>/<vid>/comments.json
 (field video_title, video_description).
 Transcript from the standard pipeline (get_segments_and_duration).
 Embeddings via deepvk/USER2-base (same model as semantic_embedding_feature).
@@ -39,7 +39,7 @@ MODEL_ID = "deepvk/USER2-base"
 EMB_DIM = 256
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
-_COMMENTS_ROOT = _PROJECT_ROOT / "get_data" / "comments"
+_COMMENTS_ROOT = _PROJECT_ROOT / "src" / "get_data" / "comments"
 
 WINDOW_SEC = 15
 DELIVERY_HORIZON_SEC = 30

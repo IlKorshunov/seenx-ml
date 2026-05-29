@@ -7,7 +7,7 @@
 ├── main.py                    # CLI для сборки признаков, обучения и инференса
 ├── run_pipeline.sh            # полный локальный прогон пайплайна
 ├── run_all_experiments.sh     # seq/multimodal/VideoMAE/BERT эксперименты
-├── run_loo_experiments.sh     # LOO-бенчмарк табличных моделей
+├── run_loo_experiments.sh     # LOO-проверка LSTM/Transformer
 ├── configs/                   # конфиги локального запуска и весов моделей
 ├── data/                      # входные видео, retention.csv и снапшоты
 ├── output/                    # итоговые CSV с признаками
@@ -19,11 +19,13 @@
 │   │   ├── audio/             # аудио признаки
 │   │   └── text/              # признаки из транскрипта и комментариев
 │   ├── models/                # нейросетевые модели удержания
-│   ├── analysis/              # отчеты, сравнения, кластеризация
+│   ├── analysis/              # кривые, отчеты и сравнения
+│   ├── get_data/              # сбор комментариев и метаданных YouTube
+│   ├── tune_hp/               # Optuna-тюнинг
 │   ├── cutting_shots/         # поиск и нарезка бамперов
 │   └── utils/                 # конфиги, кэш, выравнивание эмбеддингов
-├── train/                     # обучение, LOO-эксперименты и служебные утилиты
-├── tune_hp/                   # Optuna-тюнинг
+├── analysis/                  # значимость признаков, кластеризация, рекомендации
+├── train/                     # обучение моделей и служебные утилиты
 └── tests/                     # тесты
 ```
 
@@ -42,7 +44,7 @@ pip install -r requirements.txt
 Полный сценарий:
 
 ```bash
-python download_data.py --count 5
+python src/get_data/comments.py
 ./run_pipeline.sh
 ```
 
@@ -51,7 +53,6 @@ python download_data.py --count 5
 ```bash
 python main.py aggregate -v data/{video_id}/video.mp4 -o output/{video_id}_features.csv -c configs/local.json -r data/{video_id}/retention.csv
 python main.py train --features_dir output --data_dir data --output_dir my_metrics --save_path static/weights/model.cbm
-python -m train.transformer.train_transformer_seq
 python -m train.transformer.train_multimodal_seq
 ```
 
@@ -71,6 +72,6 @@ RUN_OPTUNA=1 ./run_all_experiments.sh
 
 **Текст.** WPS, обращения к зрителю, слова-паразиты, сложность речи, культурные/NER-ссылки, hook score, вопросы, главы, intro/outro, рекламные сегменты, clickbait gap, curiosity gap, storytelling, viewer engagement, примеры, плотность информации, sentiment, topic sharpness и признаки комментариев.
 
-**Мультимодальные признаки.** Синхронизация визуального и аудио ряда, ритм контента, narrative momentum, engagement surprise, MM embeddings и fusion эмоций в Ekman-признаки.
+**Мультимодальные признаки.** Синхронизация визуального и аудио ряда, ритм контента, narrative momentum, engagement surprise и fusion эмоций в Ekman-признаки.
 
 Часть старых или слишком дорогих признаков оставлена в коде для экспериментов, но удаляется из финального CSV как deprecated/redundant: например `aesthetic_score`, `depth_*`, `audio_*_similarity`, `visual_*_similarity`, сырые `sent_*` и голосовые эмоции после fusion.

@@ -144,7 +144,7 @@ def test_embedding_sampling_and_pca_pipeline(tmp_path):
 def test_comment_keyword_classification_and_single_cluster_pick():
     pytest.importorskip("torch")
     pytest.importorskip("transformers")
-    from get_data.comment_insights import _cluster_and_pick, _keyword_classify
+    from src.get_data.comment_insights import _cluster_and_pick, _keyword_classify
 
     assert _keyword_classify(["сделайте продолжение", "это ошибка", "обычный комментарий"]) == ["suggestion", "criticism", "other"]
     assert _cluster_and_pick(["один комментарий"], np.ones((1, 3)), [7]) == [{"text": "один комментарий", "likes": 7, "cluster_size": 1}]

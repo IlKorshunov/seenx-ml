@@ -1,13 +1,11 @@
 """
-extract  — Extract per-second BERT embeddings from transcripts, then train
-            with existing multimodal pipeline (replaces USER2 text branch)
-e2e      — End-to-end LoRA fine-tuning of BERT + temporal regression head
-            (text-only model: predicts retention purely from transcript)
-hybrid   — BERT LoRA text branch fused with visual/audio/tabular features
+extract per-second BERT embeddings → multimodal pipeline
+e2e LoRA fine-tune BERT + temporal head (text-only)
+hybrid BERT LoRA text fused with visual/audio/tabular
 
-python train/train_bert_seq.py --mode extract --output-dir bert_exp/extract
-python train/train_bert_seq.py --mode e2e --lora-rank 8 --output-dir bert_exp/e2e
-python train/train_bert_seq.py --mode hybrid --output-dir bert_exp/hybrid
+python train/bert/train_bert_seq.py --mode extract --output-dir bert_exp/extract
+python train/bert/train_bert_seq.py --mode e2e --lora-rank 8 --output-dir bert_exp/e2e
+python train/bert/train_bert_seq.py --mode hybrid --output-dir bert_exp/hybrid
 """
 
 from __future__ import annotations
@@ -34,20 +32,7 @@ from tqdm import tqdm
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from train.common.seq_data_utils import (
-    FeatureNormalizer,
-    MultimodalWindowedDataset,
-    composite_loss,
-    filter_features,
-    load_aligned_embeddings_for_videos,
-    load_all_merged,
-    load_video_weights,
-    max_time_sec_over_videos,
-    plot_mae_summary,
-    predict_video_multimodal,
-    seq_metrics,
-    time_feature_extra_dim,
-)
+from train.common.seq_data_utils import *
 from train.common.composite_trainer import lr_warmup_cosine as _lr_lambda_warmup_cosine, to_device_batch as _to_device
 from train.common.retention_plots import plot_prediction, plot_training_curve
 from train.common.split_utils import apply_train_id_file_filter, resolve_train_val_split

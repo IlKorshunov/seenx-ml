@@ -1,11 +1,5 @@
 """
-Shared utilities for LOO retention training scripts.
-
-Consolidates duplicated helpers from:
-  train_retention_regressor_loo, train_retention_ranker_loo,
-  train_retention_local_knn_loo, train_retention_shape_only_loo,
-  train_retention_stacked_loo, train_retention_hybrid_loo,
-  compare_fixed_inference_models.
+Shared utilities for retention training and reporting scripts.
 """
 
 from __future__ import annotations

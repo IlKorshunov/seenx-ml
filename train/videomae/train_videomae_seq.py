@@ -8,9 +8,9 @@ Three modes:
     hybrid   — LoRA-tuned VideoMAE fused with tabular/audio/text features
 
 Usage:
-    python train/train_videomae_seq.py --mode extract --output-dir videomae_exp/extract
-    python train/train_videomae_seq.py --mode e2e --lora-rank 8 --output-dir videomae_exp/e2e
-    python train/train_videomae_seq.py --mode hybrid --output-dir videomae_exp/hybrid
+    python train/videomae/train_videomae_seq.py --mode extract --output-dir videomae_exp/extract
+    python train/videomae/train_videomae_seq.py --mode e2e --lora-rank 8 --output-dir videomae_exp/e2e
+    python train/videomae/train_videomae_seq.py --mode hybrid --output-dir videomae_exp/hybrid
 """
 
 from __future__ import annotations

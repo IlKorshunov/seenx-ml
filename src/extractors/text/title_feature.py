@@ -29,7 +29,7 @@ _COLS = {"title_clickbait", "title_clarity", "title_emotional", "title_specifici
 
 _LLM_MODEL_ID = "Qwen/Qwen3-4B"
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
-_COMMENTS_ROOT = _PROJECT_ROOT / "get_data" / "comments"
+_COMMENTS_ROOT = _PROJECT_ROOT / "src" / "get_data" / "comments"
 
 _TITLE_PROMPT = """\
 Ты — эксперт по YouTube-заголовкам. Оцени заголовок видео по 5 шкалам от 0 до 10.

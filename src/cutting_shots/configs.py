@@ -49,7 +49,6 @@ class VideoVerifierConfig:
     visual_threshold: float = 0.80
     min_videos_agree: int = 2
     n_frames: int = 5
-
     @classmethod
     def from_json(cls, path: str = VIDEO_CONFIG_PATH) -> "VideoVerifierConfig":
         with open(path) as f:

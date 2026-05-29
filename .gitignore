@@ -18,7 +18,6 @@ experiments/
 data/
 output/
 my_metrics/
-catboost_info/
 
 credentials.json
 token.json

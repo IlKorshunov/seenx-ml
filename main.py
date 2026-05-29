@@ -18,10 +18,9 @@ import subprocess
 import sys
 import tempfile
 
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # type: ignore[import-not-found]
 
 from analysis.retention_advice import run as run_retention_advice
-from scripts.error_analysis import run_error_analysis
 from src.aggregator import aggregate, aggregate_batch
 from src.analysis.channel_baseline import run as run_channel_baseline_batch
 from src.baseline import AVDTrainer, RetentionTrainer, compare_all, plot_comparison
@@ -191,9 +190,9 @@ def _train_transformer(args):
     cmd = [
         sys.executable,
         "-m",
-        "train.transformer.train_transformer_seq",
-        "--mode",
-        "composite",
+        "train.transformer.train_multimodal_seq",
+        "--arch",
+        "transformer",
         "--output-dir-features",
         args.features_dir,
         "--snapshot-dir",
@@ -240,9 +239,6 @@ def run_train(args):
         _train_transformer(args)
         _run_baseline_comparison(args, args.output_dir)
         return
-    if args.target == "ensemble":
-        logger.error("Legacy TransformerTrainer ensemble path was removed; train sequence models via train.transformer.train_transformer_seq.")
-        return
     _train_catboost(args)
     _run_baseline_comparison(args, args.output_dir)
 
@@ -286,8 +282,8 @@ def main():
         "--target",
         type=str,
         default="retention",
-        choices=["retention", "avd", "transformer", "ensemble"],
-        help="retention=CatBoost, transformer=Transformer, ensemble=both blended, avd=AVD model",
+        choices=["retention", "avd", "transformer"],
+        help="retention=CatBoost, transformer=multimodal Transformer, avd=AVD model",
     )
     tr.add_argument("--epochs", type=int, default=200, help="Transformer training epochs")
     tr.add_argument("--batch_size", type=int, default=16, help="Transformer batch size")
@@ -298,10 +294,6 @@ def main():
     tr.add_argument("--n_heads", type=int, default=4, help="Transformer attention heads")
     tr.add_argument("--n_layers", type=int, default=4, help="Transformer encoder layers")
     tr.add_argument("--d_ff", type=int, default=256, help="Transformer FFN dimension")
-    err = subparsers.add_parser("error_analysis", help="Error analysis: MAE per video, residual curves, clustering")
-    err.add_argument("--features_dir", type=str, default="output")
-    err.add_argument("--model_path", type=str, default="static/weights/model.cbm")
-    err.add_argument("--output_dir", type=str, default="my_metrics", help="Base dir; CSVs in output_dir/error_analysis/, plots in output_dir/videos/{vid}/residual/")
     advice = subparsers.add_parser("retention_advice", help="Find retention drops and generate feature-based advice")
     advice.add_argument("--features_dir", default="output")
     advice.add_argument("--predictions_root", default="experiments")
@@ -341,8 +333,6 @@ def main():
     }
     if args.command in dispatch:
         dispatch[args.command](args)
-    elif args.command == "error_analysis":
-        run_error_analysis(args.features_dir, args.model_path, args.output_dir)
     elif args.command == "retention_advice":
         run_retention_advice(args)
 

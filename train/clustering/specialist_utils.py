@@ -51,7 +51,7 @@ def default_output_base(arch: str) -> Path:
 def tuned_args(args: argparse.Namespace, root: Path, arch: str) -> list[str]:
     if args.no_tuned:
         return []
-    tuned_json = args.tuned_params_json or Path(f"tune_hp/results/tune_multimodal_{arch}_best.json")
+    tuned_json = args.tuned_params_json or Path(f"src/tune_hp/results/tune_multimodal_{arch}_best.json")
     tuned_json = resolve_path(tuned_json, root)
     return ["--tuned-params-json", str(tuned_json)] if tuned_json.is_file() else []
 

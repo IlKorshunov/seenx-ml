@@ -65,8 +65,8 @@ HEAVY_N_LAYERS_TRF="${HEAVY_N_LAYERS_TRF:-6}"
 HEAVY_N_HEADS="${HEAVY_N_HEADS:-8}"
 HEAVY_D_FF="${HEAVY_D_FF:-1024}"
 
-TUNE_LSTM_JSON="${TUNE_LSTM_JSON:-$ROOT_DIR/tune_hp/results/tune_multimodal_lstm_best.json}"
-TUNE_TRF_JSON="${TUNE_TRF_JSON:-$ROOT_DIR/tune_hp/results/tune_multimodal_transformer_best.json}"
+TUNE_LSTM_JSON="${TUNE_LSTM_JSON:-$ROOT_DIR/src/tune_hp/results/tune_multimodal_lstm_best.json}"
+TUNE_TRF_JSON="${TUNE_TRF_JSON:-$ROOT_DIR/src/tune_hp/results/tune_multimodal_transformer_best.json}"
 TUNE_TABULAR_JSON="${TUNE_TABULAR_JSON:-$ROOT_DIR/configs/tuned_tabular_transformer.json}"
 
 echo "[all] log=${RUN_LOG_DIR#$ROOT_DIR/} device=$DEVICE val=$VAL_N epochs=$EPOCHS patience=$PATIENCE"
@@ -111,22 +111,22 @@ if [[ "${RUN_OPTUNA:-0}" == "1" ]]; then
   N_OPTUNA="${N_OPTUNA_TRIALS:-5}"
   O_EPOCHS="${OPTUNA_EPOCHS_PER_TRIAL:-150}"
   echo "[pre] optuna trials=$N_OPTUNA epochs=$O_EPOCHS"
-  mkdir -p "$ROOT_DIR/tune_hp/results"
+  mkdir -p "$ROOT_DIR/src/tune_hp/results"
   for arch in multimodal_transformer multimodal_lstm transformer lstm; do
     set +e
-    "$PYTHON_BIN" "$ROOT_DIR/tune_hp/tune.py" \
+    "$PYTHON_BIN" "$ROOT_DIR/src/tune_hp/tune.py" \
       --arch "$arch" \
       --n-trials "$N_OPTUNA" \
       --epochs-per-trial "$O_EPOCHS" \
       --device "$DEVICE" \
-      --output-dir "$ROOT_DIR/tune_hp/results" \
+      --output-dir "$ROOT_DIR/src/tune_hp/results" \
       --val-first-n-output "$VAL_N"
     tune_rc=$?
     set -e
     [[ $tune_rc -ne 0 ]] && echo "[warn] tune arch=$arch exit=$tune_rc"
     study_json="tune_${arch}_best.json"
-    if [[ -f "$ROOT_DIR/tune_hp/results/$study_json" ]]; then
-      cp -f "$ROOT_DIR/tune_hp/results/$study_json" "$ROOT_DIR/$study_json"
+    if [[ -f "$ROOT_DIR/src/tune_hp/results/$study_json" ]]; then
+      cp -f "$ROOT_DIR/src/tune_hp/results/$study_json" "$ROOT_DIR/$study_json"
       echo "[ok] copied $study_json"
     fi
   done
@@ -153,7 +153,7 @@ fi
 run_exp \
   "lstm_v2_tabular_pca" \
   "experiments/lstm_exp/v2_tabular_pca" \
-  "$PYTHON_BIN" train/train_lstm_seq.py \
+  "$PYTHON_BIN" train/lstm/train_lstm_seq.py \
   --output-dir "experiments/lstm_exp/v2_tabular_pca" \
   --output-dir-features output \
   --snapshot-dir data \
@@ -175,7 +175,7 @@ run_exp \
 run_exp \
   "lstm_v3_multimodal" \
   "experiments/lstm_exp/v3_multimodal" \
-  "$PYTHON_BIN" train/train_multimodal_seq.py \
+  "$PYTHON_BIN" train/transformer/train_multimodal_seq.py \
   --arch lstm \
   --output-dir "experiments/lstm_exp/v3_multimodal" \
   --output-dir-features output \
@@ -195,7 +195,7 @@ mapfile -t TUNE_LSTM_ARGS < <(tuned_args "$TUNE_LSTM_JSON")
 run_exp \
   "lstm_v4_tuned_multimodal" \
   "experiments/lstm_exp/v4_tuned_multimodal" \
-  "$PYTHON_BIN" train/train_multimodal_seq.py \
+  "$PYTHON_BIN" train/transformer/train_multimodal_seq.py \
   --arch lstm \
   --output-dir "experiments/lstm_exp/v4_tuned_multimodal" \
   --output-dir-features output \
@@ -214,7 +214,7 @@ run_exp \
 run_exp \
   "transformer_v3_multimodal" \
   "experiments/transformer_exp/v3_multimodal" \
-  "$PYTHON_BIN" train/train_multimodal_seq.py \
+  "$PYTHON_BIN" train/transformer/train_multimodal_seq.py \
   --arch transformer \
   --output-dir "experiments/transformer_exp/v3_multimodal" \
   --output-dir-features output \
@@ -235,16 +235,17 @@ mapfile -t TUNE_TAB_ARGS < <(tuned_args "$TUNE_TABULAR_JSON")
 run_exp \
   "transformer_v4_tuned" \
   "experiments/transformer_exp/v4_tuned" \
-  "$PYTHON_BIN" train/train_transformer_seq.py \
+  "$PYTHON_BIN" train/transformer/train_multimodal_seq.py \
+  --arch transformer \
   --output-dir "experiments/transformer_exp/v4_tuned" \
   --output-dir-features output \
   --snapshot-dir data \
+  --embeddings-root embeddings \
   --val-first-n-output "$VAL_N" \
   --d-model "$HEAVY_D_MODEL" \
   --n-heads "$HEAVY_N_HEADS" \
   --n-layers "$HEAVY_N_LAYERS_TRF" \
   --d-ff "$HEAVY_D_FF" \
-  --emb-pca-components 36 \
   "${TUNE_TAB_ARGS[@]}" \
   --epochs "$EPOCHS" \
   --batch-size "$HEAVY_BATCH" \
@@ -257,7 +258,7 @@ mapfile -t TUNE_TRF_ARGS < <(tuned_args "$TUNE_TRF_JSON")
 run_exp \
   "transformer_v4_tuned_multimodal" \
   "experiments/transformer_exp/v4_tuned_multimodal" \
-  "$PYTHON_BIN" train/train_multimodal_seq.py \
+  "$PYTHON_BIN" train/transformer/train_multimodal_seq.py \
   --arch transformer \
   --output-dir "experiments/transformer_exp/v4_tuned_multimodal" \
   --output-dir-features output \
@@ -278,7 +279,7 @@ run_exp \
 run_exp \
   "videomae_v1_extract" \
   "experiments/videomae_exp/v1_extract" \
-  "$PYTHON_BIN" train/train_videomae_seq.py \
+  "$PYTHON_BIN" train/videomae/train_videomae_seq.py \
   --mode extract \
   --backbone videomae-base \
   --output-dir "experiments/videomae_exp/v1_extract" \
@@ -299,7 +300,7 @@ run_exp \
 run_exp \
   "videomae_v1_hybrid" \
   "experiments/videomae_exp/v1_hybrid" \
-  "$PYTHON_BIN" train/train_videomae_seq.py \
+  "$PYTHON_BIN" train/videomae/train_videomae_seq.py \
   --mode hybrid \
   --backbone videomae-base \
   --output-dir "experiments/videomae_exp/v1_hybrid" \
@@ -320,7 +321,7 @@ run_exp \
 run_exp \
   "bert_v1_extract" \
   "experiments/bert_exp/v1_extract" \
-  "$PYTHON_BIN" train/train_bert_seq.py \
+  "$PYTHON_BIN" train/bert/train_bert_seq.py \
   --mode extract \
   --backbone deberta-base \
   --output-dir "experiments/bert_exp/v1_extract" \
@@ -341,7 +342,7 @@ run_exp \
 run_exp \
   "bert_v1_e2e" \
   "experiments/bert_exp/v1_e2e" \
-  "$PYTHON_BIN" train/train_bert_seq.py \
+  "$PYTHON_BIN" train/bert/train_bert_seq.py \
   --mode e2e \
   --backbone deberta-base \
   --lora-rank 8 \
@@ -362,7 +363,7 @@ run_exp \
 run_exp \
   "bert_v1_hybrid" \
   "experiments/bert_exp/v1_hybrid" \
-  "$PYTHON_BIN" train/train_bert_seq.py \
+  "$PYTHON_BIN" train/bert/train_bert_seq.py \
   --mode hybrid \
   --backbone deberta-base \
   --output-dir "experiments/bert_exp/v1_hybrid" \
@@ -393,7 +394,7 @@ run_exp \
 run_exp \
   "lstm_content_cluster_specialists" \
   "experiments/lstm_exp/content_cluster_specialists" \
-  "$PYTHON_BIN" train/content_cluster_specialists.py \
+  "$PYTHON_BIN" train/clustering/content_cluster_specialists.py \
   --arch lstm \
   --repo-root "$ROOT_DIR" \
   --run-clustering-first \
@@ -420,7 +421,7 @@ run_exp \
 run_exp \
   "transformer_content_cluster_specialists" \
   "experiments/transformer_exp/content_cluster_specialists" \
-  "$PYTHON_BIN" train/content_cluster_specialists.py \
+  "$PYTHON_BIN" train/clustering/content_cluster_specialists.py \
   --arch transformer \
   --repo-root "$ROOT_DIR" \
   --clusters-json "$ROOT_DIR/analysis/video_clustering/retention/clusters.json" \
@@ -439,7 +440,11 @@ run_exp \
   "${TUNE_TRF_ARGS[@]}"
 
 echo "[summary]"
-"$PYTHON_BIN" "$ROOT_DIR/train/summarize_experiments.py" --root "$ROOT_DIR"
+if [[ -f "$ROOT_DIR/train/summarize_experiments.py" ]]; then
+  "$PYTHON_BIN" "$ROOT_DIR/train/summarize_experiments.py" --root "$ROOT_DIR"
+else
+  echo "[skip] train/summarize_experiments.py not found"
+fi
 
 echo
 if [[ ${#FAILED_EXPERIMENTS[@]} -gt 0 ]]; then

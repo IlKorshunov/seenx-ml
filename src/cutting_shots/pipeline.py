@@ -1,17 +1,10 @@
 """
-Combined bumper extraction pipeline: audio fingerprinting → video verification → clip cutting.
+chroma-CQT vectors find intervals repeating across videos.
+CLIP embeddings verify visually similar.
+Verified candidates are cut into clips and written to CSV.
 
-Strategy:
-  1. Audio stage  (audio.py): chroma-CQT fingerprinting finds candidate intervals
-     that repeat across multiple videos. Fast, but may produce false positives.
-  2. Video stage  (video.py): CLIP image embeddings verify that candidate frames are
-     visually similar across videos. Real bumpers share a distinctive visual identity;
-     audio-only FPs do not.
-  3. Only verified candidates are cut into clips and written to CSV.
-
-Usage:
-    python main.py extract_bumpers --data_dir testing --output_dir result
-    python main.py extract_bumpers --data_dir testing --output_dir result --skip_video_verify
+python main.py extract_bumpers --data_dir testing --output_dir result
+python main.py extract_bumpers --data_dir testing --output_dir result --skip_video_verify
 """
 
 import argparse

@@ -177,7 +177,7 @@ class BaseCatBoostTrainer:
             if held not in ids: raise ValueError(f"val_video '{held}' not in video_frames")
             self.val_ids, self.train_ids = [held], [v for v in ids if v != held]
         else:
-        np.random.default_rng(self.random_state).shuffle(ids)
+            np.random.default_rng(self.random_state).shuffle(ids)
             val_count = max(1, int(len(ids) * self.val_ratio))
             self.val_ids, self.train_ids = ids[:val_count], ids[val_count:]
         logger.info("%s [%s] Train: %s, Val: %s", self.LOG_PREFIX, self.split_strategy, self.train_ids, self.val_ids)
@@ -305,7 +305,7 @@ class RetentionTrainer(BaseCatBoostTrainer):
         self.baseline_result = compute_channel_baseline(train_data, strategy=BASELINE_STRATEGY)
         baselines: dict[str, np.ndarray] = {}
 
-            for vid in self.train_ids:
+        for vid in self.train_ids:
             excluded = [d for d in train_data if d["name"] != vid]
             if not excluded: continue
             loo = compute_channel_baseline(excluded, strategy=BASELINE_STRATEGY)

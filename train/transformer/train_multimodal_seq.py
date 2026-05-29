@@ -50,7 +50,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--tune-first", action="store_true")
     p.add_argument("--n-trials", type=int, default=50)
     p.add_argument("--epochs-per-trial", type=int, default=80)
-    p.add_argument("--tune-output-dir", default="tune_hp/results")
+    p.add_argument("--tune-output-dir", default="src/tune_hp/results")
     p.add_argument("--study-name", default="")
     return p.parse_args()
 
@@ -58,7 +58,7 @@ def parse_args() -> argparse.Namespace:
 def _run_optuna_and_apply(args: argparse.Namespace) -> argparse.Namespace:
     tune_arch = f"multimodal_{args.arch}"
     study_name = args.study_name or f"tune_{tune_arch}"
-    tune_script = Path(__file__).resolve().parent.parent / "tune_hp" / "tune.py"
+    tune_script = Path(__file__).resolve().parents[2] / "src" / "tune_hp" / "tune.py"
     cmd = [sys.executable, str(tune_script), "--arch", tune_arch, "--output-dir-features", args.output_dir_features, "--snapshot-dir", args.snapshot_dir, "--embeddings-root", args.embeddings_root, "--val-first-n-output", str(args.val_first_n_output), "--n-trials", str(args.n_trials), "--epochs-per-trial", str(args.epochs_per_trial), "--device", args.device, "--output-dir", args.tune_output_dir, "--study-name", study_name, "--random-seed", str(args.random_seed)]
     cmd.append("--use-curve-raw" if args.use_curve_raw else "--no-use-curve-raw")
     logger.info("Running Optuna tuning: %s", " ".join(cmd))

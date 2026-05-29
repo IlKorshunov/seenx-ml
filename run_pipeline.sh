@@ -48,7 +48,7 @@ for video_dir in "$DATA_DIR"/*/; do
 done
 
 echo "[run] summary"
-python3 -m src.summarize --features_dir "$OUTPUT_DIR" --data_dir "$DATA_DIR" --output_dir my_metrics
+python3 -m src.visualization.summarize --features_dir "$OUTPUT_DIR" --data_dir "$DATA_DIR" --output_dir my_metrics
 
 echo "[run] catboost"
 python3 main.py train \
@@ -56,9 +56,6 @@ python3 main.py train \
   --data_dir "$DATA_DIR" \
   --output_dir my_metrics \
   --save_path static/weights/model.cbm
-
-echo "[run] error_analysis"
-python3 main.py error_analysis --features_dir "$OUTPUT_DIR" --output_dir my_metrics
 
 echo "[run] feature_importance"
 python3 -m analysis.feature_importance.run_all \
@@ -77,7 +74,7 @@ python3 -m analysis.retention_advice \
   --drop_percentile 15
 
 TRAIN_TARGET="${TRAIN_TARGET:-}"
-if [[ "$TRAIN_TARGET" == "transformer" || "$TRAIN_TARGET" == "ensemble" ]]; then
+if [[ "$TRAIN_TARGET" == "transformer" ]]; then
   echo "[run] train target=$TRAIN_TARGET"
   python3 main.py train \
     --features_dir "$OUTPUT_DIR" \
@@ -85,6 +82,8 @@ if [[ "$TRAIN_TARGET" == "transformer" || "$TRAIN_TARGET" == "ensemble" ]]; then
     --output_dir my_metrics \
     --save_path static/weights/model.cbm \
     --target "$TRAIN_TARGET"
+elif [[ -n "$TRAIN_TARGET" ]]; then
+  echo "[warn] unsupported TRAIN_TARGET=$TRAIN_TARGET; expected transformer"
 fi
 
 echo "[done] my_metrics"

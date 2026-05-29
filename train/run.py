@@ -21,32 +21,9 @@ EXPERIMENTS: dict[str, Experiment] = {
     "bert.seq": Experiment("train.bert.train_bert_seq"),
     "clustering.content_specialists": Experiment("train.clustering.content_cluster_specialists"),
     "clustering.multimodal_specialists": Experiment("train.clustering.cluster_specialists_multimodal"),
-    "loo.ad_peak_weighted": Experiment("train.loo.catboost.train_retention_ad_peak_weighted_loo"),
-    "loo.blended_quantile": Experiment("train.loo.catboost.train_retention_blended_quantile_loo"),
-    "loo.conservative_catboost": Experiment("train.loo.catboost.train_retention_conservative_catboost_loo"),
-    "loo.decomposed": Experiment("train.loo.ensemble.train_retention_decomposed_loo"),
-    "loo.hybrid": Experiment("train.loo.ensemble.train_retention_hybrid_loo"),
-    "loo.integration_penalty": Experiment("train.loo.catboost.train_retention_integration_penalty_loo"),
-    "loo.kernel_baseline": Experiment("train.loo.knn.train_retention_kernel_baseline_loo"),
-    "loo.local_knn": Experiment("train.loo.knn.train_retention_local_knn_loo"),
-    "loo.meta_ensemble": Experiment("train.loo.ensemble.train_retention_meta_ensemble_loo"),
-    "loo.peak_weighted": Experiment("train.loo.catboost.train_retention_peak_weighted_loo"),
-    "loo.ranker": Experiment("train.loo.catboost.train_retention_ranker_loo"),
-    "loo.regressor": Experiment("train.loo.catboost.train_retention_regressor_loo"),
-    "loo.report": Experiment("train.loo.loo_report"),
-    "loo.residual_huber": Experiment("train.loo.catboost.train_retention_residual_huber_loo"),
-    "loo.run_all_videos": Experiment("train.loo.run_loo_all_videos", supports_args=False),
-    "loo.shape_only": Experiment("train.loo.shape.train_retention_shape_only_loo"),
-    "loo.stacked": Experiment("train.loo.ensemble.train_retention_stacked_loo"),
-    "loo.transformer": Experiment("train.loo.transformer.train_retention_transformer_video_loo"),
-    "loo.transformer_v2": Experiment("train.loo.transformer.train_retention_transformer_v2_loo"),
-    "loo.transformer_v2_video": Experiment("train.loo.transformer.train_retention_transformer_v2_video_loo"),
-    "loo.xgb_flat": Experiment("train.loo.xgboost.train_retention_xgb_flat_loo"),
     "lstm.seq": Experiment("train.lstm.train_lstm_seq"),
     "metamodel.train": Experiment("train.metamodel.train_metamodel"),
-    "tabular.catboost_regressor": Experiment("train.tabular_catboost.train_catboost_regressor"),
     "transformer.multimodal_seq": Experiment("train.transformer.train_multimodal_seq"),
-    "transformer.seq": Experiment("train.transformer.train_transformer_seq"),
     "videomae.seq": Experiment("train.videomae.train_videomae_seq"),
 }
 
@@ -75,7 +52,7 @@ def dispatch(key: str, forwarded_args: list[str]) -> None:
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     if not args or args[0] == "--help":
-        print("CLI HELP: python -m train.run <experiment> [args]")
+        print("python -m train.run <experiment> [args]")
         return
     if args[0] == "--list":
         for key in sorted(EXPERIMENTS):

@@ -40,8 +40,8 @@ SEQ_EXTRA_ARGS=()
 [[ "$MIN_DURATION_SEC" != "0" ]] && SEQ_EXTRA_ARGS+=(--min-duration-sec "$MIN_DURATION_SEC")
 [[ "$MAX_DURATION_SEC" != "0" ]] && SEQ_EXTRA_ARGS+=(--max-duration-sec "$MAX_DURATION_SEC")
 
-TUNE_LSTM_JSON="${TUNE_LSTM_JSON:-$ROOT_DIR/tune_hp/results/tune_multimodal_lstm_best.json}"
-TUNE_TRF_JSON="${TUNE_TRF_JSON:-$ROOT_DIR/tune_hp/results/tune_multimodal_transformer_best.json}"
+TUNE_LSTM_JSON="${TUNE_LSTM_JSON:-$ROOT_DIR/src/tune_hp/results/tune_multimodal_lstm_best.json}"
+TUNE_TRF_JSON="${TUNE_TRF_JSON:-$ROOT_DIR/src/tune_hp/results/tune_multimodal_transformer_best.json}"
 
 run_exp() {
   local name="$1" out_dir="$2"; shift 2; local cmd=("$@")
@@ -57,15 +57,15 @@ FAILED_EXPERIMENTS=()
 
 if [[ "${RUN_OPTUNA:-0}" == "1" ]]; then
   N_OPTUNA="${N_OPTUNA_TRIALS:-5}"; O_EPOCHS="${OPTUNA_EPOCHS_PER_TRIAL:-150}"
-  mkdir -p "$ROOT_DIR/tune_hp/results"
+  mkdir -p "$ROOT_DIR/src/tune_hp/results"
   for arch in multimodal_transformer multimodal_lstm; do
     set +e
-    "$PYTHON_BIN" "$ROOT_DIR/tune_hp/tune.py" --arch "$arch" --n-trials "$N_OPTUNA" \
+    "$PYTHON_BIN" "$ROOT_DIR/src/tune_hp/tune.py" --arch "$arch" --n-trials "$N_OPTUNA" \
       --epochs-per-trial "$O_EPOCHS" --device "$DEVICE" \
-      --output-dir "$ROOT_DIR/tune_hp/results" --val-first-n-output "$VAL_N"
+      --output-dir "$ROOT_DIR/src/tune_hp/results" --val-first-n-output "$VAL_N"
     set -e
     study_json="tune_${arch}_best.json"
-    [[ -f "$ROOT_DIR/tune_hp/results/$study_json" ]] && cp -f "$ROOT_DIR/tune_hp/results/$study_json" "$ROOT_DIR/$study_json"
+    [[ -f "$ROOT_DIR/src/tune_hp/results/$study_json" ]] && cp -f "$ROOT_DIR/src/tune_hp/results/$study_json" "$ROOT_DIR/$study_json"
   done
 fi
 
@@ -84,7 +84,7 @@ fi
 mapfile -t TUNE_LSTM_ARGS < <(tuned_args "$TUNE_LSTM_JSON")
 
 run_exp "lstm_v3_multimodal" "experiments/lstm_exp/v3_multimodal" \
-  "$PYTHON_BIN" train/train_multimodal_seq.py --arch lstm \
+  "$PYTHON_BIN" train/transformer/train_multimodal_seq.py --arch lstm \
   --output-dir "experiments/lstm_exp/v3_multimodal" --output-dir-features output \
   --snapshot-dir data --embeddings-root embeddings --val-first-n-output "$VAL_N" \
   --d-model "$HEAVY_D_MODEL" --n-layers "$HEAVY_N_LAYERS_LSTM" \
@@ -92,7 +92,7 @@ run_exp "lstm_v3_multimodal" "experiments/lstm_exp/v3_multimodal" \
   --patience "$PATIENCE" --device "$DEVICE"
 
 run_exp "lstm_v4_tuned_multimodal" "experiments/lstm_exp/v4_tuned_multimodal" \
-  "$PYTHON_BIN" train/train_multimodal_seq.py --arch lstm \
+  "$PYTHON_BIN" train/transformer/train_multimodal_seq.py --arch lstm \
   --output-dir "experiments/lstm_exp/v4_tuned_multimodal" --output-dir-features output \
   --snapshot-dir data --embeddings-root embeddings --val-first-n-output "$VAL_N" \
   --d-model "$HEAVY_D_MODEL" --n-layers "$HEAVY_N_LAYERS_LSTM" "${TUNE_LSTM_ARGS[@]}" \
@@ -102,7 +102,7 @@ run_exp "lstm_v4_tuned_multimodal" "experiments/lstm_exp/v4_tuned_multimodal" \
 mapfile -t TUNE_TRF_ARGS < <(tuned_args "$TUNE_TRF_JSON")
 
 run_exp "transformer_v3_multimodal" "experiments/transformer_exp/v3_multimodal" \
-  "$PYTHON_BIN" train/train_multimodal_seq.py --arch transformer \
+  "$PYTHON_BIN" train/transformer/train_multimodal_seq.py --arch transformer \
   --output-dir "experiments/transformer_exp/v3_multimodal" --output-dir-features output \
   --snapshot-dir data --embeddings-root embeddings --val-first-n-output "$VAL_N" \
   --d-model "$HEAVY_D_MODEL" --n-heads "$HEAVY_N_HEADS" --n-layers "$HEAVY_N_LAYERS_TRF" \
@@ -110,14 +110,18 @@ run_exp "transformer_v3_multimodal" "experiments/transformer_exp/v3_multimodal" 
   "${SEQ_EXTRA_ARGS[@]}" --patience "$PATIENCE" --device "$DEVICE"
 
 run_exp "transformer_v4_tuned_multimodal" "experiments/transformer_exp/v4_tuned_multimodal" \
-  "$PYTHON_BIN" train/train_multimodal_seq.py --arch transformer \
+  "$PYTHON_BIN" train/transformer/train_multimodal_seq.py --arch transformer \
   --output-dir "experiments/transformer_exp/v4_tuned_multimodal" --output-dir-features output \
   --snapshot-dir data --embeddings-root embeddings --val-first-n-output "$VAL_N" \
   --d-model "$HEAVY_D_MODEL" --n-heads "$HEAVY_N_HEADS" --n-layers "$HEAVY_N_LAYERS_TRF" \
   --d-ff "$HEAVY_D_FF" "${TUNE_TRF_ARGS[@]}" --epochs "$EPOCHS" --batch-size "$HEAVY_BATCH" \
   "${SEQ_EXTRA_ARGS[@]}" --patience "$PATIENCE" --device "$DEVICE"
 
-"$PYTHON_BIN" "$ROOT_DIR/train/summarize_experiments.py" --root "$ROOT_DIR"
+if [[ -f "$ROOT_DIR/train/summarize_experiments.py" ]]; then
+  "$PYTHON_BIN" "$ROOT_DIR/train/summarize_experiments.py" --root "$ROOT_DIR"
+else
+  echo "[skip] train/summarize_experiments.py not found"
+fi
 
 [[ ${#FAILED_EXPERIMENTS[@]} -gt 0 ]] && { printf '  - %s\n' "${FAILED_EXPERIMENTS[@]}"; exit 1; }
 exit 0
