@@ -2,7 +2,6 @@ from collections.abc import Callable
 
 import cv2
 import numpy as np
-from PIL import Image
 from torch.utils.data import IterableDataset
 
 from .utils.logger import Logger
@@ -117,15 +116,3 @@ class FaceCropVideoDataset(VideoBatchDataset):
     def accept_frame(self, frame_idx: int) -> bool:
         return frame_idx in self.frame_ids
 
-
-class EmotionIterableDataset(IterableDataset):
-    def __init__(self, video_dataset):
-        self.video_dataset = video_dataset
-        self.indices = []
-
-    def __iter__(self):
-        self.indices.clear()
-        for frames, indices in self.video_dataset:
-            for frame, idx in zip(frames, indices, strict=True):
-                self.indices.append(idx)
-                yield Image.fromarray(frame)

@@ -191,7 +191,7 @@ def _train_transformer(args):
     cmd = [
         sys.executable,
         "-m",
-        "train.transformer.train_transformer_seq_v1",
+        "train.transformer.train_transformer_seq",
         "--mode",
         "composite",
         "--output-dir-features",
@@ -241,7 +241,7 @@ def run_train(args):
         _run_baseline_comparison(args, args.output_dir)
         return
     if args.target == "ensemble":
-        logger.error("Legacy TransformerTrainer ensemble path was removed; train sequence models via train.transformer.train_transformer_seq_v1.")
+        logger.error("Legacy TransformerTrainer ensemble path was removed; train sequence models via train.transformer.train_transformer_seq.")
         return
     _train_catboost(args)
     _run_baseline_comparison(args, args.output_dir)

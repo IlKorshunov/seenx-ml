@@ -16,8 +16,8 @@ import pandas as pd
 from .catboost_importance import run_catboost_importance
 from .permutation_importance import run_permutation_importance
 from .correlation_analysis import run_correlation_analysis
+from .pca_component_importance import run_pca_component_importance
 from .shap_analysis import run_shap_analysis
-from .transformer_importance import run_transformer_importance
 from matplotlib.patches import Patch  
 matplotlib.use("Agg")
 
@@ -36,15 +36,15 @@ def _run_correlation(output_dir, results_dir, target, top_n) -> dict | None:
     return run_correlation_analysis(output_dir=output_dir, results_dir=results_dir, target=target, top_n=top_n)
 
 
+def _run_pca(output_dir, results_dir, target, top_n) -> dict | None:
+    return run_pca_component_importance(output_dir=output_dir, results_dir=results_dir, target=target, top_n=top_n)
+
+
 def _run_shap(output_dir, results_dir, target, top_n) -> dict | None:   
     return run_shap_analysis(output_dir=output_dir, results_dir=results_dir, target=target, top_n=top_n, n_dependence_plots=min(5, top_n))
 
 
-def _run_transformer(output_dir, results_dir, target, top_n) -> dict | None:
-    return run_transformer_importance(output_dir=output_dir, results_dir=results_dir, target=target, top_n=top_n)
-
-
-PIPELINE_REGISTRY = {"catboost": _run_catboost, "permutation": _run_permutation, "correlation": _run_correlation, "shap": _run_shap, "transformer": _run_transformer}
+PIPELINE_REGISTRY = {"catboost": _run_catboost, "permutation": _run_permutation, "correlation": _run_correlation, "pca": _run_pca, "shap": _run_shap}
 
 
 def build_master_ranking(pipeline_results: dict[str, dict], results_dir: Path) -> pd.DataFrame:
@@ -72,6 +72,8 @@ def build_master_ranking(pipeline_results: dict[str, dict], results_dir: Path) -
         for method_key, df_key, col in [
             ("spearman", "spearman_agg", "abs_correlation"),
             ("pearson", "pearson_agg", "abs_correlation"),
+            ("spearman_ts", "spearman_ts", "abs_correlation"),
+            ("pearson_ts", "pearson_ts", "abs_correlation"),
             ("mi", "mutual_info", "mutual_information"),
         ]:
             df = corr.get(df_key)
@@ -88,14 +90,13 @@ def build_master_ranking(pipeline_results: dict[str, dict], results_dir: Path) -
                 feat = row["feature"]
                 all_scores.setdefault(feat, {})["shap_deep"] = float(row["shap_mean_abs"])
 
-    trans_res = pipeline_results.get("transformer", {})
-    if trans_res:
-        for method_key, df_key in [("trans_attn", "attn_importance"), ("trans_grad", "grad_importance")]:
-            df = trans_res.get(df_key)
-            if df is not None and "feature" in df.columns and "importance" in df.columns:
-                for _, row in df.iterrows():
-                    feat = row["feature"]
-                    all_scores.setdefault(feat, {})[method_key] = float(row["importance"])
+    pca_res = pipeline_results.get("pca", {})
+    if pca_res:
+        df = pca_res.get("feature_importance")
+        if df is not None and "feature" in df.columns and "importance" in df.columns:
+            for _, row in df.iterrows():
+                feat = row["feature"]
+                all_scores.setdefault(feat, {})["pca_component"] = float(row["importance"])
 
     if not all_scores:
         print("WARNING: No importance scores collected for master ranking.")
@@ -263,7 +264,7 @@ if __name__ == "__main__":
     parser.add_argument("--target", default="target_avg_retention", choices=["target_avg_retention", "target_drop_rate", "target_early_drop"], help="Target variable to analyze")
     parser.add_argument("--top_n", type=int, default=30, help="Number of top features to show in plots")
     parser.add_argument(
-        "--pipelines", nargs="+", default=None, choices=["catboost", "permutation", "correlation", "shap", "transformer"], help="Which pipelines to run (default: all)"
+        "--pipelines", nargs="+", default=None, choices=["catboost", "permutation", "correlation", "pca", "shap"], help="Which pipelines to run (default: all)"
     )
     args = parser.parse_args()
     run_all(output_dir=args.output_dir, results_dir=args.results_dir, target=args.target, top_n=args.top_n, pipelines=args.pipelines)

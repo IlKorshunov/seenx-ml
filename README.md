@@ -51,7 +51,7 @@ python download_data.py --count 5
 ```bash
 python main.py aggregate -v data/{video_id}/video.mp4 -o output/{video_id}_features.csv -c configs/local.json -r data/{video_id}/retention.csv
 python main.py train --features_dir output --data_dir data --output_dir my_metrics --save_path static/weights/model.cbm
-python -m train.transformer.train_transformer_seq_v1
+python -m train.transformer.train_transformer_seq
 python -m train.transformer.train_multimodal_seq
 ```
 

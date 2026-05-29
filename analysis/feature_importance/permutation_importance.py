@@ -60,7 +60,7 @@ def compute_permutation_importance(X: pd.DataFrame, y: pd.Series, model_name: st
     return _importance_frame(X.columns.tolist(), perm.importances_mean, perm.importances_std, model_name)
 
 
-def compute_loo_permutation_importance(X: pd.DataFrame, y: pd.Series, model_name: str = "catboost", n_repeats: int = 10) -> pd.DataFrame:
+def compute_loo_permutation_importance(X: pd.DataFrame, y: pd.Series, model_name: str = "catboost", n_repeats: int = 20) -> pd.DataFrame:
     n = len(X)
     if n < 5:
         print(f"  LOO: only {n} samples, falling back to full-data permutation importance")

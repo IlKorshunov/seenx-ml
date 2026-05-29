@@ -151,23 +151,6 @@ if [[ "${SKIP_NEW_CLUSTERING:-0}" != "1" ]]; then
   echo
 fi
 run_exp \
-  "lstm_v1_baseline" \
-  "experiments/lstm_exp/v1_baseline" \
-  "$PYTHON_BIN" train/train_lstm_seq_v1.py \
-  --output-dir "experiments/lstm_exp/v1_baseline" \
-  --output-dir-features output \
-  --snapshot-dir data \
-  --val-first-n-output "$VAL_N" \
-  --hidden-size 256 \
-  --n-layers 3 \
-  --epochs "$EPOCHS" \
-  --batch-size "$BATCH_SIZE" \
-  --patience "$PATIENCE" \
-  --min-duration-sec "$MIN_DURATION_SEC" \
-  --max-duration-sec "$MAX_DURATION_SEC" \
-  --device "$DEVICE"
-
-run_exp \
   "lstm_v2_tabular_pca" \
   "experiments/lstm_exp/v2_tabular_pca" \
   "$PYTHON_BIN" train/train_lstm_seq.py \

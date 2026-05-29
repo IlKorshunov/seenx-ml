@@ -97,6 +97,27 @@ class TestPermutationImportance:
         assert (tmp_path / "permutation" / "perm_importance_ridge.csv").exists()
 
 
+class TestCorrelationAnalysis:
+    def test_run_correlation_includes_per_second_pearson(self, tmp_path, monkeypatch):
+        from analysis.feature_importance import correlation_analysis as corr_mod
+
+        video_dfs = {
+            "v1": pd.DataFrame({"rms": [0.0, 1.0, 2.0], "edit_pace": [2.0, 1.0, 0.0], "retention": [3.0, 2.0, 1.0]}),
+            "v2": pd.DataFrame({"rms": [1.0, 2.0, 3.0], "edit_pace": [0.0, 1.0, 2.0], "retention": [2.0, 1.0, 0.0]}),
+        }
+
+        monkeypatch.setattr(corr_mod, "load_all_videos", lambda output_dir: video_dfs)
+        monkeypatch.setattr(corr_mod, "plot_correlation_bar", lambda *args, **kwargs: None)
+        monkeypatch.setattr(corr_mod, "plot_correlation_heatmap", lambda *args, **kwargs: None)
+        monkeypatch.setattr(corr_mod, "plot_group_heatmap", lambda *args, **kwargs: None)
+        monkeypatch.setattr(corr_mod, "plot_redundancy_network", lambda *args, **kwargs: None)
+
+        out = corr_mod.run_correlation_analysis(output_dir="unused", results_dir=str(tmp_path), top_n=2)
+
+        assert {"spearman_agg", "pearson_agg", "spearman_ts", "pearson_ts", "mutual_info", "corr_matrix"} <= set(out)
+        assert (tmp_path / "correlation" / "pearson_timeseries.csv").exists()
+
+
 class TestCatBoostImportance:
     def test_builtin_and_shap_importance_with_fake_model(self, monkeypatch):
         from analysis.feature_importance import catboost_importance as cb
@@ -280,6 +301,28 @@ class TestShapAnalysis:
         assert (tmp_path / "shap" / "shap_values.csv").exists()
 
 
+class TestPCAComponentImportance:
+    def test_compute_and_run_pca_component_importance(self, tmp_path, monkeypatch):
+        from analysis.feature_importance import pca_component_importance as pca_mod
+
+        X, y = _toy_xy()
+        component_df, feature_df = pca_mod.compute_pca_component_importance(X, y, n_components=2)
+
+        assert {"component", "explained_variance_ratio", "target_correlation", "importance"} <= set(component_df.columns)
+        assert {"feature", "importance", "group"} <= set(feature_df.columns)
+        assert len(component_df) == 2
+
+        monkeypatch.setattr(pca_mod, "load_all_videos", lambda output_dir: {"v": pd.DataFrame()})
+        monkeypatch.setattr(pca_mod, "aggregate_per_video", lambda video_dfs: pd.DataFrame({"dummy": [1]}))
+        monkeypatch.setattr(pca_mod, "prepare_X_y", lambda agg_df, target: (X, y))
+
+        result = pca_mod.run_pca_component_importance(output_dir="unused", results_dir=str(tmp_path), top_n=2)
+
+        assert {"component_importance", "feature_importance"} <= set(result)
+        assert (tmp_path / "pca" / "pca_component_importance.csv").exists()
+        assert (tmp_path / "pca" / "pca_feature_importance.csv").exists()
+
+
 class TestRunAllFeatureImportance:
     def test_build_master_ranking_collects_all_pipeline_shapes(self, tmp_path):
         run_all = importlib.import_module("analysis.feature_importance.run_all")
@@ -295,8 +338,8 @@ class TestRunAllFeatureImportance:
                 "catboost": {"pvc": base, "lfc": base, "shap": base},
                 "permutation": {"ridge": perm},
                 "correlation": {"spearman_agg": corr, "pearson_agg": corr, "mutual_info": mi},
+                "pca": {"feature_importance": base},
                 "shap": {"importance_df": shap},
-                "transformer": {"attn_importance": base, "grad_importance": base},
             },
             tmp_path,
         )
@@ -361,32 +404,3 @@ class TestSeqPredictPermutation:
         assert (tmp_path / "baseline_metrics.csv").exists()
         assert (tmp_path / "master_ranking.csv").exists()
 
-
-class TestTransformerImportance:
-    def test_small_transformer_attention_gradient_and_plots(self, tmp_path):
-        from analysis.feature_importance import transformer_importance as tr
-
-        X, y = _toy_xy()
-        X_arr = X.values.astype(np.float32)
-        y_arr = y.values.astype(np.float32)
-        model, losses = tr._train_with_tracking(X_arr, y_arr, d_model=8, n_heads=2, n_layers=1, epochs=2, batch_size=2, device="cpu")
-
-        attn, matrix = tr.extract_attention_importance(model, X_arr, "cpu")
-        grad = tr.extract_gradient_importance(model, X_arr, y_arr, "cpu")
-
-        assert attn.shape == (3,)
-        assert matrix.shape == (3, 3)
-        assert grad.shape == (3,)
-        assert len(losses) == 2
-
-        attn_df = pd.DataFrame({"feature": X.columns, "importance": attn, "group": ["audio_basic", "visual_motion", "unknown"]})
-        grad_df = pd.DataFrame({"feature": X.columns, "importance": grad, "group": ["audio_basic", "visual_motion", "unknown"]})
-        tr.plot_attention_importance(attn_df, "attn", tmp_path / "attn.png", top_n=3)
-        tr.plot_attention_heatmap(matrix, X.columns.tolist(), tmp_path / "heat.png", top_n=3)
-        tr.plot_combined_importance(attn_df, grad_df, tmp_path / "combined.png", top_n=3)
-        tr.plot_training_curve(losses, tmp_path / "loss.png")
-
-        assert (tmp_path / "attn.png").exists()
-        assert (tmp_path / "heat.png").exists()
-        assert (tmp_path / "combined.png").exists()
-        assert (tmp_path / "loss.png").exists()

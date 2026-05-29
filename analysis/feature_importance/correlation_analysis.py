@@ -7,16 +7,16 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import matplotlib
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
+import matplotlib  # type: ignore[import-not-found]
+import matplotlib.pyplot as plt  # type: ignore[import-not-found]
+import numpy as np  # type: ignore[import-not-found]
+import pandas as pd  # type: ignore[import-not-found]
 
 
 matplotlib.use("Agg")
-import seaborn as sns
-from scipy import stats
-from sklearn.feature_selection import mutual_info_regression
+import seaborn as sns  # type: ignore[import-not-found]
+from scipy import stats  # type: ignore[import-not-found]
+from sklearn.feature_selection import mutual_info_regression  # type: ignore[import-not-found]
 from .utils import NON_FEATURE_COLS, aggregate_per_video, default_output_dir, feature_group_of, load_all_videos, prepare_X_y, save_importance_csv
 
 
@@ -170,9 +170,11 @@ def run_correlation_analysis(
     output_dir: str = "output", results_dir: str | None = None, target: str = "target_avg_retention", top_n: int = 30, redundancy_threshold: float = 0.85
 ) -> dict[str, pd.DataFrame]:
     if results_dir is None:
-        results_dir = default_output_dir()
-    results_dir = Path(results_dir) / "correlation"
-    results_dir.mkdir(parents=True, exist_ok=True)
+        results_root = default_output_dir()
+    else:
+        results_root = Path(results_dir)
+    out_dir = results_root / "correlation"
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"Loading videos from {output_dir}")
     video_dfs = load_all_videos(output_dir)
@@ -186,47 +188,56 @@ def run_correlation_analysis(
 
     print("Computing Spearman correlation (aggregated)")
     sp_agg = compute_feature_target_correlation(X, y, method="spearman")
-    save_importance_csv(sp_agg, results_dir / "spearman_agg.csv", sort_by="abs_correlation")
-    plot_correlation_bar(sp_agg, f"Spearman ρ with {target} (per-video avg)", results_dir / "spearman_agg.png", top_n)
+    save_importance_csv(sp_agg, out_dir / "spearman_agg.csv", sort_by="abs_correlation")
+    plot_correlation_bar(sp_agg, f"Spearman ρ with {target} (per-video avg)", out_dir / "spearman_agg.png", top_n)
     results["spearman_agg"] = sp_agg
 
     print("Computing Pearson correlation (aggregated)")
     pe_agg = compute_feature_target_correlation(X, y, method="pearson")
-    save_importance_csv(pe_agg, results_dir / "pearson_agg.csv", sort_by="abs_correlation")
-    plot_correlation_bar(pe_agg, f"Pearson r with {target} (per-video avg)", results_dir / "pearson_agg.png", top_n)
+    save_importance_csv(pe_agg, out_dir / "pearson_agg.csv", sort_by="abs_correlation")
+    plot_correlation_bar(pe_agg, f"Pearson r with {target} (per-video avg)", out_dir / "pearson_agg.png", top_n)
     results["pearson_agg"] = pe_agg
 
     print("Computing Spearman correlation (per-second pooled)")
     try:
         sp_ts = compute_per_second_correlation(video_dfs, target_col="retention", method="spearman")
-        save_importance_csv(sp_ts, results_dir / "spearman_timeseries.csv", sort_by="abs_correlation")
-        plot_correlation_bar(sp_ts, "Spearman ρ with retention (per-second, all videos pooled)", results_dir / "spearman_timeseries.png", top_n)
+        save_importance_csv(sp_ts, out_dir / "spearman_timeseries.csv", sort_by="abs_correlation")
+        plot_correlation_bar(sp_ts, "Spearman ρ with retention (per-second, all videos pooled)", out_dir / "spearman_timeseries.png", top_n)
         results["spearman_ts"] = sp_ts
     except Exception as e:
         print(f"  Per-second correlation failed: {e}")
 
+    print("Computing Pearson correlation (per-second pooled)")
+    try:
+        pe_ts = compute_per_second_correlation(video_dfs, target_col="retention", method="pearson")
+        save_importance_csv(pe_ts, out_dir / "pearson_timeseries.csv", sort_by="abs_correlation")
+        plot_correlation_bar(pe_ts, "Pearson r with retention (per-second, all videos pooled)", out_dir / "pearson_timeseries.png", top_n)
+        results["pearson_ts"] = pe_ts
+    except Exception as e:
+        print(f"  Per-second Pearson correlation failed: {e}")
+
     print("Computing mutual information")
     mi = compute_mutual_information(X, y)
-    save_importance_csv(mi, results_dir / "mutual_information.csv", sort_by="mutual_information")
-    plot_correlation_bar(mi, f"Mutual Information with {target}", results_dir / "mutual_information.png", top_n, col="mutual_information")
+    save_importance_csv(mi, out_dir / "mutual_information.csv", sort_by="mutual_information")
+    plot_correlation_bar(mi, f"Mutual Information with {target}", out_dir / "mutual_information.png", top_n, col="mutual_information")
     results["mutual_info"] = mi
 
     print("Computing feature–feature correlation matrix")
     corr_mat = compute_feature_correlation_matrix(X, method="spearman")
-    corr_mat.to_csv(results_dir / "feature_corr_matrix.csv")
-    plot_correlation_heatmap(corr_mat, results_dir / "feature_corr_heatmap.png")
-    plot_group_heatmap(corr_mat, results_dir / "group_corr_heatmap.png")
+    corr_mat.to_csv(out_dir / "feature_corr_matrix.csv")
+    plot_correlation_heatmap(corr_mat, out_dir / "feature_corr_heatmap.png")
+    plot_group_heatmap(corr_mat, out_dir / "group_corr_heatmap.png")
     results["corr_matrix"] = corr_mat
 
     redundant = find_redundant_features(corr_mat, threshold=redundancy_threshold)
-    plot_redundancy_network(redundant, results_dir / "redundant_features.png", redundancy_threshold)
+    plot_redundancy_network(redundant, out_dir / "redundant_features.png", redundancy_threshold)
     if redundant:
         red_df = pd.DataFrame(redundant, columns=["feature_a", "feature_b", "correlation"])
-        red_df.to_csv(results_dir / "redundant_pairs.csv", index=False)
+        red_df.to_csv(out_dir / "redundant_pairs.csv", index=False)
         print(f"  Found {len(redundant)} redundant pairs (|ρ| ≥ {redundancy_threshold})")
 
     combined = _build_combined_ranking(sp_agg, pe_agg, mi)
-    save_importance_csv(combined, results_dir / "combined_ranking.csv", sort_by="avg_rank")
+    save_importance_csv(combined, out_dir / "combined_ranking.csv", sort_by="avg_rank")
     print(f"\nTop 10 features by combined correlation ranking:\n{combined.head(10).to_string()}")
 
     return results

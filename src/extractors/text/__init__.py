@@ -7,7 +7,6 @@ from .curiosity_gap_feature import extract_curiosity_gap
 from .example_feature import extract_examples
 from .hook_score_feature import extract_hook_score
 from .information_density_feature import extract_information_density
-from .mm_embedding_feature import extract_mm_embeddings
 from .section_feature import extract_sections
 from .semantic_embedding_feature import extract_semantic_embeddings
 from .speech_filler_feature import extract_speech_fillers
@@ -33,7 +32,6 @@ __all__ = [
     "extract_examples",
     "extract_hook_score",
     "extract_information_density",
-    "extract_mm_embeddings",
     "extract_sections",
     "extract_semantic_embeddings",
     "extract_speech_fillers",

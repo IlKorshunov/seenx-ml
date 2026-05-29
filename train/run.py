@@ -43,16 +43,10 @@ EXPERIMENTS: dict[str, Experiment] = {
     "loo.transformer_v2_video": Experiment("train.loo.transformer.train_retention_transformer_v2_video_loo"),
     "loo.xgb_flat": Experiment("train.loo.xgboost.train_retention_xgb_flat_loo"),
     "lstm.seq": Experiment("train.lstm.train_lstm_seq"),
-    "lstm.seq_v1": Experiment("train.lstm.train_lstm_seq_v1"),
     "metamodel.train": Experiment("train.metamodel.train_metamodel"),
     "tabular.catboost_regressor": Experiment("train.tabular_catboost.train_catboost_regressor"),
-    "tools.compare_fixed_inference_models": Experiment("train.tools.compare_fixed_inference_models", supports_args=False),
-    "tools.merge_output_partials": Experiment("train.tools.merge_output_partials"),
-    "tools.sync_partial_from_main": Experiment("train.tools.sync_partial_from_main"),
-    "tools.visualize_ranker_experiment": Experiment("train.tools.visualize_ranker_experiment"),
     "transformer.multimodal_seq": Experiment("train.transformer.train_multimodal_seq"),
     "transformer.seq": Experiment("train.transformer.train_transformer_seq"),
-    "transformer.seq_v1": Experiment("train.transformer.train_transformer_seq_v1"),
     "videomae.seq": Experiment("train.videomae.train_videomae_seq"),
 }
 

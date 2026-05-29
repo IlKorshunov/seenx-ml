@@ -371,11 +371,6 @@ def aggregate( video_path: str, audio_path: str, output_path: str, config: Confi
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
-    if _should_run({"mm_embed"}, only, existing_features_set):
-        mm = extract_mm_embeddings(video_path, config)
-        if mm is not None and not mm.empty:
-            add_to_accumulated(map_to_retention(mm))
-
     clear_transcript_cache()
 
     if "is_intro" in accumulated.columns and "retention" in accumulated.columns and accumulated["retention"].std() > 1e-3:
